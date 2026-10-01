@@ -54,8 +54,8 @@ export const TRACKS: Track[] = [
     tagline: "See what really happens inside the runtime when your code runs.",
     accent: "var(--node)",
     sessions: [
-      { id: "event-loop", title: "The event loop, phase by phase", blurb: "Queue timers, promises and I/O, then step through each loop phase.", status: "soon" },
-      { id: "streams-backpressure", title: "Streams & backpressure", blurb: "Push data faster than it drains and watch the buffer fill.", status: "soon" },
+      { id: "event-loop", title: "The event loop, phase by phase", blurb: "Queue timers, promises and I/O, then step through each loop phase.", status: "live" },
+      { id: "streams-backpressure", title: "Streams and backpressure", blurb: "Push data faster than it drains and watch the buffer fill.", status: "live" },
       { id: "thread-pool", title: "The libuv thread pool", blurb: "Fire file and crypto work and see which calls block the pool.", status: "soon" },
     ],
     roadmap: ["Runtime & V8 basics", "Event loop & async", "Streams & buffers", "Workers & clustering", "Profiling & performance"],

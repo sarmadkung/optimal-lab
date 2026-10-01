@@ -6,11 +6,15 @@ import NextTokenDemo from "./ai/next-token/NextTokenDemo";
 import BinarySearchDemo from "./dsa/binary-search/BinarySearchDemo";
 import SlidingWindowDemo from "./dsa/sliding-window/SlidingWindowDemo";
 import TwoSumDemo from "./dsa/two-sum/TwoSumDemo";
+import BackpressureDemo from "./nodejs/streams-backpressure/BackpressureDemo";
+import EventLoopDemo from "./nodejs/event-loop/EventLoopDemo";
 
 const SESSIONS: Record<string, ReactNode> = {
   "dsa/two-sum": <TwoSumDemo />,
   "dsa/sliding-window": <SlidingWindowDemo />,
   "dsa/binary-search": <BinarySearchDemo />,
+  "nodejs/event-loop": <EventLoopDemo />,
+  "nodejs/streams-backpressure": <BackpressureDemo />,
   "ai/next-token": <NextTokenDemo />,
 };
 
