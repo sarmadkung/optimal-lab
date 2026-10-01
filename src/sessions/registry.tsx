@@ -8,6 +8,8 @@ import SlidingWindowDemo from "./dsa/sliding-window/SlidingWindowDemo";
 import TwoSumDemo from "./dsa/two-sum/TwoSumDemo";
 import BackpressureDemo from "./nodejs/streams-backpressure/BackpressureDemo";
 import EventLoopDemo from "./nodejs/event-loop/EventLoopDemo";
+import CachingDemo from "./system-design/caching/CachingDemo";
+import LoadBalanceDemo from "./system-design/load-balancing/LoadBalanceDemo";
 
 const SESSIONS: Record<string, ReactNode> = {
   "dsa/two-sum": <TwoSumDemo />,
@@ -15,6 +17,8 @@ const SESSIONS: Record<string, ReactNode> = {
   "dsa/binary-search": <BinarySearchDemo />,
   "nodejs/event-loop": <EventLoopDemo />,
   "nodejs/streams-backpressure": <BackpressureDemo />,
+  "system-design/load-balancing": <LoadBalanceDemo />,
+  "system-design/caching": <CachingDemo />,
   "ai/next-token": <NextTokenDemo />,
 };
 
