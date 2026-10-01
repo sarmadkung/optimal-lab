@@ -2,7 +2,9 @@
 // A session in src/lib/tracks.ts with status "live" must have an entry here.
 
 import type { ReactNode } from "react";
+import EmbeddingsDemo from "./ai/embeddings/EmbeddingsDemo";
 import NextTokenDemo from "./ai/next-token/NextTokenDemo";
+import RagDemo from "./ai/rag/RagDemo";
 import PipelineDemo from "./devops/ci-cd-pipeline/PipelineDemo";
 import ContainersDemo from "./devops/containers-vs-vms/ContainersDemo";
 import BinarySearchDemo from "./dsa/binary-search/BinarySearchDemo";
@@ -24,6 +26,8 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/ci-cd-pipeline": <PipelineDemo />,
   "devops/containers-vs-vms": <ContainersDemo />,
   "ai/next-token": <NextTokenDemo />,
+  "ai/embeddings": <EmbeddingsDemo />,
+  "ai/rag": <RagDemo />,
 };
 
 export const sessionDemo = (trackId: string, sessionId: string): ReactNode =>
