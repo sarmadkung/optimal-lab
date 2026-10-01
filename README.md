@@ -122,7 +122,7 @@ pnpm lint
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
 | `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI): sessions, planned roadmap stages and projects |
 | `src/lib/theme.ts` | Light/dark mode: the storage key and the no-flash inline script |
-| `src/lib/onboarding.ts` | First-visit tour: the storage key and the "open the tour" event |
+| `src/lib/onboarding.ts` | First-visit tour: the storage key and whether the tour is open |
 | `src/components/Onboarding.tsx` | The tour itself |
 | `src/app/page.tsx` | Home page, built from `TRACKS` |
 | `src/app/tracks/page.tsx` | All tracks with their sessions |
