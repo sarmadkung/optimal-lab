@@ -82,8 +82,8 @@ export const TRACKS: Track[] = [
     tagline: "Ship, scale and recover. See every step of the pipeline move.",
     accent: "var(--ops)",
     sessions: [
-      { id: "ci-cd-pipeline", title: "A CI/CD pipeline, stage by stage", blurb: "Break a test or a build and see where the pipeline stops.", status: "soon" },
-      { id: "containers-vs-vms", title: "Containers vs VMs", blurb: "Stack the layers and compare what each one shares.", status: "soon" },
+      { id: "ci-cd-pipeline", title: "A CI/CD pipeline, stage by stage", blurb: "Break a test or a build and see where the pipeline stops.", status: "live" },
+      { id: "containers-vs-vms", title: "Containers vs virtual machines", blurb: "Start a container, then boot a VM, and see what each one shares.", status: "live" },
       { id: "rolling-deploys", title: "Kubernetes rolling deploys", blurb: "Roll out a bad version and watch probes and rollback kick in.", status: "soon" },
     ],
     roadmap: ["Linux & networking", "Containers & Docker", "CI/CD", "Kubernetes", "Observability & incidents"],

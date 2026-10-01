@@ -3,6 +3,8 @@
 
 import type { ReactNode } from "react";
 import NextTokenDemo from "./ai/next-token/NextTokenDemo";
+import PipelineDemo from "./devops/ci-cd-pipeline/PipelineDemo";
+import ContainersDemo from "./devops/containers-vs-vms/ContainersDemo";
 import BinarySearchDemo from "./dsa/binary-search/BinarySearchDemo";
 import SlidingWindowDemo from "./dsa/sliding-window/SlidingWindowDemo";
 import TwoSumDemo from "./dsa/two-sum/TwoSumDemo";
@@ -19,6 +21,8 @@ const SESSIONS: Record<string, ReactNode> = {
   "nodejs/streams-backpressure": <BackpressureDemo />,
   "system-design/load-balancing": <LoadBalanceDemo />,
   "system-design/caching": <CachingDemo />,
+  "devops/ci-cd-pipeline": <PipelineDemo />,
+  "devops/containers-vs-vms": <ContainersDemo />,
   "ai/next-token": <NextTokenDemo />,
 };
 
