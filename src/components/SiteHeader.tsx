@@ -17,13 +17,16 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/85 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-2 px-4">
-        <Link href="/" className="mr-auto flex shrink-0 items-center gap-2 font-semibold" onClick={close}>
+        <Link href="/" className="flex shrink-0 items-center gap-2 font-semibold" onClick={close}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.svg" alt="" width={24} height={24} className="rounded-md" />
           Optimal Lab
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Tracks">
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-end gap-0.5 overflow-x-auto md:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Tracks"
+        >
           {TRACKS.map((t) => {
             const active = t.id === activeId;
             return (
@@ -32,7 +35,7 @@ export default function SiteHeader() {
                 href={trackHref(t)}
                 aria-current={active ? "page" : undefined}
                 style={{ "--accent": t.accent } as React.CSSProperties}
-                className={`rounded-lg px-2 py-1.5 text-sm transition-colors lg:px-3 ${
+                className={`shrink-0 rounded-lg px-2 py-1.5 text-sm transition-colors ${
                   active
                     ? "bg-[var(--panel)] text-[var(--accent)] shadow-[inset_0_0_0_1px_var(--line)]"
                     : "text-[var(--muted)] hover:text-[var(--text)]"

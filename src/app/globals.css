@@ -18,6 +18,9 @@
   --node: #7ee0a1;
   --sys: #c49bff;
   --ops: #5fd4e6;
+  --native: #ff8fab;
+  --auto: #e6c15a;
+  --tools: #b6e37a;
 
   /* states */
   --good: #7ee0b5;
@@ -53,6 +56,9 @@
   --node: #1a8a4a;
   --sys: #7442c8;
   --ops: #0b7f92;
+  --native: #c4315c;
+  --auto: #7a5b00;
+  --tools: #4d7a12;
 
   --good: #0f8a5c;
   --bad: #c2366a;
