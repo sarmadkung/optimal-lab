@@ -55,6 +55,7 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 |---|---|---|
 | `/dsa-01` | Two Sum, three ways: brute force, sort + two pointers, hash map, and how each scales | social-content DSA #01 |
 | `/next-token` | How an LLM picks the next token: logits, softmax, temperature, top-k, top-p, sampling | social-content AI Engineering #02 |
+| `/tracks/<id>` | Track pages: `dsa`, `nodejs`, `system-design`, `devops`, `ai` | — |
 
 ## Run it
 
@@ -79,13 +80,16 @@ pnpm lint
 | `src/app/<slug>/page.tsx` | One route per visual: metadata only |
 | `src/app/<slug>/*Demo.tsx` | The interactive component (`"use client"`) |
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
-| `src/app/page.tsx` | Home page. Add each new visual to the `DEMOS` list |
+| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI): sessions, planned roadmap stages and projects |
+| `src/app/page.tsx` | Home page: track picker plus a section per track, built from `TRACKS` |
+| `src/app/tracks/[track]/` | One page per track: interactive sessions, roadmap and projects |
+| `src/components/` | Shared UI: the top bar (`SiteHeader`) and `SessionCard` |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
 ## Adding a visual
 
 1. Put the logic in `src/lib/<concept>.ts` and check its numbers by hand.
 2. Build the page in `src/app/<slug>/`.
-3. Add it to `DEMOS` in `src/app/page.tsx` and to the Pages table above.
+3. Add it as a session in its track in `src/lib/tracks.ts` (set `status: "live"` and `slug`), and to the Pages table above.
 4. Check it at phone width (390px): no sideways scroll.
 5. Link it from the matching post in social-content.

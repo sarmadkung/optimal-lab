@@ -11,6 +11,9 @@
   --faint: #5e6977;
   --ai: #8aa4ff;
   --dsa: #ffb86b;
+  --node: #7ee0a1;
+  --sys: #c49bff;
+  --ops: #5fd4e6;
 }
 
 @theme inline {
