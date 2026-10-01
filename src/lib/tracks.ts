@@ -109,6 +109,99 @@ export const TRACKS: Track[] = [
     roadmap: ["How LLMs work", "Prompting & sampling", "Embeddings & retrieval", "Agents & tools", "Evaluation"],
     projects: ["Build a RAG chatbot over your docs", "Build a tool-using agent", "Write an eval harness"],
   },
+  {
+    id: "ai-native",
+    title: "AI Native",
+    short: "AI Native",
+    tagline: "Build products where the model is the interface, and the output has a shape.",
+    accent: "var(--native)",
+    sessions: [
+      {
+        id: "structured-output",
+        title: "Force valid JSON",
+        blurb: "Turn a schema on and watch illegal tokens get refused.",
+        status: "live",
+      },
+      {
+        id: "tool-calling",
+        title: "Call a tool, then answer",
+        blurb: "Give the model a weather tool, then take it away and watch it guess.",
+        status: "live",
+      },
+      {
+        id: "evals",
+        title: "Evals: did the answer hold up?",
+        blurb: "Score a set of answers and see a prompt change move the pass rate.",
+        status: "soon",
+      },
+    ],
+    roadmap: ["The model as the product", "Structured output", "Tools and agents", "Evals", "Shipping a model feature"],
+    projects: ["A support reply that only returns JSON", "An agent with two tools", "An eval set of 20 questions"],
+  },
+  {
+    id: "ai-automation",
+    title: "AI Automation",
+    short: "Automation",
+    tagline: "Run work without a person in every step, and pause where a person still matters.",
+    accent: "var(--auto)",
+    sessions: [
+      {
+        id: "workflow",
+        title: "One item through a workflow",
+        blurb: "Send three different emails down the same path and watch the branch change.",
+        status: "live",
+      },
+      {
+        id: "human-approval",
+        title: "Pause for a person",
+        blurb: "Draft a refund, then approve or reject it before anything is sent.",
+        status: "live",
+      },
+      {
+        id: "schedules",
+        title: "Run it on a schedule",
+        blurb: "Fire the same workflow on a clock and see what a missed run does.",
+        status: "soon",
+      },
+    ],
+    roadmap: ["Triggers", "Branches", "Human approval", "Schedules and retries", "Watching failures"],
+    projects: ["Triage an inbox into Slack", "Approve refunds before they send", "A daily digest that runs at 8am"],
+  },
+  {
+    id: "tools",
+    title: "Tools",
+    short: "Tools",
+    tagline: "See how the tools around the model actually move: agents, MCP, and workflow builders.",
+    accent: "var(--tools)",
+    sessions: [
+      {
+        id: "cursor-agent",
+        title: "A coding agent's loop",
+        blurb: "Watch search, edit, and a check repeat until the test passes.",
+        status: "live",
+      },
+      {
+        id: "mcp",
+        title: "MCP: tools the model can call",
+        blurb: "A server lists tools. The app forwards the one the model picks.",
+        status: "live",
+      },
+      {
+        id: "n8n",
+        title: "An n8n workflow, node by node",
+        blurb: "Cross a threshold and see the run switch from email to Slack.",
+        status: "live",
+      },
+      {
+        id: "github-actions",
+        title: "GitHub Actions on every push",
+        blurb: "Follow a workflow file from the push event to the job log.",
+        status: "soon",
+      },
+    ],
+    roadmap: ["Coding agents", "MCP and tool servers", "Workflow builders", "CI tools", "Model APIs"],
+    projects: ["Connect one MCP tool", "An n8n flow with a branch", "A GitHub Action that runs tests"],
+  },
 ];
 
 export const getTrack = (id: string) => TRACKS.find((t) => t.id === id);
