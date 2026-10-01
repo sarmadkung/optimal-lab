@@ -12,3 +12,4 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Read README.md first: it covers the layout, the tracks and how to add a visual.
 - Any visual that explains how something works step by step must use the **step flow**: top-to-bottom steps, one card each, with a labelled arrow between them. Follow "Explaining a process: the step flow" in README.md and use `src/components/flow/Flow.tsx`. Reference: `/tracks/ai/next-token`.
+- Every page and visual must stay usable on a phone (390px) and a tablet (768px), with no sideways scroll. Follow "Responsive layout" in README.md and check both widths before finishing UI work.

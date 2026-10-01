@@ -185,7 +185,7 @@ export default function NextTokenDemo() {
           />
           <ul className="mt-4 grid gap-1 font-mono text-sm sm:grid-cols-2">
             {CANDIDATES.map((c, i) => (
-              <li key={c.token} className="flex justify-between gap-3 rounded bg-[var(--inset)] px-2 py-1">
+              <li key={c.token} className="flex flex-wrap justify-between gap-x-3 gap-y-1 rounded bg-[var(--inset)] px-2 py-1">
                 <span style={{ color: COLORS[i] }}>{c.token}</span>
                 <span className="text-[var(--muted)] tabular-nums">
                   {c.logit.toFixed(1)} ÷ {t.toFixed(2)} ={" "}
@@ -432,7 +432,7 @@ function Bars({
           key={r.label}
           initial={false}
           animate={{ opacity: r.dim ? 0.4 : 1 }}
-          className="grid grid-cols-[5.5rem_1fr_4rem] items-center gap-3 sm:grid-cols-[6.5rem_1fr_4.5rem]"
+          className="grid grid-cols-[minmax(0,5.25rem)_minmax(0,1fr)_3.25rem] items-center gap-2 sm:grid-cols-[6.5rem_minmax(0,1fr)_4.5rem] sm:gap-3"
         >
           <span className={`truncate text-sm ${r.dim ? "line-through" : ""}`}>{r.label}</span>
           <div className="relative h-5 overflow-hidden rounded bg-[var(--track)]">

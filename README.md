@@ -72,6 +72,31 @@ first paint, so there is no flash. In components, use the colour tokens from
 `globals.css` (`var(--text)`, `var(--panel)`, `var(--c1)` …), never raw hex, so both
 themes work.
 
+## First-visit onboarding
+
+The first time someone opens the site on a device, a short tour explains tracks,
+sessions, and the theme button. There is no account or database, so "already seen"
+is saved in `localStorage` under the key `onboarding`. Skip and finish both count as
+done, so the tour does not come back on the next visit. **Take the tour** in the
+footer opens it again. The component is `src/components/Onboarding.tsx`.
+
+## Responsive layout
+
+Every page and every visual must work on a phone and on a tablet, as well as on a
+desktop. Check these widths before finishing any UI change, in both themes:
+
+| Width | What it stands for |
+|---|---|
+| 390px | Phone |
+| 768px | Tablet |
+| 1280px | Desktop |
+
+1. **No sideways scroll.** The page width must match the viewport. Long titles, notes and button rows wrap or stack.
+2. **Phone:** one column. The top bar collapses to the Menu button. Tap targets are at least 44px tall.
+3. **Tablet:** two columns where a grid has several cards. Track links in the top bar are visible, and nothing overflows the bar.
+4. **A row that is the visual itself** (the eight Two Sum cells, a bar chart) may stay in a row, but the labels and controls around it must still fit.
+5. Do this check for shared chrome too: header, menu, footer, onboarding, and 404.
+
 ## Run it
 
 ```bash
@@ -97,6 +122,8 @@ pnpm lint
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
 | `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI): sessions, planned roadmap stages and projects |
 | `src/lib/theme.ts` | Light/dark mode: the storage key and the no-flash inline script |
+| `src/lib/onboarding.ts` | First-visit tour: the storage key and the "open the tour" event |
+| `src/components/Onboarding.tsx` | The tour itself |
 | `src/app/page.tsx` | Home page, built from `TRACKS` |
 | `src/app/tracks/page.tsx` | All tracks with their sessions |
 | `src/app/tracks/[track]/` | One page per track: sessions, roadmap and projects |
@@ -140,7 +167,7 @@ How to write the flow:
    through the whole chain.
 7. **Close the loop.** If the process repeats (the next token, the next request, the next
    tick), say so in the last step and point back to step 1.
-8. **Check it at 390px.** Steps stack naturally, so there should be no sideways scroll.
+8. **Check it at 390px and 768px.** Steps stack naturally, so there should be no sideways scroll. See "Responsive layout" above.
 
 Reference implementation: `/tracks/ai/next-token` (`src/sessions/ai/next-token/NextTokenDemo.tsx`).
 
@@ -155,5 +182,5 @@ layout. The step flow is for "how does X work, step by step".
 3. Register it in `src/sessions/registry.tsx`, set the session's `status: "live"` in
    `src/lib/tracks.ts`, and add it to the Pages table above. The route
    `/tracks/<track>/<session>` and the previous/next links come for free.
-4. Check it at phone width (390px) in both themes: no sideways scroll.
+4. Check it at phone width (390px) and tablet width (768px), in both themes: no sideways scroll. See "Responsive layout" above.
 5. Link it from the matching post in social-content.

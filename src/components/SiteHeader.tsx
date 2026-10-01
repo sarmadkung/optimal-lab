@@ -23,7 +23,7 @@ export default function SiteHeader() {
           Optimal Lab
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Tracks">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Tracks">
           {TRACKS.map((t) => {
             const active = t.id === activeId;
             return (
@@ -32,7 +32,7 @@ export default function SiteHeader() {
                 href={trackHref(t)}
                 aria-current={active ? "page" : undefined}
                 style={{ "--accent": t.accent } as React.CSSProperties}
-                className={`rounded-lg px-3 py-1.5 text-sm transition-colors ${
+                className={`rounded-lg px-2 py-1.5 text-sm transition-colors lg:px-3 ${
                   active
                     ? "bg-[var(--panel)] text-[var(--accent)] shadow-[inset_0_0_0_1px_var(--line)]"
                     : "text-[var(--muted)] hover:text-[var(--text)]"
@@ -48,7 +48,7 @@ export default function SiteHeader() {
 
         <button
           type="button"
-          className="flex h-9 items-center gap-2 rounded-lg border border-[var(--line)] px-3 text-sm text-[var(--muted)] lg:hidden"
+          className="flex h-11 items-center gap-2 rounded-lg border border-[var(--line)] px-3 text-sm text-[var(--muted)] md:hidden"
           aria-expanded={open}
           aria-controls="mobile-tracks"
           onClick={() => setOpen((o) => !o)}
@@ -61,7 +61,7 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="mobile-tracks" className="border-t border-[var(--line)] px-4 py-3 lg:hidden" aria-label="Tracks">
+        <nav id="mobile-tracks" className="max-h-[70dvh] overflow-y-auto border-t border-[var(--line)] px-4 py-3 md:hidden" aria-label="Tracks">
           <Link
             href="/tracks"
             onClick={close}
@@ -78,7 +78,7 @@ export default function SiteHeader() {
                 onClick={close}
                 aria-current={t.id === activeId ? "page" : undefined}
                 style={{ "--accent": t.accent } as React.CSSProperties}
-                className={`flex items-center gap-3 rounded-lg px-2 py-2.5 ${
+                className={`flex min-h-11 items-center gap-3 rounded-lg px-2 py-2.5 ${
                   t.id === activeId ? "bg-[var(--panel)] text-[var(--accent)]" : "text-[var(--text)]"
                 }`}
               >

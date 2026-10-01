@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TourButton from "@/components/TourButton";
 import { TRACKS, trackHref } from "@/lib/tracks";
 
 export default function SiteFooter() {
@@ -10,6 +11,7 @@ export default function SiteFooter() {
           <p className="mt-1 max-w-sm text-[var(--muted)]">
             See how engineering works. Interactive visuals you can drag, step and break.
           </p>
+          <TourButton />
         </div>
         <nav aria-label="Footer">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--faint)]">Tracks</p>

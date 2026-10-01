@@ -79,11 +79,11 @@ export default function TwoSumDemo() {
       </div>
 
       {/* the visualiser */}
-      <section className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-5">
+      <section className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
         <p className="text-sm text-[var(--muted)]">{meta.idea}</p>
 
         <LayoutGroup id={approach}>
-          <div className="mt-6 grid grid-cols-8 gap-1.5 sm:gap-2">
+          <div className="mt-6 grid grid-cols-8 gap-1 sm:gap-2">
             {frame.arr.map((value, pos) => {
               const origIdx = frame.orig[pos];
               const inAnswer = frame.found?.includes(origIdx) ?? false;
@@ -110,7 +110,7 @@ export default function TwoSumDemo() {
                           ? "color-mix(in srgb, var(--dsa) 12%, transparent)"
                           : "transparent",
                     }}
-                    className="flex aspect-square w-full items-center justify-center rounded-lg border-2 font-mono text-base transition-colors duration-200 sm:text-xl"
+                    className="flex aspect-square w-full items-center justify-center rounded-lg border-2 font-mono text-xs transition-colors duration-200 min-[420px]:text-base sm:text-xl"
                   >
                     {value}
                   </motion.div>
@@ -120,7 +120,7 @@ export default function TwoSumDemo() {
                       <motion.span
                         layoutId={`ptr-${pointer.label}`}
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        className="block font-mono text-sm font-semibold text-[var(--dsa)]"
+                        className="block font-mono text-[10px] font-semibold text-[var(--dsa)] sm:text-sm"
                       >
                         ↑{pointer.label}
                       </motion.span>
@@ -133,7 +133,7 @@ export default function TwoSumDemo() {
         </LayoutGroup>
 
         {/* what is happening at this step */}
-        <div className="mt-2 flex min-h-12 items-center justify-between gap-4 rounded-lg bg-[var(--inset)] px-4 py-3">
+        <div className="mt-2 flex min-h-12 flex-col gap-2 rounded-lg bg-[var(--inset)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <AnimatePresence mode="wait">
             <motion.p
               key={`${approach}-${step}`}
@@ -146,7 +146,7 @@ export default function TwoSumDemo() {
               {frame.note}
             </motion.p>
           </AnimatePresence>
-          <div className="shrink-0 text-right">
+          <div className="shrink-0 text-right sm:ml-auto">
             <motion.p
               key={frame.ops}
               initial={{ scale: 1.25 }}
@@ -249,15 +249,15 @@ export default function TwoSumDemo() {
       </section>
 
       {/* small-n surprise */}
-      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-5">
+      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
         <h2 className="font-semibold">Checks to find the answer in these 8 numbers</h2>
         <ul className="mt-4 space-y-2">
           {APPROACHES.map((a) => {
             const total = TRACES[a.id].at(-1)!.ops;
             const max = Math.max(...APPROACHES.map((x) => TRACES[x.id].at(-1)!.ops));
             return (
-              <li key={a.id} className="grid grid-cols-[9rem_1fr_2.5rem] items-center gap-3 text-sm">
-                <span className="truncate text-[var(--muted)]">{a.name}</span>
+              <li key={a.id} className="grid grid-cols-[minmax(0,1fr)_2.5rem] items-center gap-x-3 gap-y-1 text-sm sm:grid-cols-[9rem_minmax(0,1fr)_2.5rem]">
+                <span className="col-span-2 truncate text-[var(--muted)] sm:col-span-1">{a.name}</span>
                 <div className="h-3 rounded bg-[var(--track)]">
                   <motion.div
                     className="h-full rounded"
@@ -281,8 +281,8 @@ export default function TwoSumDemo() {
       </section>
 
       {/* growth */}
-      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-5">
-        <div className="flex items-baseline justify-between gap-4">
+      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 className="font-semibold">Now make the input bigger</h2>
           <p className="font-mono text-xs text-[var(--faint)]">log scale · 1 check = 1 ns</p>
         </div>
@@ -306,7 +306,7 @@ export default function TwoSumDemo() {
             const count = ops[a.id];
             return (
               <li key={a.id}>
-                <div className="flex items-baseline justify-between gap-3 text-sm">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-sm">
                   <span>
                     {a.name} <span className="font-mono text-xs text-[var(--faint)]">{a.big}</span>
                   </span>

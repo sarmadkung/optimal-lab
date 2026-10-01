@@ -51,7 +51,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--text)]"
     >
       {/* both icons are in the HTML; globals.css shows the one for the theme you would switch to */}
       <svg className="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
