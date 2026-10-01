@@ -72,7 +72,7 @@ export default function Onboarding() {
           <p className="font-mono text-xs text-[var(--faint)]">
             {step + 1} of {STEPS.length}
           </p>
-          <button type="button" onClick={finish} className="min-h-11 px-2 text-sm text-[var(--muted)] hover:text-[var(--text)]">
+          <button type="button" onClick={finishOnboarding} className="min-h-11 px-2 text-sm text-[var(--muted)] hover:text-[var(--text)]">
             Skip
           </button>
         </div>
@@ -111,7 +111,7 @@ export default function Onboarding() {
           {step > 0 && (
             <button
               type="button"
-              onClick={() => setStep((s) => s - 1)}
+              onClick={() => setOnboardingStep(step - 1)}
               className="min-h-11 rounded-lg border border-[var(--line-strong)] px-4 text-sm"
             >
               Back
@@ -120,7 +120,7 @@ export default function Onboarding() {
           {last && start ? (
             <Link
               href={sessionHref(start.track, start.session)}
-              onClick={finish}
+              onClick={finishOnboarding}
               className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[var(--text)] px-4 text-sm font-semibold text-[var(--bg)]"
             >
               Start with {start.session.title}
@@ -128,7 +128,7 @@ export default function Onboarding() {
           ) : (
             <button
               type="button"
-              onClick={() => (last ? finish() : setStep((s) => s + 1))}
+              onClick={() => (last ? finishOnboarding() : setOnboardingStep(step + 1))}
               className="min-h-11 rounded-lg bg-[var(--text)] px-4 text-sm font-semibold text-[var(--bg)]"
             >
               {last ? "Got it" : "Next"}
