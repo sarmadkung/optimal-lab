@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: { default: "Optimal Lab", template: "%s · Optimal Lab" },
-  description: "See how engineering works: interactive visuals for DSA, system design, DevOps and AI, plus DSA practice.",
+  description: "See how engineering works: interactive visuals for DSA, system design, DevOps, AI, automation, and the tools around them.",
 };
 
 export const viewport: Viewport = {

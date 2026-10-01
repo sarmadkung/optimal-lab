@@ -13,8 +13,9 @@ export default function Home() {
       <section>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">See how engineering works</h1>
         <p className="mt-3 max-w-2xl text-[var(--muted)]">
-          Short interactive sessions on algorithms, Node.js, system design, DevOps and AI. Instead of
-          reading a diagram, you move the parts yourself and watch what happens.
+          Short interactive sessions on algorithms, Node.js, system design, DevOps, AI, and the
+          tools that ship them. Instead of reading a diagram, you move the parts yourself and watch
+          what happens.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           {start && (

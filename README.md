@@ -55,9 +55,26 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 |---|---|---|
 | `/` | Home: start button, live sessions, how a session works, all tracks | — |
 | `/tracks` | Every track with all its sessions | — |
-| `/tracks/<track>` | One track: sessions, roadmap, projects. Tracks: `dsa`, `nodejs`, `system-design`, `devops`, `ai` | — |
+| `/tracks/<track>` | One track: sessions, roadmap, projects. Tracks: `dsa`, `nodejs`, `system-design`, `devops`, `ai`, `ai-native`, `ai-automation`, `tools` | — |
 | `/tracks/dsa/two-sum` | Two Sum, three ways: brute force, sort + two pointers, hash map, and how each scales | social-content DSA #01 |
+| `/tracks/dsa/sliding-window` | Fixed window: drop the cell that left, add the cell that entered | — |
+| `/tracks/dsa/binary-search` | Halve a sorted list until the target is found or the range is empty | — |
+| `/tracks/nodejs/event-loop` | One turn of the event loop: sync, nextTick, promises, timers, poll, check | — |
+| `/tracks/nodejs/streams-backpressure` | Producer, buffer, high water mark, consumer | — |
+| `/tracks/system-design/load-balancing` | Round robin vs least connections when one server is faster | — |
+| `/tracks/system-design/caching` | LRU: hits, misses, and which key gets evicted | — |
+| `/tracks/devops/ci-cd-pipeline` | Lint, test, build, deploy — stop at the first failure | — |
+| `/tracks/devops/containers-vs-vms` | Start a container, or boot a virtual machine | — |
 | `/tracks/ai/next-token` | How an LLM picks the next token: logits, softmax, temperature, top-k, top-p, sampling | social-content AI Engineering #02 |
+| `/tracks/ai/embeddings` | Cosine similarity: move a query and see which notes return | — |
+| `/tracks/ai/rag` | Chunk, retrieve, paste into the prompt, answer only from that | — |
+| `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
+| `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
+| `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
+| `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
+| `/tracks/tools/cursor-agent` | Search, edit, check, repeat | — |
+| `/tracks/tools/mcp` | A tool server lists tools; the app forwards the call | — |
+| `/tracks/tools/n8n` | Webhook → IF → Slack or email | — |
 
 Every session in `tracks.ts` gets a page. Sessions marked `soon` show a "coming soon" page.
 The old URLs `/dsa-01` and `/next-token` redirect to the new ones (`next.config.ts`), so
@@ -120,7 +137,7 @@ pnpm lint
 | `src/sessions/<track>/<session>/*Demo.tsx` | The interactive component for one session (`"use client"`) |
 | `src/sessions/registry.tsx` | Maps `<track>/<session>` to its demo component |
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
-| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI): sessions, planned roadmap stages and projects |
+| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI, AI Native, AI Automation, Tools): sessions, planned roadmap stages and projects |
 | `src/lib/theme.ts` | Light/dark mode: the storage key and the no-flash inline script |
 | `src/lib/onboarding.ts` | First-visit tour: the storage key and whether the tour is open |
 | `src/components/Onboarding.tsx` | The tour itself |

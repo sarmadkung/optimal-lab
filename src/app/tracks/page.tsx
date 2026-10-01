@@ -6,7 +6,7 @@ import { TRACKS, liveCount, trackHref } from "@/lib/tracks";
 
 export const metadata: Metadata = {
   title: "All tracks",
-  description: "Every Optimal Lab track and its interactive sessions: DSA, Node.js, system design, DevOps and AI.",
+  description: "Every Optimal Lab track and its interactive sessions, from DSA and DevOps to AI native, automation, and tools.",
 };
 
 export default function TracksPage() {
