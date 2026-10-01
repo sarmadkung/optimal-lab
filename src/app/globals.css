@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-/* same palette as the post visuals in posts/ */
+/* Colour tokens. Dark is the default and matches the social-content post visuals.
+   Light is set by data-theme="light" on <html> (see src/lib/theme.ts and ThemeToggle).
+   Use these tokens in components, never raw hex, so both themes work. */
 :root {
   --bg: #0a0c10;
   --panel: #11141b;
@@ -9,11 +11,64 @@
   --text: #e6eaf2;
   --muted: #9ba6b7;
   --faint: #5e6977;
+
+  /* track accents */
   --ai: #8aa4ff;
   --dsa: #ffb86b;
   --node: #7ee0a1;
   --sys: #c49bff;
   --ops: #5fd4e6;
+
+  /* states */
+  --good: #7ee0b5;
+  --bad: #f28fad;
+
+  /* surfaces inside a panel */
+  --track: rgb(255 255 255 / 0.05); /* empty bar / progress track */
+  --ghost: rgb(255 255 255 / 0.15); /* faint "before" bar */
+  --inset: rgb(0 0 0 / 0.25); /* recessed box */
+  --on-accent: #0a0c10; /* text on an accent background */
+
+  /* categorical series (charts, candidate tokens) */
+  --c1: #8aa4ff;
+  --c2: #ffb86b;
+  --c3: #7ee0b5;
+  --c4: #f28fad;
+  --c5: #c9a8ff;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --line: #e2e6ee;
+  --line-strong: #c2c9d6;
+  --text: #111620;
+  --muted: #4a5466;
+  --faint: #7a8496;
+
+  --ai: #3d5ce0;
+  --dsa: #b85f00;
+  --node: #1a8a4a;
+  --sys: #7442c8;
+  --ops: #0b7f92;
+
+  --good: #0f8a5c;
+  --bad: #c2366a;
+
+  --track: rgb(15 20 32 / 0.06);
+  --ghost: rgb(15 20 32 / 0.14);
+  --inset: rgb(15 20 32 / 0.04);
+  --on-accent: #ffffff;
+
+  --c1: #3d5ce0;
+  --c2: #c06a00;
+  --c3: #12895c;
+  --c4: #c93b70;
+  --c5: #7c4fd6;
+
+  color-scheme: light;
 }
 
 @theme inline {
@@ -21,12 +76,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  color-scheme: dark;
-}
-
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ai);
+  outline-offset: 2px;
+}
+
+/* ThemeToggle: dark mode offers the sun, light mode offers the moon */
+:root[data-theme="light"] .theme-icon-sun,
+:root:not([data-theme="light"]) .theme-icon-moon {
+  display: none;
 }

@@ -1,6 +1,10 @@
 @AGENTS.md
 @README.md
 
+## Rules for agents
+
+- Any visual that explains how something works step by step must use the step flow: top-to-bottom steps with an arrow between each. Follow "Explaining a process: the step flow" in README.md and use `src/components/flow/Flow.tsx`.
+
 ## Related repositories
 
 This site works with two sibling repos in `~/Documents/startups/`:

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import SessionCard from "@/components/SessionCard";
-import { TRACKS, getTrack } from "@/lib/tracks";
+import { TRACKS, firstLive, getTrack, sessionHref } from "@/lib/tracks";
 
 export const dynamicParams = false;
 
@@ -23,23 +24,46 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
 
   const live = t.sessions.filter((s) => s.status === "live");
   const soon = t.sessions.filter((s) => s.status === "soon");
+  const start = firstLive(t);
 
   return (
     <main
-      className="mx-auto w-full max-w-5xl px-4 py-12"
+      className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-12"
       style={{ "--accent": t.accent } as React.CSSProperties}
     >
-      <Link href="/" className="text-sm text-[var(--muted)] hover:text-[var(--text)]">
-        ← All tracks
-      </Link>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Tracks", href: "/tracks" },
+          { label: t.short },
+        ]}
+      />
       <span className="mt-6 block h-1 w-12 rounded-full bg-[var(--accent)]" />
       <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">{t.title}</h1>
       <p className="mt-3 max-w-2xl text-[var(--muted)]">{t.tagline}</p>
 
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        {start ? (
+          <Link
+            href={sessionHref(t, start)}
+            className="rounded-lg bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-[var(--on-accent)] transition-opacity hover:opacity-90"
+          >
+            Start: {start.title} →
+          </Link>
+        ) : (
+          <span className="rounded-lg border border-dashed border-[var(--line-strong)] px-4 py-2.5 text-sm text-[var(--muted)]">
+            First session coming soon
+          </span>
+        )}
+        <span className="font-mono text-xs text-[var(--faint)]">
+          {live.length} live · {soon.length} coming
+        </span>
+      </div>
+
       {/* section jump links */}
-      <nav className="mt-6 flex flex-wrap gap-2 text-sm" aria-label="Sections">
+      <nav className="mt-8 flex flex-wrap gap-2 text-sm" aria-label="On this page">
         {[
-          ["sessions", "Interactive sessions"],
+          ["sessions", "Sessions"],
           ["roadmap", "Roadmap"],
           ["projects", "Projects"],
         ].map(([id, label]) => (
@@ -54,20 +78,22 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
       </nav>
 
       <section id="sessions" className="mt-12 scroll-mt-20">
-        <h2 className="text-xl font-semibold">Interactive sessions</h2>
-        <p className="mt-1 text-sm text-[var(--muted)]">Drag, step and break things to see how they work.</p>
+        <h2 className="text-xl font-semibold">Sessions</h2>
+        <p className="mt-1 text-sm text-[var(--muted)]">
+          Go in order. Each session is one idea you can drag, step and break.
+        </p>
         {live.length === 0 && (
           <p className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 text-sm text-[var(--muted)]">
             The first sessions for this track are being built. Here is what is coming.
           </p>
         )}
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[...live, ...soon].map((s) => (
-            <li key={s.title}>
-              <SessionCard session={s} accent={t.accent} />
+            <li key={s.id}>
+              <SessionCard track={t} session={s} />
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
 
       <section id="roadmap" className="mt-14 scroll-mt-20">

@@ -101,14 +101,16 @@ export default function TwoSumDemo() {
                     animate={{
                       opacity: dim ? 0.3 : 1,
                       scale: inAnswer ? 1.08 : pointer ? 1.04 : 1,
-                      borderColor: inAnswer ? "#7EE0B5" : pointer ? "#FFB86B" : "#3A4453",
-                      backgroundColor: inAnswer
-                        ? "rgba(126,224,181,0.15)"
-                        : pointer
-                          ? "rgba(255,184,107,0.12)"
-                          : "rgba(0,0,0,0)",
                     }}
-                    className="flex aspect-square w-full items-center justify-center rounded-lg border-2 font-mono text-base sm:text-xl"
+                    style={{
+                      borderColor: inAnswer ? "var(--good)" : pointer ? "var(--dsa)" : "var(--line-strong)",
+                      backgroundColor: inAnswer
+                        ? "color-mix(in srgb, var(--good) 15%, transparent)"
+                        : pointer
+                          ? "color-mix(in srgb, var(--dsa) 12%, transparent)"
+                          : "transparent",
+                    }}
+                    className="flex aspect-square w-full items-center justify-center rounded-lg border-2 font-mono text-base transition-colors duration-200 sm:text-xl"
                   >
                     {value}
                   </motion.div>
@@ -131,7 +133,7 @@ export default function TwoSumDemo() {
         </LayoutGroup>
 
         {/* what is happening at this step */}
-        <div className="mt-2 flex min-h-12 items-center justify-between gap-4 rounded-lg bg-black/25 px-4 py-3">
+        <div className="mt-2 flex min-h-12 items-center justify-between gap-4 rounded-lg bg-[var(--inset)] px-4 py-3">
           <AnimatePresence mode="wait">
             <motion.p
               key={`${approach}-${step}`}
@@ -139,7 +141,7 @@ export default function TwoSumDemo() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.15 }}
-              className={`font-mono text-sm ${frame.found ? "text-[#7EE0B5]" : "text-[var(--text)]"}`}
+              className={`font-mono text-sm ${frame.found ? "text-[var(--good)]" : "text-[var(--text)]"}`}
             >
               {frame.note}
             </motion.p>
@@ -193,7 +195,7 @@ export default function TwoSumDemo() {
               if (last) setStep(0);
               setPlaying((p) => (last ? true : !p));
             }}
-            className="w-24 rounded-md bg-[var(--dsa)] px-4 py-2 font-semibold text-[#0A0C10]"
+            className="w-24 rounded-md bg-[var(--dsa)] px-4 py-2 font-semibold text-[var(--on-accent)]"
           >
             {last ? "Replay" : playing ? "Pause" : "Play"}
           </button>
@@ -223,7 +225,7 @@ export default function TwoSumDemo() {
                 key={s.label}
                 onClick={() => setSpeed(i)}
                 className={`px-2.5 py-1.5 font-mono text-xs ${
-                  i === speed ? "bg-white/10 text-[var(--text)]" : "text-[var(--faint)]"
+                  i === speed ? "bg-[var(--ghost)] text-[var(--text)]" : "text-[var(--faint)]"
                 }`}
               >
                 {s.label}
@@ -231,7 +233,7 @@ export default function TwoSumDemo() {
             ))}
           </div>
         </div>
-        <div className="mt-3 h-1 overflow-hidden rounded bg-white/5">
+        <div className="mt-3 h-1 overflow-hidden rounded bg-[var(--track)]">
           <motion.div
             className="h-full bg-[var(--dsa)]"
             animate={{ width: `${((step + 1) / frames.length) * 100}%` }}
@@ -256,10 +258,10 @@ export default function TwoSumDemo() {
             return (
               <li key={a.id} className="grid grid-cols-[9rem_1fr_2.5rem] items-center gap-3 text-sm">
                 <span className="truncate text-[var(--muted)]">{a.name}</span>
-                <div className="h-3 rounded bg-white/5">
+                <div className="h-3 rounded bg-[var(--track)]">
                   <motion.div
                     className="h-full rounded"
-                    style={{ background: a.id === approach ? "#FFB86B" : "#5E6977" }}
+                    style={{ background: a.id === approach ? "var(--dsa)" : "var(--faint)" }}
                     initial={{ width: 0 }}
                     whileInView={{ width: `${(total / max) * 100}%` }}
                     viewport={{ once: true }}
@@ -313,10 +315,10 @@ export default function TwoSumDemo() {
                     <span className="text-[var(--text)]">{duration(count)}</span>
                   </span>
                 </div>
-                <div className="mt-1.5 h-3 rounded bg-white/5">
+                <div className="mt-1.5 h-3 rounded bg-[var(--track)]">
                   <motion.div
                     className="h-full rounded"
-                    style={{ background: a.id === "brute" ? "#F28FAD" : a.id === "hashMap" ? "#7EE0B5" : "#FFB86B" }}
+                    style={{ background: a.id === "brute" ? "var(--bad)" : a.id === "hashMap" ? "var(--good)" : "var(--dsa)" }}
                     initial={false}
                     animate={{ width: `${(Math.log10(count + 1) / maxLog) * 100}%` }}
                     transition={{ type: "spring", stiffness: 160, damping: 24 }}

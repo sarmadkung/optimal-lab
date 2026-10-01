@@ -7,3 +7,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+# Optimal Lab rules
+
+- Read README.md first: it covers the layout, the tracks and how to add a visual.
+- Any visual that explains how something works step by step must use the **step flow**: top-to-bottom steps, one card each, with a labelled arrow between them. Follow "Explaining a process: the step flow" in README.md and use `src/components/flow/Flow.tsx`. Reference: `/tracks/ai/next-token`.
