@@ -33,6 +33,73 @@ export function useWalk(steps: number, ms = 420) {
   return { stage, busy, run, setStage, setBusy };
 }
 
+// Steps through precomputed frames (ticks, requests) with play, pause and next.
+export function usePlayback(length: number, ms = 1200) {
+  const [i, setI] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const last = Math.max(0, length - 1);
+  const at = Math.min(i, last);
+  const atEnd = at >= last;
+
+  useEffect(() => {
+    if (!playing || atEnd) return;
+    const t = setTimeout(() => setI((n) => n + 1), ms);
+    return () => clearTimeout(t);
+  }, [playing, atEnd, i, ms]);
+
+  return {
+    i: at,
+    atEnd,
+    playing: playing && !atEnd,
+    next: () => setI((n) => (n >= last ? 0 : n + 1)),
+    toggle: () => {
+      if (atEnd) {
+        setI(0);
+        setPlaying(true);
+        return;
+      }
+      setPlaying((p) => !p);
+    },
+    reset: () => {
+      setI(0);
+      setPlaying(false);
+    },
+  };
+}
+
+export function PlaybackControls({
+  playback,
+  accent,
+  nextLabel,
+  status,
+}: {
+  playback: ReturnType<typeof usePlayback>;
+  accent: string;
+  nextLabel: string;
+  status?: string;
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        onClick={playback.toggle}
+        className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)]"
+        style={{ background: accent }}
+      >
+        {playback.playing ? "Pause" : "Play"}
+      </button>
+      <button
+        type="button"
+        onClick={playback.next}
+        className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
+      >
+        {playback.atEnd ? "Restart" : nextLabel}
+      </button>
+      {status && <span className="text-xs text-[var(--faint)]">{status}</span>}
+    </>
+  );
+}
+
 export function RunButton({
   busy,
   onClick,

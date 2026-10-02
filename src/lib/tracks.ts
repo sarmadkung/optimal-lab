@@ -69,7 +69,7 @@ export const TRACKS: Track[] = [
     accent: "var(--sys)",
     sessions: [
       { id: "load-balancing", title: "Load balancing strategies", blurb: "Compare round robin and least connections under uneven load.", status: "live" },
-      { id: "caching", title: "Caching and eviction", blurb: "Tune the cache size and watch which keys get evicted.", status: "live" },
+      { id: "caching", title: "Caching and eviction", blurb: "Watch a cache hit, miss and evict, then predict the next request.", status: "live" },
       { id: "consistent-hashing", title: "Consistent hashing", blurb: "Add and remove nodes and see how few keys move.", status: "soon" },
     ],
     roadmap: ["Scaling basics", "Caching & CDNs", "Databases, replication & sharding", "Queues & async work", "Designing for failure"],

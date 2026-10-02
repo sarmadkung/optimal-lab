@@ -11,23 +11,45 @@ export type CacheFrame = {
   hits: number;
 };
 
-export function lru(size: number, requests = REQUESTS): CacheFrame[] {
-  const cache: string[] = [];
-  const frames: CacheFrame[] = [];
-  let hits = 0;
-  for (const key of requests) {
-    const at = cache.indexOf(key);
-    let evicted: string | null = null;
-    if (at >= 0) {
-      cache.splice(at, 1);
-      cache.push(key);
-      hits++;
-      frames.push({ key, hit: true, evicted, cache: [...cache], hits });
-      continue;
-    }
-    if (cache.length >= size) evicted = cache.shift() ?? null;
-    cache.push(key);
-    frames.push({ key, hit: false, evicted, cache: [...cache], hits });
+export type LruStep = {
+  cache: string[];
+  hit: boolean;
+  evicted: string | null;
+};
+
+// `cache` index 0 is least recent. The returned cache is a new array.
+export function applyLru(cache: string[], size: number, key: string): LruStep {
+  const next = [...cache];
+  const at = next.indexOf(key);
+  if (at >= 0) {
+    next.splice(at, 1);
+    next.push(key);
+    return { cache: next, hit: true, evicted: null };
   }
-  return frames;
+  const evicted = next.length >= size ? (next.shift() ?? null) : null;
+  next.push(key);
+  return { cache: next, hit: false, evicted };
+}
+
+export function lru(size: number, requests = REQUESTS): CacheFrame[] {
+  let cache: string[] = [];
+  let hits = 0;
+  return requests.map((key) => {
+    const step = applyLru(cache, size, key);
+    cache = step.cache;
+    if (step.hit) hits += 1;
+    return { key, hit: step.hit, evicted: step.evicted, cache: [...cache], hits };
+  });
+}
+
+// Cache state after `history`, plus the frame produced by reading `key` next.
+export function preview(size: number, history: string[], key: string) {
+  const before = lru(size, history).at(-1);
+  const after = lru(size, [...history, key]).at(-1)!;
+  return {
+    cache: before?.cache ?? [],
+    hits: before?.hits ?? 0,
+    seen: history.length,
+    after,
+  };
 }

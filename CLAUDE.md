@@ -4,6 +4,8 @@
 ## Rules for agents
 
 - Any visual that explains how something works step by step must use the step flow: top-to-bottom steps with an arrow between each. Follow "Explaining a process: the step flow" in README.md and use `src/components/flow/Flow.tsx`.
+- Any visual where requests or data move between parts of a real system (load balancer, cache, database, model, tool server, pipeline) must add a system map above the step flow, with the request animated hop by hop. Follow "Showing the system: the system map" in README.md and use `src/components/system/SystemMap.tsx`.
+- A simulation the reader should predict and break uses a guided lesson: one live stage, one chapter at a time, then a playground. Follow "Guided lessons" in README.md and use `src/components/lesson/Lesson.tsx`.
 
 ## Related repositories
 

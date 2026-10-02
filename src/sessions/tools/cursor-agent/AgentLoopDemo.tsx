@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
+import { SystemMap, hops, type Packet } from "@/components/system/SystemMap";
 import { STEP_FOR, turns } from "@/lib/agentLoop";
 
 const ACCENT = "var(--tools)";
@@ -32,10 +33,10 @@ export default function AgentLoopDemo() {
       if (cancel.current) return;
       setStage(STEP_FOR[script[i].action]);
       setShown(i + 1);
-      await wait(480);
+      await wait(1000);
     }
     setStage(4);
-    await wait(360);
+    await wait(900);
     setStage(null);
     setBusy(false);
   }
@@ -45,6 +46,20 @@ export default function AgentLoopDemo() {
   const passed = last?.action === "Check" && last.ok;
   const failed = last?.action === "Check" && !last.ok;
 
+  const turn = stage !== null && stage < 4 ? last : undefined;
+  const id = `${failOnce}-${shown}`;
+  const packets: Packet[] =
+    stage === 4 ? hops(`${id}-done`, ["agent", "task"], { label: "done", tone: "good" })
+    : turn?.action === "Search" ? [...hops(`${id}-s`, ["agent", "repo"], { label: "search" }), ...hops(`${id}-f`, ["repo", "agent"], { label: "files", start: 0.45 })]
+    : turn?.action === "Edit" ? hops(`${id}-e`, ["agent", "repo"], { label: "edit" })
+    : turn?.action === "Check" ? [...hops(`${id}-c`, ["agent", "tests"], { label: "run test" }), ...hops(`${id}-r`, ["tests", "agent"], { label: turn.ok ? "green" : "red", tone: turn.ok ? "good" : "bad", start: 0.45 })]
+    : [];
+  const caption =
+    stage === null ? (passed ? "Done. The loop stopped on a green check." : "Run the agent and watch it move between the repo and the test runner.")
+    : stage === 4 ? "Green. The agent stops and reports back."
+    : turn ? `Round ${turn.round}. ${turn.action}: ${turn.detail}`
+    : "";
+
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Tools · interactive</p>
@@ -53,6 +68,39 @@ export default function AgentLoopDemo() {
         Cursor, Claude Code, and tools like them do not write the whole answer in one shot. They
         search, edit, run a check, and repeat until the check passes.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="The task, the agent, the repo and the test runner"
+          accent={ACCENT}
+          nodes={[
+            { id: "task", label: "Task", sub: "make the test pass", at: [12, 50], mobileAt: [50, 11], state: stage === 4 ? "good" : "idle" },
+            { id: "agent", label: "Agent", sub: turn ? `round ${turn.round}` : "idle", at: [44, 50], mobileAt: [50, 46], state: stage !== null ? "active" : "idle" },
+            { id: "repo", label: "Repo files", sub: "sum.ts", at: [84, 20], mobileAt: [22, 86], state: turn?.action === "Search" || turn?.action === "Edit" ? "active" : "idle" },
+            {
+              id: "tests",
+              label: "Test runner",
+              sub: last?.action === "Check" ? (last.ok ? "green" : "red") : "not run",
+              at: [84, 80],
+              mobileAt: [78, 86],
+              state: turn?.action === "Check" ? (turn.ok ? "good" : "bad") : "idle",
+            },
+          ]}
+          links={[
+            { from: "task", to: "agent", label: "task" },
+            { from: "agent", to: "repo", label: turn?.action === "Edit" ? "edit" : "search" },
+            { from: "agent", to: "tests", label: "check" },
+          ]}
+          packets={packets}
+          aspect={2.1}
+          mobileAspect={0.95}
+          caption={caption}
+        >
+          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Working…">
+            Run the agent
+          </RunButton>
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         {STEPS.map((step, index) => (
@@ -94,11 +142,6 @@ export default function AgentLoopDemo() {
                       {failed ? "Still red. Back to search." : "Stopped. The test is green."}
                     </p>
                   )}
-                  <div className="mt-4">
-                    <RunButton busy={busy} onClick={run} accent={ACCENT} running="Working…">
-                      Run the agent
-                    </RunButton>
-                  </div>
                 </>
               )}
             </FlowStep>

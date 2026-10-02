@@ -3,13 +3,39 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, useWalk } from "@/components/session/ui";
+import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { ANSWER, CALL, GUESS, QUESTION, RESULT } from "@/lib/toolCall";
 
 const ACCENT = "var(--native)";
 
 export default function ToolCallDemo() {
   const [tools, setTools] = useState(true);
-  const { stage, busy, run, setStage } = useWalk(5, 450);
+  const { stage, busy, run, setStage } = useWalk(5, 1000);
+  const lit = (...at: number[]): NodeState => (!tools ? "dim" : stage !== null && at.includes(stage) ? "active" : "idle");
+
+  const packets: Packet[] =
+    stage === 0 ? hops("q", ["user", "model"], { label: "question" })
+    : stage === 2 && tools ? hops("call", ["model", "app"], { label: "get_weather" })
+    : stage === 3 && tools ? [...hops("get", ["app", "api"], { label: "GET" }), ...hops("json", ["api", "app"], { label: "JSON", start: 0.5 })]
+    : stage === 4 ? tools
+      ? [...hops("res", ["app", "model"], { label: "result" }), ...hops("ans", ["model", "user"], { label: "answer", tone: "good", start: 0.5 })]
+      : hops("guess", ["model", "user"], { label: "guess", tone: "bad" })
+    : [];
+  const captions = tools
+    ? [
+        "The question reaches the model.",
+        "The model sees it needs live weather it does not have.",
+        "It writes a tool call. Your app receives it, not the user.",
+        "Your app calls the weather API and gets JSON back.",
+        "The result goes back to the model, which writes the answer from it.",
+      ]
+    : [
+        "The question reaches the model.",
+        "The model needs live weather, but no tool was given.",
+        "There is nothing to call, so your app and the API stay idle.",
+        "No request leaves the process.",
+        "The model answers anyway. The number is a guess.",
+      ];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
@@ -19,6 +45,39 @@ export default function ToolCallDemo() {
         The model does not have live weather. With a tool, it asks your app. Your app runs the tool and
         hands the result back. Without a tool, it can only guess.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="The user, the model, your app and a weather API"
+          accent={ACCENT}
+          nodes={[
+            { id: "user", label: "User", at: [12, 72], mobileAt: [25, 15], state: stage === 0 || stage === 4 ? "active" : "idle" },
+            {
+              id: "model",
+              label: "Model",
+              sub: tools ? "has 1 tool" : "no tools",
+              at: [38, 26],
+              mobileAt: [75, 15],
+              state: stage === 4 && !tools ? "bad" : stage !== null && stage <= 4 && stage !== 3 ? "active" : "idle",
+            },
+            { id: "app", label: "Your app", sub: "runs the tool", at: [64, 72], mobileAt: [75, 85], state: lit(2, 3, 4) },
+            { id: "api", label: "Weather API", sub: "live data", at: [88, 26], mobileAt: [25, 85], state: lit(3) },
+          ]}
+          links={[
+            { from: "user", to: "model", label: stage === 4 ? (tools ? "answer" : "a guess") : "question" },
+            { from: "model", to: "app", label: stage === 4 ? "tool result" : "tool call", dim: !tools },
+            { from: "app", to: "api", label: "HTTP", dim: !tools },
+          ]}
+          packets={packets}
+          aspect={2.1}
+          mobileAspect={1}
+          caption={stage === null ? "Ask the model and watch where the request goes." : captions[stage]}
+        >
+          <RunButton busy={busy} onClick={run} accent={ACCENT}>
+            Ask the model
+          </RunButton>
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         <FlowStep n={1} title="Read the question" what="Some questions can be answered from the prompt. This one cannot." accent={ACCENT} active={stage === 0}>
@@ -79,11 +138,6 @@ export default function ToolCallDemo() {
           <p className="mt-2 text-xs" style={{ color: tools ? "var(--good)" : "var(--bad)" }}>
             {tools ? "Grounded in the sample reading." : "Not grounded. The model invented a temperature."}
           </p>
-          <div className="mt-4">
-            <RunButton busy={busy} onClick={run} accent={ACCENT}>
-              Ask the model
-            </RunButton>
-          </div>
         </FlowStep>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, Slider, useWalk } from "@/components/session/ui";
+import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { ASKS, retrieve, type Ask } from "@/lib/rag";
 
 const ACCENT = "var(--ai)";
@@ -11,9 +12,26 @@ export default function RagDemo() {
   const [askId, setAskId] = useState(ASKS[0].id);
   const [mode, setMode] = useState<"sentence" | "section">("sentence");
   const [k, setK] = useState(1);
-  const { stage, busy, run } = useWalk(6, 420);
+  const { stage, busy, run } = useWalk(6, 1000);
   const ask = ASKS.find((a) => a.id === askId) ?? ASKS[0];
   const { ranked, kept, prompt } = retrieve(ask, mode, k);
+
+  const lit = (...at: number[]): NodeState => (stage !== null && at.includes(stage) ? "active" : "idle");
+  const packets: Packet[] =
+    stage === 0 ? hops("q", ["user", "app"], { label: "question" })
+    : stage === 1 ? hops("chunk", ["app", "docs"], { label: "question" })
+    : stage === 3 ? hops("top", ["docs", "app"], { label: `top ${k}` })
+    : stage === 4 ? hops("prompt", ["app", "llm"], { label: "prompt" })
+    : stage === 5 ? [...hops("ans", ["llm", "app"], { label: "answer" }), ...hops("ans2", ["app", "user"], { label: "answer", start: 0.45 })]
+    : [];
+  const captions = [
+    "The question goes to your app, not straight to the model.",
+    `Your app sends it to the document index, split into ${ranked.length} chunks.`,
+    "The index scores every chunk against the question.",
+    `Only the top ${k} chunk${k > 1 ? "s" : ""} come back to your app.`,
+    "Your app pastes those chunks into one prompt and sends it to the model.",
+    "The model answers from that prompt. It never touched the index.",
+  ];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
@@ -23,6 +41,32 @@ export default function RagDemo() {
         The model does not search your docs. You split them, retrieve a few chunks, and paste those
         chunks into the prompt. The model only sees that prompt.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="A user, your app, the document index and the model"
+          accent={ACCENT}
+          nodes={[
+            { id: "user", label: "User", sub: "asks", at: [13, 22], mobileAt: [24, 14], state: lit(0, 5) },
+            { id: "app", label: "Your app", sub: "builds the prompt", at: [48, 50], mobileAt: [50, 50], state: lit(0, 1, 3, 4, 5) },
+            { id: "docs", label: "Doc index", sub: `${ranked.length} chunks`, at: [86, 22], mobileAt: [76, 14], state: lit(1, 2, 3) },
+            { id: "llm", label: "LLM", sub: "sees only the prompt", at: [86, 78], mobileAt: [50, 86], state: lit(4, 5) },
+          ]}
+          links={[
+            { from: "user", to: "app", label: stage === 5 ? "answer" : "question" },
+            { from: "app", to: "docs", label: stage === 3 ? `top ${k} chunks` : "search", active: stage === 2 },
+            { from: "app", to: "llm", label: stage === 5 ? "answer" : "prompt" },
+          ]}
+          packets={packets}
+          aspect={2.1}
+          mobileAspect={1}
+          caption={stage === null ? "Run retrieval to watch the question travel." : captions[stage]}
+        >
+          <RunButton busy={busy} onClick={run} accent={ACCENT}>
+            Run retrieval
+          </RunButton>
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         <FlowStep n={1} title="Ask a question" what="Retrieval starts from the question, not from the whole corpus." accent={ACCENT} active={stage === 0}>
@@ -92,11 +136,6 @@ export default function RagDemo() {
 
         <FlowStep n={6} title="Answer only from that prompt" what="The model is not searching again. It writes from the notes you just pasted." accent={ACCENT} active={stage === 5}>
           <Answer ask={ask} mode={mode} keptIds={kept.map((c) => c.id)} />
-          <div className="mt-4">
-            <RunButton busy={busy} onClick={run} accent={ACCENT}>
-              Run retrieval
-            </RunButton>
-          </div>
         </FlowStep>
       </div>
     </div>

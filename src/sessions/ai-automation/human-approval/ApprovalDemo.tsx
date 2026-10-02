@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
+import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { DRAFT, type Decision } from "@/lib/approval";
 
 const ACCENT = "var(--auto)";
@@ -20,7 +21,7 @@ export default function ApprovalDemo() {
     for (let s = 0; s < 3; s++) {
       if (cancel.current) return;
       setStage(s);
-      await wait(420);
+      await wait(900);
     }
     setBusy(false);
   }
@@ -33,6 +34,21 @@ export default function ApprovalDemo() {
 
   const waiting = stage === 2 && !decision;
 
+  const packets: Packet[] =
+    stage === 0 ? hops("email", ["inbox", "model"], { label: "email" })
+    : stage === 2 ? [...hops("draft", ["model", "gate"], { label: "draft" }), ...hops("ask", ["gate", "person"], { label: "review", start: 0.5 })]
+    : stage === 3 && decision === "approve" ? [...hops("yes", ["person", "gate"], { label: "approve", tone: "good" }), ...hops("send", ["gate", "customer"], { label: "sent", tone: "good", start: 0.5 })]
+    : stage === 3 && decision === "reject" ? hops("no", ["person", "gate"], { label: "reject", tone: "bad" })
+    : [];
+  const gate: NodeState = waiting ? "wait" : decision === "approve" ? "good" : decision === "reject" ? "bad" : "idle";
+  const caption =
+    stage === null ? "Run the workflow. It will stop at the gate and wait for you."
+    : stage === 0 ? "Sara's email reaches the workflow."
+    : stage === 1 ? "The model drafts a refund reply. Nothing is sent."
+    : waiting ? "The draft is parked at the gate. Approve or reject it in step 3."
+    : decision === "approve" ? "Approved. Only now does the reply leave for Sara."
+    : "Rejected. The draft never leaves the gate.";
+
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI automation · interactive</p>
@@ -41,6 +57,34 @@ export default function ApprovalDemo() {
         The workflow can draft a refund. It must not send it. A person approves or rejects, and only
         then does the run finish.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="Inbox, model, approval gate, a person and the customer"
+          accent={ACCENT}
+          nodes={[
+            { id: "inbox", label: "Inbox", sub: "Charged twice", at: [11, 62], mobileAt: [25, 10], state: stage === 0 ? "active" : "idle" },
+            { id: "model", label: "Model", sub: "drafts a reply", at: [36, 62], mobileAt: [75, 10], state: stage === 0 || stage === 1 || stage === 2 ? "active" : "idle" },
+            { id: "gate", label: "Approval gate", sub: waiting ? "waiting…" : "holds the draft", at: [63, 62], mobileAt: [50, 48], state: gate },
+            { id: "person", label: "Person", sub: "you", at: [63, 15], mobileAt: [18, 86], state: waiting ? "wait" : stage === 3 ? "active" : "idle" },
+            { id: "customer", label: "Sara", sub: "customer", at: [89, 62], mobileAt: [82, 86], state: decision === "approve" ? "good" : decision === "reject" ? "dim" : "idle" },
+          ]}
+          links={[
+            { from: "inbox", to: "model" },
+            { from: "model", to: "gate", label: "draft" },
+            { from: "gate", to: "person", label: decision ?? "review", active: waiting },
+            { from: "gate", to: "customer", label: "reply", dim: decision === "reject" },
+          ]}
+          packets={packets}
+          aspect={2.1}
+          mobileAspect={0.95}
+          caption={caption}
+        >
+          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Drafting…">
+            Run until the pause
+          </RunButton>
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         <FlowStep n={1} title="The email arrives" what="Sara wrote that order 1842 was charged twice." accent={ACCENT} active={stage === 0}>
@@ -88,11 +132,6 @@ export default function ApprovalDemo() {
             {decision === "reject" && "Stopped. The draft was not sent."}
             {decision === null && "Still waiting on a person."}
           </p>
-          <div className="mt-4">
-            <RunButton busy={busy} onClick={run} accent={ACCENT} running="Drafting…">
-              Run until the pause
-            </RunButton>
-          </div>
         </FlowStep>
       </div>
     </div>

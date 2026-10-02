@@ -3,14 +3,31 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, Slider, useWalk } from "@/components/session/ui";
+import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { THRESHOLD, route } from "@/lib/n8n";
 
 const ACCENT = "var(--tools)";
 
 export default function N8nDemo() {
   const [amount, setAmount] = useState(240);
-  const { stage, busy, run } = useWalk(5, 450);
+  const { stage, busy, run } = useWalk(5, 900);
   const taken = route(amount);
+  const target = taken.high ? "slack" : "email";
+  const branch = (id: "slack" | "email"): NodeState =>
+    id !== target ? "dim" : stage === 4 ? "good" : stage === (taken.high ? 2 : 3) ? "active" : "idle";
+
+  const packets: Packet[] =
+    stage === 0 ? hops("in", ["source", "webhook"], { label: "POST" })
+    : stage === 1 ? hops("json", ["webhook", "if"], { label: `$${amount}` })
+    : (stage === 2 && taken.high) || (stage === 3 && !taken.high) ? hops("branch", ["if", target], { label: taken.high ? "true" : "false" })
+    : [];
+  const captions = [
+    "Another system POSTs the order to the webhook.",
+    `The webhook passes { amount: ${amount} } to the IF node.`,
+    taken.high ? `${amount} > ${THRESHOLD}, so the true branch runs.` : "The true branch is skipped.",
+    taken.high ? "The false branch is skipped." : `${amount} ≤ ${THRESHOLD}, so the false branch runs.`,
+    `One execution, one path: ${taken.destination}.`,
+  ];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
@@ -20,6 +37,34 @@ export default function N8nDemo() {
         n8n runs a chain of nodes. A webhook starts it, an IF node picks a branch, and only one
         destination runs. Drag the amount across ${THRESHOLD}.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="An n8n canvas: shop, webhook, IF node, Slack and email"
+          accent={ACCENT}
+          nodes={[
+            { id: "source", label: "Shop", sub: "new order", at: [10, 50], mobileAt: [50, 10], state: stage === 0 ? "active" : "idle" },
+            { id: "webhook", label: "Webhook", sub: "POST /order", at: [36, 50], mobileAt: [50, 36], state: stage === 0 || stage === 1 ? "active" : "idle" },
+            { id: "if", label: "IF", sub: `amount > ${THRESHOLD}`, at: [62, 50], mobileAt: [50, 62], state: stage === 1 || stage === 2 || stage === 3 ? "active" : "idle" },
+            { id: "slack", label: "Slack", sub: "#sales", at: [88, 20], mobileAt: [22, 89], state: branch("slack") },
+            { id: "email", label: "Email", sub: "the team", at: [88, 80], mobileAt: [78, 89], state: branch("email") },
+          ]}
+          links={[
+            { from: "source", to: "webhook" },
+            { from: "webhook", to: "if" },
+            { from: "if", to: "slack", label: "true", dim: !taken.high },
+            { from: "if", to: "email", label: "false", dim: taken.high },
+          ]}
+          packets={packets}
+          aspect={2.1}
+          mobileAspect={0.95}
+          caption={stage === null ? `Drag the amount across $${THRESHOLD}, then run it. The dimmed branch will not run.` : captions[stage]}
+        >
+          <RunButton busy={busy} onClick={run} accent={ACCENT}>
+            Run the workflow
+          </RunButton>
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         <FlowStep n={1} title="Webhook receives the order" what="Some other system POSTs JSON. That payload is the input to every later node." accent={ACCENT} active={stage === 0}>
@@ -63,11 +108,6 @@ export default function N8nDemo() {
           <p className="text-sm">
             Sent to <span className="font-semibold text-[var(--text)]">{taken.destination}</span>.
           </p>
-          <div className="mt-4">
-            <RunButton busy={busy} onClick={run} accent={ACCENT}>
-              Run the workflow
-            </RunButton>
-          </div>
         </FlowStep>
       </div>
     </div>

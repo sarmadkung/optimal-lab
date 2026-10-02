@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
-import { Meter, Slider } from "@/components/session/ui";
+import { Meter, PlaybackControls, Slider, usePlayback } from "@/components/session/ui";
+import { SystemMap, type Packet } from "@/components/system/SystemMap";
 import { simulate } from "@/lib/backpressure";
 
 const ACCENT = "var(--node)";
@@ -11,24 +12,16 @@ export default function BackpressureDemo() {
   const [produce, setProduce] = useState(8);
   const [consume, setConsume] = useState(3);
   const [hwm, setHwm] = useState(10);
-  const [i, setI] = useState(0);
-  const [playing, setPlaying] = useState(false);
   const frames = simulate(produce, consume, hwm);
-  const frame = frames[Math.min(i, frames.length - 1)];
+  const playback = usePlayback(frames.length, 1200);
+  const frame = frames[playback.i];
   const peak = Math.max(hwm, ...frames.map((f) => f.buffer));
 
-  const atEnd = i >= frames.length - 1;
-
-  useEffect(() => {
-    if (!playing || atEnd) return;
-    const t = setTimeout(() => setI((n) => n + 1), 600);
-    return () => clearTimeout(t);
-  }, [playing, atEnd, i]);
-
-  const reset = () => {
-    setI(0);
-    setPlaying(false);
-  };
+  const id = `${produce}-${consume}-${hwm}-${playback.i}`;
+  const packets: Packet[] = [];
+  if (frame.wrote > 0) packets.push({ id: `${id}-w`, from: "producer", to: "buffer", label: `${frame.wrote} B` });
+  if (frame.read > 0) packets.push({ id: `${id}-r`, from: "buffer", to: "consumer", label: `${frame.read} B`, delay: 0.5 });
+  if (frame.paused) packets.push({ id: `${id}-p`, from: "buffer", to: "producer", label: "pause", tone: "bad", delay: 0.5 });
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
@@ -38,6 +31,36 @@ export default function BackpressureDemo() {
         The producer wants to write faster than the consumer can read. The high water mark is the
         buffer&apos;s limit. Cross it, and the producer pauses.
       </p>
+
+      <div className="mt-6">
+        <SystemMap
+          title="A producer, the stream buffer and a consumer"
+          accent={ACCENT}
+          nodes={[
+            { id: "producer", label: "Producer", sub: frame.paused ? "paused" : `writes ${produce}/tick`, at: [14, 50], mobileAt: [50, 13], state: frame.paused ? "bad" : "active" },
+            { id: "buffer", label: "Buffer", sub: `${frame.buffer} / ${hwm} bytes`, at: [50, 50], mobileAt: [50, 50], state: frame.paused ? "bad" : "idle" },
+            { id: "consumer", label: "Consumer", sub: `reads ${consume}/tick`, at: [86, 50], mobileAt: [50, 87], state: frame.read > 0 ? "active" : "idle" },
+          ]}
+          links={[
+            { from: "producer", to: "buffer", label: frame.paused ? "backpressure" : "write()" },
+            { from: "buffer", to: "consumer", label: "read()" },
+          ]}
+          packets={packets}
+          aspect={2.6}
+          mobileAspect={1}
+          caption={
+            frame.paused ? (
+              <>
+                <span style={{ color: "var(--bad)" }}>Over the limit.</span> The buffer holds {frame.buffer} bytes, so the producer is told to pause.
+              </>
+            ) : (
+              <>Flowing. Wrote {frame.wrote}, read {frame.read}, {frame.buffer} bytes waiting.</>
+            )
+          }
+        >
+          <PlaybackControls playback={playback} accent={ACCENT} nextLabel="Next tick" status={`Tick ${frame.tick + 1} of ${frames.length}`} />
+        </SystemMap>
+      </div>
 
       <div className="mt-6">
         <FlowStep n={1} title="Write a chunk" what="If the stream is flowing, the producer adds bytes to the buffer." accent={ACCENT} active={frame.wrote > 0}>
@@ -51,12 +74,12 @@ export default function BackpressureDemo() {
             accent={ACCENT}
             onChange={(v) => {
               setProduce(v);
-              reset();
+              playback.reset();
             }}
           />
           <p className="mt-2 font-mono text-sm">wrote {frame.wrote} this tick</p>
         </FlowStep>
-        <FlowArrow label={`${frame.wrote} bytes`} accent={ACCENT} active={playing} />
+        <FlowArrow label={`${frame.wrote} bytes`} accent={ACCENT} active={playback.playing} />
 
         <FlowStep n={2} title="Hold them in the buffer" what="Unread bytes wait here. The bar is the buffer. The mark is the limit." accent={ACCENT} active>
           <Meter value={frame.buffer} max={peak} color={frame.paused ? "var(--bad)" : ACCENT} />
@@ -84,7 +107,7 @@ export default function BackpressureDemo() {
             accent={ACCENT}
             onChange={(v) => {
               setHwm(v);
-              reset();
+              playback.reset();
             }}
           />
           <p className="mt-2 text-sm" style={{ color: frame.paused ? "var(--bad)" : "var(--good)" }}>
@@ -93,7 +116,7 @@ export default function BackpressureDemo() {
         </FlowStep>
         <FlowArrow label={`${frame.read} bytes read`} accent={ACCENT} />
 
-        <FlowStep n={4} title="Read some bytes out" what="The consumer takes what it can. If the buffer falls back under the limit, the producer resumes." accent={ACCENT} active={frame.read > 0}>
+        <FlowStep n={4} title="Read some bytes out" what="The consumer takes what it can. If the buffer falls back under the limit, the producer resumes on the next tick." accent={ACCENT} active={frame.read > 0}>
           <Slider
             label="Bytes read per tick"
             value={consume}
@@ -104,33 +127,9 @@ export default function BackpressureDemo() {
             accent={ACCENT}
             onChange={(v) => {
               setConsume(v);
-              reset();
+              playback.reset();
             }}
           />
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setI((n) => (n >= frames.length - 1 ? 0 : n + 1))}
-              className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)]"
-              style={{ background: ACCENT }}
-            >
-              {i >= frames.length - 1 ? "Restart" : "Next tick"}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                if (atEnd) {
-                  setI(0);
-                  setPlaying(true);
-                  return;
-                }
-                setPlaying((p) => !p);
-              }}
-              className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
-            >
-              {playing && !atEnd ? "Pause" : "Play"}
-            </button>
-          </div>
           <p className="mt-3 text-xs text-[var(--faint)]">
             Tick {frame.tick + 1} of {frames.length}. Read {frame.read}.
           </p>
