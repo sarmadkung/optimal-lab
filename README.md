@@ -53,7 +53,7 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 
 | Route | Concept | From |
 |---|---|---|
-| `/` | Home: start button, live sessions, how a session works, all tracks | — |
+| `/` | Home: start button, then tabs for Tracks, Live sessions, Roadmaps, Projects and Practice (the open tab is kept in the URL hash, e.g. `/#projects`), then how a session works | — |
 | `/tracks` | Every track with all its sessions | — |
 | `/tracks/<track>` | One track: sessions, roadmap, projects. Tracks: `dsa`, `nodejs`, `system-design`, `devops`, `ai`, `ai-native`, `ai-automation`, `tools` | — |
 | `/tracks/dsa/two-sum` | Two Sum, three ways: brute force, sort + two pointers, hash map, and how each scales | social-content DSA #01 |
@@ -145,7 +145,7 @@ pnpm lint
 | `src/app/tracks/page.tsx` | All tracks with their sessions |
 | `src/app/tracks/[track]/` | One page per track: sessions, roadmap and projects |
 | `src/app/tracks/[track]/[session]/` | One page per session: breadcrumbs, the demo, then previous/next in the track |
-| `src/components/` | Shared UI: `SiteHeader`, `SiteFooter`, `ThemeToggle`, `Breadcrumbs`, `TrackCard`, `SessionCard`, the step flow (`flow/Flow.tsx`), the system map (`system/SystemMap.tsx`) and the guided lesson (`lesson/Lesson.tsx`) |
+| `src/components/` | Shared UI: `SiteHeader`, `SiteFooter`, `ThemeToggle`, `Breadcrumbs`, `TrackCard`, `SessionCard`, `HomeTabs` (the home page tab bar), the step flow (`flow/Flow.tsx`), the system map (`system/SystemMap.tsx`) and the guided lesson (`lesson/Lesson.tsx`) |
 | `src/components/session/ui.tsx` | Session controls: `useWalk` + `RunButton` for one walk through the steps, `usePlayback` + `PlaybackControls` for stepping through simulator frames, `Slider`, `Choices`, `Meter` |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
