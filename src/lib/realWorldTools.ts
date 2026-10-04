@@ -91,29 +91,35 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
   "ai/next-token": {
     lead: "Inference stacks all implement the same scoring → filter → sample loop for each token.",
     tools: [
-      { name: "OpenAI Chat Completions", kind: "service", note: "Hosted models with temperature and sampling parameters.", href: "https://platform.openai.com/docs/api-reference/chat" },
+      { name: "OpenAI Chat Completions", kind: "service", note: "Hosted models with temperature, top-p, and logit bias.", href: "https://platform.openai.com/docs/api-reference/chat" },
+      { name: "Anthropic Messages API", kind: "service", note: "Claude with temperature and sampling controls.", href: "https://docs.anthropic.com/en/api/messages" },
+      { name: "Ollama", kind: "software", note: "Run open models locally with the same sampling knobs.", href: "https://github.com/ollama/ollama" },
+      { name: "Hugging Face Transformers", kind: "software", note: "Load models and call generate() with temperature and top-k.", href: "https://github.com/huggingface/transformers" },
       { name: "vLLM", kind: "software", note: "High-throughput GPU inference server.", href: "https://github.com/vllm-project/vllm" },
       { name: "llama.cpp", kind: "software", note: "Local CPU/GPU inference for open weights.", href: "https://github.com/ggerganov/llama.cpp" },
-      { name: "Hugging Face TGI", kind: "software", note: "Text Generation Inference for production serving.", href: "https://github.com/huggingface/text-generation-inference" },
     ],
   },
   "ai/embeddings": {
     lead: "Embedding models plus a vector index power similarity search in any application stack.",
     tools: [
       { name: "OpenAI Embeddings", kind: "service", note: "Hosted embedding API for text.", href: "https://platform.openai.com/docs/guides/embeddings" },
+      { name: "Cohere Embed", kind: "service", note: "Multilingual embedding models as an API.", href: "https://cohere.com/embed" },
+      { name: "sentence-transformers", kind: "software", note: "Open embedding models you can run yourself.", href: "https://github.com/UKPLab/sentence-transformers" },
+      { name: "Chroma", kind: "software", note: "Embeddings + vector store in one open-source package.", href: "https://github.com/chroma-core/chroma" },
       { name: "pgvector", kind: "software", note: "Vector similarity inside PostgreSQL.", href: "https://github.com/pgvector/pgvector" },
       { name: "Pinecone", kind: "service", note: "Managed vector database for similarity search.", href: "https://www.pinecone.io/" },
       { name: "Weaviate", kind: "service", note: "Open-source vector store with hybrid search.", href: "https://weaviate.io/" },
-      { name: "OpenSearch k-NN", kind: "software", note: "Approximate nearest-neighbour search on OpenSearch.", href: "https://opensearch.org/docs/latest/search-plugins/knn/index/" },
     ],
   },
   "ai/rag": {
     lead: "RAG pipelines chunk documents, retrieve vectors, and inject context — usually with off-the-shelf pieces.",
     tools: [
-      { name: "LangChain", kind: "software", note: "Composable retrieval and prompt chains (multiple languages).", href: "https://www.langchain.com/" },
-      { name: "LlamaIndex", kind: "software", note: "Data connectors and retrieval orchestration for LLM apps.", href: "https://www.llamaindex.ai/" },
+      { name: "LangChain", kind: "software", note: "Retrieval chains, loaders, and prompt templates.", href: "https://github.com/langchain-ai/langchain" },
+      { name: "LlamaIndex", kind: "software", note: "Connectors, chunking, and query engines over your data.", href: "https://github.com/run-llama/llama_index" },
       { name: "Haystack", kind: "software", note: "Open-source RAG and search pipelines.", href: "https://github.com/deepset-ai/haystack" },
-      { name: "Vector database", kind: "service", note: "Pinecone, Weaviate, pgvector, Chroma — store chunks for retrieval.", href: "https://www.pinecone.io/" },
+      { name: "Unstructured", kind: "software", note: "Parse PDFs and HTML into clean chunks for indexing.", href: "https://github.com/Unstructured-IO/unstructured" },
+      { name: "Chroma", kind: "software", note: "Persist retrieved chunks with embeddings.", href: "https://github.com/chroma-core/chroma" },
+      { name: "Azure AI Search", kind: "service", note: "Hybrid keyword + vector retrieval in one index.", href: "https://azure.microsoft.com/en-us/products/ai-services/ai-search" },
     ],
   },
   "ai-native/structured-output": {

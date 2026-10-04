@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { RealWorldTools } from "@/components/session/RealWorldTools";
+import { TrackLearningPath } from "@/components/session/TrackLearningPath";
 import { TRACKS, getSession, neighbours, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
 import { sessionDemo } from "@/sessions/registry";
 
@@ -38,6 +39,8 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
           ]}
         />
       </div>
+
+      {session.status === "live" ? <TrackLearningPath trackId={track.id} sessionId={session.id} /> : null}
 
       {demo ?? <ComingSoon track={track} session={session} />}
 

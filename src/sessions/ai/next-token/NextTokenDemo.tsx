@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
@@ -428,6 +429,12 @@ export default function NextTokenDemo() {
       <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">
         That is why the same prompt can give different answers: steps 1 to 6 are fixed maths, but
         step 7 is a dice roll. Temperature 0 removes the roll and always takes the top token.
+      </p>
+      <p className="mt-3 text-sm text-[var(--muted)]">
+        Next in this track:{" "}
+        <Link href="/tracks/ai/embeddings" className="font-medium text-[var(--accent)] hover:underline">
+          Embeddings and similarity search →
+        </Link>
       </p>
     </SessionPage>
   );

@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
-import { Choices, Meter, RunButton, Slider, useWalk } from "@/components/session/ui";
+import { Choices, Meter, Slider, useWalk } from "@/components/session/ui";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
 import { PRESETS, ranked } from "@/lib/embeddings";
@@ -21,12 +23,24 @@ export default function EmbeddingsDemo() {
   return (
     <SessionPage>
       <SessionHeader
-        kicker="AI engineering · interactive"
+        kicker="AI Engineering · interactive"
         title="Embeddings and similarity search"
         blurb="Text becomes a direction in space. Closer directions are more alike. Pick a question, or click the plot, and see which notes come back."
       />
 
-      <div className="mt-6">
+      <SessionControlBar
+        label={
+          rows.some((r) => r.kept)
+            ? `Top match: ${rows.find((r) => r.kept)?.label ?? "—"}`
+            : "Pick a query and k, then run the search"
+        }
+        busy={busy}
+        onRun={run}
+        runLabel="Run the search"
+        accent={ACCENT}
+      />
+
+      <div className="mt-4">
         <SessionSplitLayout
           visual={
             <div className="rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
@@ -50,9 +64,6 @@ export default function EmbeddingsDemo() {
                 options={PRESETS.map((p) => ({ id: p.id, label: p.label }))}
               />
               <Slider label="How many to return (k)" value={k} min={1} max={4} step={1} format={(v) => String(v)} accent={ACCENT} onChange={setK} />
-              <RunButton busy={busy} onClick={run} accent={ACCENT}>
-                Run the search
-              </RunButton>
               <ul className="mt-3 space-y-1 text-sm">
                 {rows.filter((r) => r.kept).map((row) => (
                   <li key={row.id}>
@@ -95,7 +106,14 @@ export default function EmbeddingsDemo() {
               </FlowStep>
               <FlowArrow label={`${k} notes`} accent={ACCENT} active={stage === 3} />
 
-              <FlowStep n={4} title="Hand those notes onward" what="Search stops here. A later step, such as RAG, is what puts the notes into a prompt." accent={ACCENT} active={stage === 3} />
+              <FlowStep n={4} title="Hand those notes onward" what="Search stops here. RAG is what pastes the retrieved chunks into a prompt for the model." accent={ACCENT} active={stage === 3}>
+                <p className="text-sm text-[var(--muted)]">
+                  Next in this track:{" "}
+                  <Link href="/tracks/ai/rag" className="text-[var(--accent)] hover:underline">
+                    RAG, step by step →
+                  </Link>
+                </p>
+              </FlowStep>
             </>
           }
         />

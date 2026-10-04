@@ -44,6 +44,9 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
       <span className="mt-6 block h-1 w-12 rounded-full bg-[var(--accent)]" />
       <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">{t.title}</h1>
       <p className="mt-3 max-w-2xl text-[var(--muted)]">{t.tagline}</p>
+      {t.learningPathBlurb ? (
+        <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">{t.learningPathBlurb}</p>
+      ) : null}
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         {start ? (

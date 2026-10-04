@@ -19,6 +19,8 @@ export type Track = {
   title: string;
   short: string; // label for the top bar
   tagline: string;
+  /** Optional one-liner on session pages: how live sessions fit together */
+  learningPathBlurb?: string;
   accent: string; // CSS colour token from globals.css
   sessions: Session[];
   roadmap: string[]; // planned stages, shown as "coming soon" for now
@@ -94,6 +96,8 @@ export const TRACKS: Track[] = [
     title: "AI Engineering",
     short: "AI",
     tagline: "Open up the model and tune the knobs yourself.",
+    learningPathBlurb:
+      "One token at a time, then vectors for search, then retrieval into the prompt — the usual stack for building with LLMs.",
     accent: "var(--ai)",
     sessions: [
       {

@@ -152,6 +152,7 @@ pnpm lint
 | `src/components/session/SessionControlBar.tsx` | Sticky run strip so Play / Generate stays reachable on long step flows |
 | `src/lib/realWorldTools.ts` | Per-session list of language-agnostic tools (Redis, NGINX, MCP, …) |
 | `src/components/session/RealWorldTools.tsx` | **In production** on session pages and aggregated on each track page (`/tracks/<track>#tools`) |
+| `src/components/session/TrackLearningPath.tsx` | Step strip for live sessions in a track (optional `learningPathBlurb` on `Track` in `tracks.ts`) |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
 ## Explaining a process: the step flow

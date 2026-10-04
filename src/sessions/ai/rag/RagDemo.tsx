@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, Slider, useWalk } from "@/components/session/ui";
@@ -40,7 +41,7 @@ export default function RagDemo() {
   return (
     <SessionPage>
       <SessionHeader
-        kicker="AI engineering · interactive"
+        kicker="AI Engineering · interactive"
         title="RAG, step by step"
         blurb="The model does not search your docs. You split them, retrieve a few chunks, and paste those chunks into the prompt. The model only sees that prompt."
       />
@@ -105,7 +106,13 @@ export default function RagDemo() {
         </FlowStep>
         <FlowArrow label={`${ranked.length} chunks`} accent={ACCENT} active={stage === 2} />
 
-        <FlowStep n={3} title="Score each chunk against the question" what="Higher means this chunk is more like the question. These scores are fixed for the demo so you can see the ranking move." accent={ACCENT} active={stage === 2}>
+        <FlowStep n={3} title="Score each chunk against the question" what="Higher means this chunk is more like the question — the same cosine idea as the embeddings session." accent={ACCENT} active={stage === 2}>
+          <p className="mb-3 text-xs text-[var(--faint)]">
+            <Link href="/tracks/ai/embeddings" className="text-[var(--accent)] hover:underline">
+              Embeddings and similarity search
+            </Link>{" "}
+            shows this step on its own.
+          </p>
           <ul className="space-y-2 font-mono text-sm">
             {ranked.map((chunk) => (
               <li key={chunk.id} className="flex justify-between gap-3">
