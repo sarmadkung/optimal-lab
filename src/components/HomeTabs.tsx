@@ -13,20 +13,25 @@ export default function HomeTabs({ tabs, label }: { tabs: HomeTab[]; label: stri
   const [active, setActive] = useState(tabs[0].id);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const tabKey = tabs.map((t) => t.id).join("|");
+  const defaultId = tabs[0]?.id ?? "";
 
   useEffect(() => {
     function applyHash() {
-      const id = window.location.hash.replace("#", "");
-      if (tabKey.split("|").includes(id)) setActive(id);
+      let id = window.location.hash.replace("#", "");
+      if (id === "sessions") id = "tracks";
+      else if (id.startsWith("projects-")) id = "projects";
+      const ids = tabKey.split("|");
+      if (id && ids.includes(id)) setActive(id);
+      else if (defaultId) setActive(defaultId);
     }
     applyHash();
     window.addEventListener("hashchange", applyHash);
     return () => window.removeEventListener("hashchange", applyHash);
-  }, [tabKey]);
+  }, [tabKey, defaultId]);
 
   function select(id: string) {
     setActive(id);
-    history.replaceState(null, "", id === tabs[0].id ? window.location.pathname : `#${id}`);
+    history.replaceState(null, "", id === defaultId ? window.location.pathname : `#${id}`);
   }
 
   function onKeyDown(e: KeyboardEvent, i: number) {

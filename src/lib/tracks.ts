@@ -219,11 +219,18 @@ export const getSession = (trackId: string, sessionId: string) => {
   return track && session ? { track, session } : undefined;
 };
 
-// every live session, in track order: used for static routes and "Start here"
+// every live session, in track order: used for static routes
 export const liveSessions = () =>
   TRACKS.flatMap((track) =>
     track.sessions.filter((s) => s.status === "live").map((session) => ({ track, session })),
   );
+
+/** Home hero + onboarding: one flagship session, not necessarily first in catalog order */
+export const homeStartSession = () => {
+  const featured = getSession("ai", "next-token");
+  if (featured?.session.status === "live") return featured;
+  return liveSessions()[0];
+};
 
 // previous and next session in the same track, so a learner can keep going
 export const neighbours = (track: Track, sessionId: string) => {

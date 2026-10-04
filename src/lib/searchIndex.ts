@@ -1,3 +1,4 @@
+import { flattenProjectCatalog, PROJECT_PILLARS, projectPillarHash } from "@/lib/projects";
 import { REAL_WORLD_TOOLS } from "@/lib/realWorldTools";
 import { TRACKS, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
 
@@ -33,10 +34,10 @@ export function buildSearchIndex(): SearchDoc[] {
     {
       id: "page-home",
       title: "Home",
-      subtitle: "Tracks, live sessions, roadmaps, projects, practice",
+      subtitle: "Tracks, roadmaps, projects, practice",
       href: "/",
       kind: "page",
-      haystack: buildHaystack(["home", "start", "tracks", "live sessions", "roadmaps", "projects", "practice"]),
+      haystack: buildHaystack(["home", "start", "tracks", "roadmaps", "projects", "practice"]),
     },
     {
       id: "page-tracks",
@@ -47,6 +48,47 @@ export function buildSearchIndex(): SearchDoc[] {
       haystack: buildHaystack(["tracks", "browse", "subjects", "sessions"]),
     },
   ];
+
+  for (const pillar of PROJECT_PILLARS) {
+    docs.push({
+      id: `projects-pillar-${pillar.id}`,
+      title: `${pillar.title} · Projects`,
+      subtitle: pillar.tagline,
+      href: `/${projectPillarHash(pillar.id)}`,
+      kind: "page",
+      accent: pillar.accent,
+      haystack: buildHaystack([
+        pillar.id,
+        pillar.title,
+        pillar.short,
+        pillar.tagline,
+        "projects",
+        "build",
+        ...pillar.categories.flatMap((c) => [c.title, c.blurb, ...c.projects.flatMap((p) => [p.title, p.blurb])]),
+      ]),
+    });
+  }
+
+  for (const project of flattenProjectCatalog()) {
+    docs.push({
+      id: `project-${project.key.replace(/\//g, "-")}`,
+      title: project.title,
+      subtitle: `${project.pillarShort} · ${project.categoryTitle}`,
+      href: "/#projects",
+      kind: "page",
+      accent: project.accent,
+      haystack: buildHaystack([
+        project.title,
+        project.blurb,
+        project.pillarTitle,
+        project.categoryTitle,
+        project.level,
+        project.format,
+        "project",
+        "build",
+      ]),
+    });
+  }
 
   for (const track of TRACKS) {
     docs.push({

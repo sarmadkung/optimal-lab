@@ -8,9 +8,7 @@ export default function SiteFooter() {
       <div className="mx-auto grid w-full max-w-5xl gap-6 px-4 py-10 text-sm sm:grid-cols-[1fr_auto]">
         <div>
           <p className="font-semibold">Optimal Lab</p>
-          <p className="mt-1 max-w-sm text-[var(--muted)]">
-            See how engineering works. Interactive visuals you can drag, step and break.
-          </p>
+          <p className="mt-1 max-w-sm text-[var(--muted)]">Interactive visuals you can drag, step, and break.</p>
           <TourButton />
         </div>
         <nav aria-label="Footer">

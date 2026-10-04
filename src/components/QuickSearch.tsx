@@ -68,7 +68,7 @@ export function QuickSearchSlot() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="hidden min-h-11 min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--inset)] px-3 text-left text-sm text-[var(--muted)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--text)] sm:flex sm:max-w-[12rem] md:max-w-xs lg:max-w-sm"
+        className="hidden h-11 w-[9.5rem] shrink-0 items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--inset)] px-3 text-left text-sm text-[var(--muted)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--text)] sm:flex md:w-44 lg:w-52"
         aria-label="Search sessions and tools (⌘K)"
       >
         <SearchIcon />

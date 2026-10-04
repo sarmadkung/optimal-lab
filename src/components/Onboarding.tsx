@@ -10,7 +10,7 @@ import {
   setOnboardingStep,
   subscribeOnboarding,
 } from "@/lib/onboarding";
-import { TRACKS, liveSessions, sessionHref } from "@/lib/tracks";
+import { TRACKS, homeStartSession, sessionHref } from "@/lib/tracks";
 
 const STEPS = [
   {
@@ -19,7 +19,7 @@ const STEPS = [
   },
   {
     title: "Start with a track",
-    body: "A track is one subject. Open it and the sessions are listed in order.",
+    body: "A track is one subject. On Home, open the Tracks tab — or use All tracks in the header for the full list.",
   },
   {
     title: "Play with a session",
@@ -31,14 +31,14 @@ const STEPS = [
   },
   {
     title: "You are ready",
-    body: "Home lists what is live right now. At the end of a session, Next takes you to the following one.",
+    body: "Open a track, pick a live session, and play. At the bottom of a session, Next takes you to the following one.",
   },
 ];
 
 export default function Onboarding() {
   const { open, step } = useSyncExternalStore(subscribeOnboarding, getOnboardingSnapshot, getOnboardingServerSnapshot);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const start = liveSessions()[0];
+  const start = homeStartSession();
 
   useEffect(() => {
     initOnboardingFromStorage();

@@ -53,7 +53,8 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 
 | Route | Concept | From |
 |---|---|---|
-| `/` | Home: start button, then tabs for Tracks, Live sessions, Roadmaps, Projects and Practice (the open tab is kept in the URL hash, e.g. `/#projects`), then how a session works | — |
+| `/` | Home: hero + tabs for Tracks, Roadmaps, Projects and Practice (hash e.g. `/#projects`; default tab is Tracks; `/#sessions` redirects to Tracks) | — |
+| *(header)* | Site chrome only: logo, **Home**, **All tracks**, quick search (⌘K), theme — not the per-track list (that lives on Home tabs and `/tracks`) | — |
 | `/tracks` | Every track with all its sessions | — |
 | `/tracks/<track>` | One track: sessions, roadmap, projects. Tracks: `dsa`, `nodejs`, `system-design`, `devops`, `ai`, `ai-native`, `ai-automation`, `tools` | — |
 | `/tracks/dsa/two-sum` | Two Sum, three ways: brute force, sort + two pointers, hash map, and how each scales | social-content DSA #01 |
@@ -129,6 +130,19 @@ pnpm lint
 - [Tailwind CSS](https://tailwindcss.com) for layout
 - [Motion](https://motion.dev) for animation
 - Deployed on [Vercel](https://vercel.com)
+- Optional [Supabase](https://supabase.com) Postgres for project **started** counts (see below)
+
+### Projects catalog (optional Supabase)
+
+Home → **Projects** is a [roadmap.sh/projects](https://roadmap.sh/projects)-style browser: filter by pillar and area, cards show level and format, **I'm starting** records interest.
+
+The catalog itself lives in `src/lib/projects.ts` (git-reviewed, no CMS yet). **Started** counts are optional:
+
+1. Create a Supabase project and run `supabase/migrations/20260322120000_project_start_counts.sql` in the SQL editor.
+2. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` in `.env.local` (service role is **server-only** — Route Handlers in `src/app/api/projects/`).
+3. Redeploy. Without env vars the UI still works; counts are optimistic in the browser only.
+
+Later you can add auth (Supabase Auth), per-user progress, and project detail pages without changing the catalog shape.
 
 ## Layout
 
@@ -137,7 +151,10 @@ pnpm lint
 | `src/sessions/<track>/<session>/*Demo.tsx` | The interactive component for one session (`"use client"`) |
 | `src/sessions/registry.tsx` | Maps `<track>/<session>` to its demo component |
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
-| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI, AI Native, AI Automation, Tools): sessions, planned roadmap stages and projects |
+| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI, AI Native, AI Automation, Tools): sessions, planned roadmap stages and track-scoped project teasers |
+| `src/lib/projects.ts` | Project catalog by pillar (AI engineering, backend, frontend) with categories and planned builds — rendered on Home → Projects |
+| `src/components/ProjectCatalog.tsx` | Home Projects tab: filters + project idea cards (`src/app/api/projects/` for counts) |
+| `supabase/migrations/` | SQL for optional project start counters |
 | `src/lib/theme.ts` | Light/dark mode: the storage key and the no-flash inline script |
 | `src/lib/onboarding.ts` | First-visit tour: the storage key and whether the tour is open |
 | `src/components/Onboarding.tsx` | The tour itself |
