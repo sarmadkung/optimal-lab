@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, useWalk } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { ASKS, TOOLS } from "@/lib/mcp";
 
 const ACCENT = "var(--tools)";
@@ -31,17 +33,21 @@ export default function McpDemo() {
     "The result travels back the same way and lands in the model's context.",
   ];
 
+  const liveCaption = stage === null ? "Run the call and follow it from the model to the tool and back." : captions[stage];
+
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Tools · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">MCP: tools the model can call</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        MCP is a socket between your app and a tool server. The server lists what it can do. The model
-        picks one. Your app forwards the call. The model never opens the tool itself.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="Tools · interactive"
+        title="MCP: tools the model can call"
+        blurb="MCP is a socket between your app and a tool server. The server lists what it can do. The model picks one. Your app forwards the call. The model never opens the tool itself."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="The model, your app, an MCP server and the tool behind it"
           accent={ACCENT}
           nodes={[
@@ -58,15 +64,18 @@ export default function McpDemo() {
           packets={packets}
           aspect={2.1}
           mobileAspect={1}
-          caption={stage === null ? "Run the call and follow it from the model to the tool and back." : captions[stage]}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT}>
-            Run the call
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={liveCaption}>
+              <Choices accent={ACCENT} value={ask.id} onChange={setId} options={ASKS.map((a) => ({ id: a.id, label: a.question }))} />
+              <RunButton busy={busy} onClick={run} accent={ACCENT}>
+                Run the call
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="Connect to the server" what="The app opens the MCP server at startup and keeps that connection." accent={ACCENT} active={stage === 0}>
           <p className="font-mono text-sm">server: local tools</p>
         </FlowStep>
@@ -85,7 +94,7 @@ export default function McpDemo() {
         <FlowArrow label="the question" accent={ACCENT} active={stage === 2} />
 
         <FlowStep n={3} title="A question arrives" what="The question decides which tool is useful. Change it and the call changes." accent={ACCENT} active={stage === 2}>
-          <Choices accent={ACCENT} value={ask.id} onChange={setId} options={ASKS.map((a) => ({ id: a.id, label: a.question }))} />
+          <p className="text-sm">{ask.question}</p>
         </FlowStep>
         <FlowArrow label={ask.tool} accent={ACCENT} active={stage === 3} />
 
@@ -104,7 +113,10 @@ export default function McpDemo() {
         <FlowStep n={6} title="Hand the result back" what="The server's reply goes back into the conversation. The model's next sentence can use it." accent={ACCENT} active={stage === 5}>
           <p className="break-words font-mono text-sm">{ask.result}</p>
         </FlowStep>
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

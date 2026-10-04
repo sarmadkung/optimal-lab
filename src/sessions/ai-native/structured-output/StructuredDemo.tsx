@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
-import { RunButton, useWalk } from "@/components/session/ui";
+import { useWalk } from "@/components/session/ui";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { FREE, GUIDED, JSON_RESULT, PROSE_RESULT, QUESTION, SCHEMA } from "@/lib/structured";
 
 const ACCENT = "var(--native)";
@@ -13,13 +15,33 @@ export default function StructuredDemo() {
   const tokens = schemaOn ? GUIDED : FREE;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI native · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Force valid JSON</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        A schema does not ask the model to &quot;please return JSON&quot;. It refuses any next token that
-        would break the shape.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI native · interactive"
+        title="Force valid JSON"
+        blurb={'A schema does not ask the model to "please return JSON". It refuses any next token that would break the shape.'}
+      />
+
+      <SessionControlBar
+        label={schemaOn ? "Schema on — only legal tokens emit" : "Schema off — any token allowed"}
+        busy={busy}
+        onRun={run}
+        runLabel="Generate"
+        accent={ACCENT}
+      >
+        <button
+          type="button"
+          aria-pressed={schemaOn}
+          onClick={() => setSchemaOn((v) => !v)}
+          className="min-h-11 rounded-md border px-3 text-sm"
+          style={{
+            borderColor: schemaOn ? ACCENT : "var(--line)",
+            background: schemaOn ? "color-mix(in srgb, var(--native) 16%, transparent)" : "transparent",
+          }}
+        >
+          Schema {schemaOn ? "on" : "off"}
+        </button>
+      </SessionControlBar>
 
       <div className="mt-6">
         <FlowStep n={1} title="Ask for the facts" what="The question is ordinary. The constraint comes next." accent={ACCENT} active={stage === 0}>
@@ -28,18 +50,6 @@ export default function StructuredDemo() {
         <FlowArrow label="the question" accent={ACCENT} active={stage === 1} />
 
         <FlowStep n={2} title="Attach a schema, or don't" what="With a schema, the only legal output is an object with city and country. Without one, a sentence is fine." accent={ACCENT} active={stage === 1}>
-          <button
-            type="button"
-            aria-pressed={schemaOn}
-            onClick={() => setSchemaOn((v) => !v)}
-            className="min-h-11 rounded-md border px-3 text-sm"
-            style={{
-              borderColor: schemaOn ? ACCENT : "var(--line)",
-              background: schemaOn ? "color-mix(in srgb, var(--native) 16%, transparent)" : "transparent",
-            }}
-          >
-            Schema {schemaOn ? "on" : "off"}
-          </button>
           {schemaOn && (
             <pre className="mt-3 overflow-x-hidden whitespace-pre-wrap rounded-md bg-[var(--inset)] p-3 font-mono text-xs">
               {SCHEMA}
@@ -78,13 +88,9 @@ export default function StructuredDemo() {
           <p className="mt-2 text-sm" style={{ color: schemaOn ? "var(--good)" : "var(--bad)" }}>
             {schemaOn ? "Parses as JSON." : "Reads well. JSON.parse would throw."}
           </p>
-          <div className="mt-4">
-            <RunButton busy={busy} onClick={run} accent={ACCENT}>
-              Generate
-            </RunButton>
-          </div>
+          <p className="mt-2 text-xs text-[var(--faint)]">Use Generate in the bar above to walk the steps.</p>
         </FlowStep>
       </div>
-    </div>
+    </SessionPage>
   );
 }

@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, useWalk } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { ANSWER, CALL, GUESS, QUESTION, RESULT } from "@/lib/toolCall";
 
 const ACCENT = "var(--native)";
@@ -37,17 +39,21 @@ export default function ToolCallDemo() {
         "The model answers anyway. The number is a guess.",
       ];
 
+  const liveCaption = stage === null ? "Ask the model and watch where the request goes." : captions[stage];
+
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI native · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Call a tool, then answer</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        The model does not have live weather. With a tool, it asks your app. Your app runs the tool and
-        hands the result back. Without a tool, it can only guess.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI native · interactive"
+        title="Call a tool, then answer"
+        blurb="The model does not have live weather. With a tool, it asks your app. Your app runs the tool and hands the result back. Without a tool, it can only guess."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="The user, the model, your app and a weather API"
           accent={ACCENT}
           nodes={[
@@ -71,32 +77,34 @@ export default function ToolCallDemo() {
           packets={packets}
           aspect={2.1}
           mobileAspect={1}
-          caption={stage === null ? "Ask the model and watch where the request goes." : captions[stage]}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT}>
-            Ask the model
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={liveCaption}>
+              <button
+                type="button"
+                aria-pressed={tools}
+                onClick={() => {
+                  setTools((v) => !v);
+                  setStage(null);
+                }}
+                className="min-h-11 w-full rounded-md border px-3 text-sm"
+                style={{
+                  borderColor: tools ? ACCENT : "var(--line)",
+                  background: tools ? "color-mix(in srgb, var(--native) 16%, transparent)" : "transparent",
+                }}
+              >
+                Tools {tools ? "on" : "off"}
+              </button>
+              <RunButton busy={busy} onClick={run} accent={ACCENT}>
+                Ask the model
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="Read the question" what="Some questions can be answered from the prompt. This one cannot." accent={ACCENT} active={stage === 0}>
           <p>{QUESTION}</p>
-          <button
-            type="button"
-            aria-pressed={tools}
-            onClick={() => {
-              setTools((v) => !v);
-              setStage(null);
-            }}
-            className="mt-4 min-h-11 rounded-md border px-3 text-sm"
-            style={{
-              borderColor: tools ? ACCENT : "var(--line)",
-              background: tools ? "color-mix(in srgb, var(--native) 16%, transparent)" : "transparent",
-            }}
-          >
-            Tools {tools ? "on" : "off"}
-          </button>
         </FlowStep>
         <FlowArrow label={tools ? "need a tool" : "no tool available"} accent={ACCENT} active={stage === 1} />
 
@@ -139,7 +147,10 @@ export default function ToolCallDemo() {
             {tools ? "Grounded in the sample reading." : "Not grounded. The model invented a temperature."}
           </p>
         </FlowStep>
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

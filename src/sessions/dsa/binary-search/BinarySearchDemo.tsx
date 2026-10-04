@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { SORTED, linearChecks, search } from "@/lib/binarySearch";
 
 const ACCENT = "var(--dsa)";
@@ -38,16 +40,42 @@ export default function BinarySearchDemo() {
           ? `${frame.value} is above ${target}. Keep the left half.`
           : `${target} is not in the list. The range is empty.`;
 
-  return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">DSA · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Binary search</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        The list is sorted. Each probe checks the middle and throws away the half that cannot hold{" "}
-        <span className="font-mono text-[var(--text)]">{target}</span>.
-      </p>
+  const nextProbe = () => {
+    setPlaying(false);
+    setI((n) => (n >= frames.length - 1 ? 0 : n + 1));
+  };
 
-      <div className="mt-6 flex flex-wrap gap-2">
+  return (
+    <SessionPage>
+      <SessionHeader
+        kicker="DSA · interactive"
+        title="Binary search"
+        blurb={`The list is sorted. Each probe checks the middle and throws away the half that cannot hold ${target}.`}
+      />
+
+      <SessionControlBar
+        label={`Probe ${i + 1} of ${frames.length} · ${note}`}
+        onRun={nextProbe}
+        runLabel={i >= frames.length - 1 ? "Restart" : "Next probe"}
+        accent={ACCENT}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            if (atEnd) {
+              setI(0);
+              setPlaying(true);
+              return;
+            }
+            setPlaying((p) => !p);
+          }}
+          className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
+        >
+          {playing && !atEnd ? "Pause" : "Play"}
+        </button>
+      </SessionControlBar>
+
+      <div className="mt-4 flex flex-wrap gap-2">
         {TARGETS.map((n) => (
           <button
             key={n}
@@ -99,33 +127,7 @@ export default function BinarySearchDemo() {
 
         <FlowStep n={2} title="Compare the middle to the target" what="Equal means you found it. Smaller means look right. Larger means look left." accent={ACCENT} active={frame.verdict !== "missing"}>
           <p className="text-sm">{note}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setPlaying(false);
-                setI((n) => (n >= frames.length - 1 ? 0 : n + 1));
-              }}
-              className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)]"
-              style={{ background: ACCENT }}
-            >
-              {i >= frames.length - 1 ? "Restart" : "Next probe"}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                if (atEnd) {
-                  setI(0);
-                  setPlaying(true);
-                  return;
-                }
-                setPlaying((p) => !p);
-              }}
-              className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
-            >
-              {playing && !atEnd ? "Pause" : "Play"}
-            </button>
-          </div>
+          <p className="mt-2 text-xs text-[var(--faint)]">Use Next probe or Play in the bar above.</p>
         </FlowStep>
         <FlowArrow label={frame.verdict === "low" ? "right half" : frame.verdict === "high" ? "left half" : "stop"} accent={ACCENT} />
 
@@ -153,6 +155,6 @@ export default function BinarySearchDemo() {
           </p>
         </FlowStep>
       </div>
-    </div>
+    </SessionPage>
   );
 }

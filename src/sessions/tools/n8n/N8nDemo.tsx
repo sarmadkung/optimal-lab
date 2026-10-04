@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, Slider, useWalk } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { THRESHOLD, route } from "@/lib/n8n";
 
 const ACCENT = "var(--tools)";
@@ -29,17 +31,21 @@ export default function N8nDemo() {
     `One execution, one path: ${taken.destination}.`,
   ];
 
+  const liveCaption = stage === null ? `Drag the amount across $${THRESHOLD}, then run it. The dimmed branch will not run.` : captions[stage];
+
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Tools · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">An n8n workflow, node by node</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        n8n runs a chain of nodes. A webhook starts it, an IF node picks a branch, and only one
-        destination runs. Drag the amount across ${THRESHOLD}.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="Tools · interactive"
+        title="An n8n workflow, node by node"
+        blurb={`n8n runs a chain of nodes. A webhook starts it, an IF node picks a branch, and only one destination runs. Drag the amount across $${THRESHOLD}.`}
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="An n8n canvas: shop, webhook, IF node, Slack and email"
           accent={ACCENT}
           nodes={[
@@ -58,28 +64,31 @@ export default function N8nDemo() {
           packets={packets}
           aspect={2.1}
           mobileAspect={0.95}
-          caption={stage === null ? `Drag the amount across $${THRESHOLD}, then run it. The dimmed branch will not run.` : captions[stage]}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT}>
-            Run the workflow
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={liveCaption}>
+              <Slider
+                label="Order amount"
+                hint={`Above ${THRESHOLD} notifies Slack. At or below it, only an email.`}
+                value={amount}
+                min={0}
+                max={500}
+                step={10}
+                format={(v) => `$${v}`}
+                accent={ACCENT}
+                onChange={setAmount}
+              />
+              <p className="break-words font-mono text-sm">{`{ "amount": ${amount} }`}</p>
+              <RunButton busy={busy} onClick={run} accent={ACCENT}>
+                Run the workflow
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="Webhook receives the order" what="Some other system POSTs JSON. That payload is the input to every later node." accent={ACCENT} active={stage === 0}>
-          <Slider
-            label="Order amount"
-            hint={`Above ${THRESHOLD} notifies Slack. At or below it, only an email.`}
-            value={amount}
-            min={0}
-            max={500}
-            step={10}
-            format={(v) => `$${v}`}
-            accent={ACCENT}
-            onChange={setAmount}
-          />
-          <p className="mt-2 break-words font-mono text-sm">{`{ "amount": ${amount} }`}</p>
+          <p className="break-words font-mono text-sm">{`{ "amount": ${amount} }`}</p>
         </FlowStep>
         <FlowArrow label="the JSON" accent={ACCENT} active={stage === 1} />
 
@@ -109,7 +118,10 @@ export default function N8nDemo() {
             Sent to <span className="font-semibold text-[var(--text)]">{taken.destination}</span>.
           </p>
         </FlowStep>
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, useWalk } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { EMAILS, KIND_LABEL, type Kind } from "@/lib/workflow";
 
 const ACTIONS: { kind: Kind; label: string; sub: string; at: [number, number]; mobileAt: [number, number] }[] = [
@@ -33,17 +35,21 @@ export default function WorkflowDemo() {
     email.result,
   ];
 
+  const liveCaption = stage === null ? "Pick an email, then run it to see which branch it takes." : captions[stage];
+
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI automation · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">One item through a workflow</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        A workflow is a fixed path with a branch. The email changes. The steps do not. Pick a message
-        and watch which action it takes.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI automation · interactive"
+        title="One item through a workflow"
+        blurb="A workflow is a fixed path with a branch. The email changes. The steps do not. Pick a message and watch which action it takes."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="An inbox, a classifier and three possible actions"
           accent={ACCENT}
           nodes={[
@@ -58,23 +64,20 @@ export default function WorkflowDemo() {
           packets={packets}
           aspect={2}
           mobileAspect={0.95}
-          caption={stage === null ? "Pick an email, then run it to see which branch it takes." : captions[stage]}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT}>
-            Run this email
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={liveCaption}>
+              <Choices accent={ACCENT} value={email.id} onChange={setId} options={EMAILS.map((e) => ({ id: e.id, label: e.subject }))} />
+              <RunButton busy={busy} onClick={run} accent={ACCENT}>
+                Run this email
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="A new email arrives" what="The trigger is the inbox. Nothing runs until a message shows up." accent={ACCENT} active={stage === 0}>
-          <Choices
-            accent={ACCENT}
-            value={email.id}
-            onChange={setId}
-            options={EMAILS.map((e) => ({ id: e.id, label: e.subject }))}
-          />
-          <p className="mt-3 text-sm text-[var(--muted)]">
+          <p className="text-sm text-[var(--muted)]">
             From {email.from}. {email.body}
           </p>
         </FlowStep>
@@ -117,7 +120,10 @@ export default function WorkflowDemo() {
         <FlowStep n={5} title="Write down what happened" what="The run ends with one result. A person can read the log without opening the inbox." accent={ACCENT} active={stage === 4}>
           <p className="text-sm">{email.result}</p>
         </FlowStep>
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

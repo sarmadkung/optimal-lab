@@ -3,7 +3,9 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
-import { SystemMap, hops, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type Packet } from "@/components/system/SystemMap";
 import { STEP_FOR, turns } from "@/lib/agentLoop";
 
 const ACCENT = "var(--tools)";
@@ -61,16 +63,18 @@ export default function AgentLoopDemo() {
     : "";
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Tools · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">A coding agent&apos;s loop</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Cursor, Claude Code, and tools like them do not write the whole answer in one shot. They
-        search, edit, run a check, and repeat until the check passes.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="Tools · interactive"
+        title="A coding agent's loop"
+        blurb="Cursor, Claude Code, and tools like them do not write the whole answer in one shot. They search, edit, run a check, and repeat until the check passes."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="The task, the agent, the repo and the test runner"
           accent={ACCENT}
           nodes={[
@@ -94,35 +98,38 @@ export default function AgentLoopDemo() {
           packets={packets}
           aspect={2.1}
           mobileAspect={0.95}
-          caption={caption}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Working…">
-            Run the agent
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={caption}>
+              <button
+                type="button"
+                aria-pressed={failOnce}
+                onClick={() => {
+                  setFailOnce((v) => !v);
+                  setShown(0);
+                  setStage(null);
+                }}
+                className="min-h-11 w-full rounded-md border px-3 text-sm"
+                style={{
+                  borderColor: failOnce ? ACCENT : "var(--line)",
+                  background: failOnce ? "color-mix(in srgb, var(--tools) 16%, transparent)" : "transparent",
+                }}
+              >
+                First check {failOnce ? "fails once" : "passes immediately"}
+              </button>
+              <RunButton busy={busy} onClick={run} accent={ACCENT} running="Working…">
+                Run the agent
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         {STEPS.map((step, index) => (
           <div key={step.title}>
             <FlowStep n={index + 1} title={step.title} what={step.what} accent={ACCENT} active={stage === index}>
               {index === 0 && (
-                <button
-                  type="button"
-                  aria-pressed={failOnce}
-                  onClick={() => {
-                    setFailOnce((v) => !v);
-                    setShown(0);
-                    setStage(null);
-                  }}
-                  className="min-h-11 rounded-md border px-3 text-sm"
-                  style={{
-                    borderColor: failOnce ? ACCENT : "var(--line)",
-                    background: failOnce ? "color-mix(in srgb, var(--tools) 16%, transparent)" : "transparent",
-                  }}
-                >
-                  First check {failOnce ? "fails once" : "passes immediately"}
-                </button>
+                <p className="text-xs text-[var(--faint)]">Toggle the first-check behaviour in the panel.</p>
               )}
               {index === 4 && (
                 <>
@@ -150,7 +157,10 @@ export default function AgentLoopDemo() {
             )}
           </div>
         ))}
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

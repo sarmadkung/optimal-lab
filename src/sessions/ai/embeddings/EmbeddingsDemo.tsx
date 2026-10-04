@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, Meter, RunButton, Slider, useWalk } from "@/components/session/ui";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
 import { PRESETS, ranked } from "@/lib/embeddings";
 
 const ACCENT = "var(--ai)";
@@ -17,79 +19,88 @@ export default function EmbeddingsDemo() {
   const rows = ranked(query, k);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI engineering · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Embeddings and similarity search</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Text becomes a direction in space. Closer directions are more alike. Pick a question, or click
-        the plot, and see which notes come back.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI engineering · interactive"
+        title="Embeddings and similarity search"
+        blurb="Text becomes a direction in space. Closer directions are more alike. Pick a question, or click the plot, and see which notes come back."
+      />
 
       <div className="mt-6">
-        <FlowStep n={1} title="Turn the question into a vector" what="The question is a point. Its direction is what we compare, not the words themselves." accent={ACCENT} active={stage === 0}>
-          <Choices
-            accent={ACCENT}
-            value={custom ? null : preset}
-            onChange={(id) => {
-              setPreset(id);
-              setCustom(null);
-            }}
-            options={PRESETS.map((p) => ({ id: p.id, label: p.label }))}
-          />
-          <p className="mt-3 text-xs text-[var(--faint)]">Or click the plot to place your own query.</p>
-          <Plot
-            query={query}
-            onPick={(x, y) => setCustom({ x, y })}
-          />
-          <p className="mt-2 font-mono text-xs text-[var(--faint)]">
-            x {query.x.toFixed(2)} · y {query.y.toFixed(2)}
-          </p>
-        </FlowStep>
-        <FlowArrow label="1 query vector" accent={ACCENT} active={stage === 1} />
+        <SessionSplitLayout
+          visual={
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
+              <p className="text-sm font-medium">Query in vector space</p>
+              <Plot query={query} onPick={(x, y) => setCustom({ x, y })} />
+              <p className="mt-2 font-mono text-xs text-[var(--faint)]">
+                x {query.x.toFixed(2)} · y {query.y.toFixed(2)}
+              </p>
+            </div>
+          }
+          panel={
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
+              <p className="text-sm text-[var(--text)]">Adjust the query and k, then run the search.</p>
+              <Choices
+                accent={ACCENT}
+                value={custom ? null : preset}
+                onChange={(id) => {
+                  setPreset(id);
+                  setCustom(null);
+                }}
+                options={PRESETS.map((p) => ({ id: p.id, label: p.label }))}
+              />
+              <Slider label="How many to return (k)" value={k} min={1} max={4} step={1} format={(v) => String(v)} accent={ACCENT} onChange={setK} />
+              <RunButton busy={busy} onClick={run} accent={ACCENT}>
+                Run the search
+              </RunButton>
+              <ul className="mt-3 space-y-1 text-sm">
+                {rows.filter((r) => r.kept).map((row) => (
+                  <li key={row.id}>
+                    {row.label} <span className="font-mono text-xs text-[var(--faint)]">{row.score.toFixed(2)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
+          detail={
+            <>
+              <FlowStep n={1} title="Turn the question into a vector" what="The question is a point. Its direction is what we compare, not the words themselves." accent={ACCENT} active={stage === 0}>
+                <p className="text-sm text-[var(--muted)]">{chosen.label}</p>
+              </FlowStep>
+              <FlowArrow label="1 query vector" accent={ACCENT} active={stage === 1} />
 
-        <FlowStep n={2} title="Score every stored note" what="Cosine similarity is 1 when two directions match, and near 0 when they do not." accent={ACCENT} active={stage === 1}>
-          <ul className="space-y-3">
-            {rows.map((row) => (
-              <li key={row.id}>
-                <div className="mb-1 flex justify-between gap-3 text-sm">
-                  <span className={row.kept ? "" : "text-[var(--faint)]"}>{row.label}</span>
-                  <span className="font-mono tabular-nums">{row.score.toFixed(2)}</span>
-                </div>
-                <Meter value={row.score + 1} max={2} color={row.kept ? ACCENT : "var(--faint)"} />
-              </li>
-            ))}
-          </ul>
-        </FlowStep>
-        <FlowArrow label="scores, high to low" accent={ACCENT} active={stage === 2} />
+              <FlowStep n={2} title="Score every stored note" what="Cosine similarity is 1 when two directions match, and near 0 when they do not." accent={ACCENT} active={stage === 1}>
+                <ul className="space-y-3">
+                  {rows.map((row) => (
+                    <li key={row.id}>
+                      <div className="mb-1 flex justify-between gap-3 text-sm">
+                        <span className={row.kept ? "" : "text-[var(--faint)]"}>{row.label}</span>
+                        <span className="font-mono tabular-nums">{row.score.toFixed(2)}</span>
+                      </div>
+                      <Meter value={row.score + 1} max={2} color={row.kept ? ACCENT : "var(--faint)"} />
+                    </li>
+                  ))}
+                </ul>
+              </FlowStep>
+              <FlowArrow label="scores, high to low" accent={ACCENT} active={stage === 2} />
 
-        <FlowStep n={3} title="Keep the closest ones" what="Top-k is how many notes you take back. The rest stay in the index." accent={ACCENT} active={stage === 2}>
-          <Slider
-            label="How many to return (k)"
-            value={k}
-            min={1}
-            max={4}
-            step={1}
-            format={(v) => String(v)}
-            accent={ACCENT}
-            onChange={setK}
-          />
-          <ul className="mt-3 space-y-1 text-sm">
-            {rows.map((row) => (
-              <li key={row.id} className={row.kept ? "text-[var(--text)]" : "text-[var(--faint)] line-through"}>
-                {row.label}
-              </li>
-            ))}
-          </ul>
-        </FlowStep>
-        <FlowArrow label={`${k} notes`} accent={ACCENT} active={stage === 3} />
+              <FlowStep n={3} title="Keep the closest ones" what="Top-k is how many notes you take back. The rest stay in the index." accent={ACCENT} active={stage === 2}>
+                <ul className="space-y-1 text-sm">
+                  {rows.map((row) => (
+                    <li key={row.id} className={row.kept ? "text-[var(--text)]" : "text-[var(--faint)] line-through"}>
+                      {row.label}
+                    </li>
+                  ))}
+                </ul>
+              </FlowStep>
+              <FlowArrow label={`${k} notes`} accent={ACCENT} active={stage === 3} />
 
-        <FlowStep n={4} title="Hand those notes onward" what="Search stops here. A later step, such as RAG, is what puts the notes into a prompt." accent={ACCENT} active={stage === 3}>
-          <RunButton busy={busy} onClick={run} accent={ACCENT}>
-            Run the search
-          </RunButton>
-        </FlowStep>
+              <FlowStep n={4} title="Hand those notes onward" what="Search stops here. A later step, such as RAG, is what puts the notes into a prompt." accent={ACCENT} active={stage === 3} />
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }
 

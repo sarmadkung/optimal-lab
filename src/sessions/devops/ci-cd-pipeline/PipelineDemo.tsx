@@ -3,7 +3,9 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, wait } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { STAGES, type StageId } from "@/lib/pipeline";
 
 const ACCENT = "var(--ops)";
@@ -71,15 +73,18 @@ export default function PipelineDemo() {
     : `${STAGES[cursor].title} is running on this commit.`;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">DevOps · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">A CI/CD pipeline, stage by stage</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Lint, test, build, then deploy. Break one stage and watch the rest never start.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="DevOps · interactive"
+        title="A CI/CD pipeline, stage by stage"
+        blurb="Lint, test, build, then deploy. Break one stage and watch the rest never start."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="A commit moving from the repo through the pipeline to production"
           accent={ACCENT}
           nodes={[
@@ -103,29 +108,32 @@ export default function PipelineDemo() {
           packets={packets}
           aspect={2}
           mobileAspect={1.2}
-          caption={caption}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Pipeline running…">
-            Run the pipeline
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={caption}>
+              <Choices
+                accent={ACCENT}
+                value={broken}
+                onChange={(id) => {
+                  setBroken(id);
+                  setCursor(-1);
+                  setSettled(false);
+                }}
+                options={[
+                  { id: "none", label: "Nothing breaks" },
+                  ...STAGES.map((s) => ({ id: s.id, label: `Break ${s.title.toLowerCase()}` })),
+                ]}
+              />
+              <RunButton busy={busy} onClick={run} accent={ACCENT} running="Pipeline running…">
+                Run the pipeline
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="Choose what breaks" what="A healthy pipeline passes every stage. One failure is enough to stop the line." accent={ACCENT} active={cursor < 0}>
-          <Choices
-            accent={ACCENT}
-            value={broken}
-            onChange={(id) => {
-              setBroken(id);
-              setCursor(-1);
-              setSettled(false);
-            }}
-            options={[
-              { id: "none", label: "Nothing breaks" },
-              ...STAGES.map((s) => ({ id: s.id, label: `Break ${s.title.toLowerCase()}` })),
-            ]}
-          />
+          <p className="text-sm text-[var(--muted)]">Use the panel to pick a failing stage.</p>
         </FlowStep>
         <FlowArrow label="commit" accent={ACCENT} active={cursor === 0} />
 
@@ -159,7 +167,10 @@ export default function PipelineDemo() {
             </div>
           );
         })}
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

@@ -3,6 +3,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
 import { decode, pct, sample, type Candidate } from "@/lib/sampling";
 
 const PROMPT = "What is the capital of Pakistan?";
@@ -96,21 +98,32 @@ export default function NextTokenDemo() {
   const arrow = (i: number) => <FlowArrow label={ARROWS[i]} active={stage === i + 1} />;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--ai)]">
-        AI Engineering · interactive
-      </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-        How an LLM picks the next token
-      </h1>
-      <p className="mt-3 text-[var(--muted)]">
-        The model does not return an answer. It runs the same eight steps for every single token.
-        Read them top to bottom, change the settings, then press{" "}
-        <span className="text-[var(--text)]">Sample</span> to watch one token travel through.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI Engineering · interactive"
+        title="How an LLM picks the next token"
+        blurb="The model does not return an answer. It runs the same eight steps for every single token. Read them top to bottom, change the settings, then sample to watch one token travel through."
+      />
 
-      {/* presets */}
-      <div className="mt-6 flex flex-wrap gap-2">
+      <SessionControlBar
+        label={stage !== null ? `Walking step ${stage + 1} of 8` : "Change settings in the flow, then sample"}
+        busy={busy}
+        onRun={sampleOnce}
+        runLabel="Sample next token"
+        runningLabel="Running the steps…"
+        accent="var(--ai)"
+      >
+        <button
+          type="button"
+          onClick={() => sampleMany(100)}
+          disabled={busy}
+          className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm disabled:opacity-50"
+        >
+          Sample 100×
+        </button>
+      </SessionControlBar>
+
+      <div className="mt-4 flex flex-wrap gap-2">
         {PRESETS.map((pr) => {
           const active = pr.t === t && pr.k === k && pr.p === p;
           return (
@@ -416,7 +429,7 @@ export default function NextTokenDemo() {
         That is why the same prompt can give different answers: steps 1 to 6 are fixed maths, but
         step 7 is a dice roll. Temperature 0 removes the roll and always takes the top token.
       </p>
-    </div>
+    </SessionPage>
   );
 }
 

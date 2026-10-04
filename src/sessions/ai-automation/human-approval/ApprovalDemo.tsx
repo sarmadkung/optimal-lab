@@ -3,7 +3,9 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { DRAFT, type Decision } from "@/lib/approval";
 
 const ACCENT = "var(--auto)";
@@ -50,16 +52,18 @@ export default function ApprovalDemo() {
     : "Rejected. The draft never leaves the gate.";
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">AI automation · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Pause for a person</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        The workflow can draft a refund. It must not send it. A person approves or rejects, and only
-        then does the run finish.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="AI automation · interactive"
+        title="Pause for a person"
+        blurb="The workflow can draft a refund. It must not send it. A person approves or rejects, and only then does the run finish."
+      />
 
       <div className="mt-6">
-        <SystemMap
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              chrome="split"
           title="Inbox, model, approval gate, a person and the customer"
           accent={ACCENT}
           nodes={[
@@ -78,15 +82,37 @@ export default function ApprovalDemo() {
           packets={packets}
           aspect={2.1}
           mobileAspect={0.95}
-          caption={caption}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Drafting…">
-            Run until the pause
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+            />
+          }
+          panel={
+            <SystemMapPanel caption={caption}>
+              <RunButton busy={busy} onClick={run} accent={ACCENT} running="Drafting…">
+                Run until the pause
+              </RunButton>
+              <div className="flex w-full flex-wrap gap-2">
+                <button
+                  type="button"
+                  disabled={!waiting}
+                  onClick={() => choose("approve")}
+                  className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)] disabled:opacity-40"
+                  style={{ background: "var(--good)" }}
+                >
+                  Approve and send
+                </button>
+                <button
+                  type="button"
+                  disabled={!waiting}
+                  onClick={() => choose("reject")}
+                  className="min-h-11 rounded-md border border-[var(--bad)] px-4 text-sm disabled:opacity-40"
+                  style={{ color: "var(--bad)" }}
+                >
+                  Reject
+                </button>
+              </div>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="The email arrives" what="Sara wrote that order 1842 was charged twice." accent={ACCENT} active={stage === 0}>
           <p className="text-sm text-[var(--muted)]">From sara@shop.com · Charged twice</p>
         </FlowStep>
@@ -102,27 +128,8 @@ export default function ApprovalDemo() {
         <FlowArrow label="waiting" accent={ACCENT} active={waiting} />
 
         <FlowStep n={3} title="Wait for approval" what="Nothing is sent while this step is open. Approve delivers the draft. Reject throws it away." accent={ACCENT} active={waiting}>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={!waiting}
-              onClick={() => choose("approve")}
-              className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)] disabled:opacity-40"
-              style={{ background: "var(--good)" }}
-            >
-              Approve and send
-            </button>
-            <button
-              type="button"
-              disabled={!waiting}
-              onClick={() => choose("reject")}
-              className="min-h-11 rounded-md border border-[var(--bad)] px-4 text-sm disabled:opacity-40"
-              style={{ color: "var(--bad)" }}
-            >
-              Reject
-            </button>
-          </div>
-          {stage === null && <p className="mt-3 text-xs text-[var(--faint)]">Run the workflow to reach this pause.</p>}
+          {stage === null && <p className="text-xs text-[var(--faint)]">Run the workflow to reach this pause, then use the panel.</p>}
+          {waiting && <p className="text-sm text-[var(--muted)]">Choose Approve or Reject in the panel beside the map.</p>}
         </FlowStep>
         <FlowArrow label={decision === "approve" ? "sent" : decision === "reject" ? "stopped" : "no decision yet"} accent={ACCENT} active={stage === 3} />
 
@@ -133,7 +140,10 @@ export default function ApprovalDemo() {
             {decision === null && "Still waiting on a person."}
           </p>
         </FlowStep>
+            </>
+          }
+        />
       </div>
-    </div>
+    </SessionPage>
   );
 }

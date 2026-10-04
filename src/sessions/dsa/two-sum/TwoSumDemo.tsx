@@ -2,6 +2,7 @@
 
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { APPROACHES, TARGET, TRACES, growth, type Approach } from "@/lib/twoSum";
 
 const SIZES = [8, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000];
@@ -40,18 +41,16 @@ export default function TwoSumDemo() {
   const maxLog = Math.log10(growth(SIZES[SIZES.length - 1]).brute);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--dsa)]">
-        DSA series #01 · interactive
-      </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-        One problem, <span className="text-[var(--dsa)]">three ways</span>
-      </h1>
-      <p className="mt-3 text-[var(--muted)]">
-        DSA is not about writing code. It is about spotting the pattern and knowing more than one
-        way to solve it. Here is the classic example: find two numbers that add up to{" "}
-        <span className="font-mono text-[var(--text)]">{TARGET}</span>.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="DSA series #01 · interactive"
+        title={
+          <>
+            One problem, <span className="text-[var(--dsa)]">three ways</span>
+          </>
+        }
+        blurb={`DSA is not about writing code. It is about spotting the pattern and knowing more than one way to solve it. Here is the classic example: find two numbers that add up to ${TARGET}.`}
+      />
 
       {/* approach tabs */}
       <div className="mt-8 grid gap-2 sm:grid-cols-3">
@@ -333,7 +332,7 @@ export default function TwoSumDemo() {
           about a millisecond. Knowing the pattern is what lets you pick.
         </p>
       </section>
-    </div>
+    </SessionPage>
   );
 }
 

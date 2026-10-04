@@ -174,10 +174,10 @@ export default function CachingDemo() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-12">
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">System design · interactive</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Caching and eviction</h1>
-      <p className="mt-3 text-[var(--muted)]">
+      <p className="mt-3 max-w-2xl text-[var(--muted)]">
         Watch a small cache hit, miss and forget a key. Three moments stop and ask you to predict before the picture answers.
       </p>
 

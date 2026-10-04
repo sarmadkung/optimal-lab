@@ -51,6 +51,8 @@ type Props = {
   aspect?: number; // width / height on desktop and tablet
   mobileAspect?: number; // width / height on a phone
   children?: ReactNode; // playback controls
+  /** split: map only; put caption and controls in SystemMapPanel beside the map */
+  chrome?: "inline" | "split";
 };
 
 const NARROW = "(max-width: 639px)";
@@ -98,6 +100,7 @@ export function SystemMap({
   aspect = 2.2,
   mobileAspect,
   children,
+  chrome = "inline",
 }: Props) {
   const narrow = useNarrow();
   const still = useReducedMotion();
@@ -212,13 +215,29 @@ export function SystemMap({
           })}
       </div>
 
-      {caption && (
+      {chrome === "inline" && caption && (
         <p aria-live="polite" className="mt-3 min-h-10 text-sm text-[var(--text)]">
           {caption}
         </p>
       )}
-      {children && <div className="mt-3 flex flex-wrap items-center gap-2">{children}</div>}
+      {chrome === "inline" && children && <div className="mt-3 flex flex-wrap items-center gap-2">{children}</div>}
     </section>
+  );
+}
+
+/** Live caption and controls when the map uses chrome="split". One aria-live region. */
+export function SystemMapPanel({ caption, children }: { caption?: ReactNode; children?: ReactNode }) {
+  return (
+    <div className="rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
+      {caption ? (
+        <p aria-live="polite" className="min-h-10 text-sm text-[var(--text)]">
+          {caption}
+        </p>
+      ) : (
+        <p className="min-h-10 text-sm text-[var(--muted)]">Press Play or Step to move the request.</p>
+      )}
+      {children ? <div className="mt-3 flex flex-wrap items-center gap-2">{children}</div> : null}
+    </div>
   );
 }
 

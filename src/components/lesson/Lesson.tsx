@@ -140,8 +140,7 @@ export function Lesson({ steps, accent, renderStage, renderExtra }: Props) {
   const showControls = step.controls !== false;
 
   return (
-    <div>
-      <div ref={stageRef} className="scroll-mt-20">
+    <div ref={stageRef} className="scroll-mt-20">
       <div className="mb-3 flex items-center justify-between gap-3">
         <p className="font-mono text-xs text-[var(--muted)]">
           {index + 1} / {steps.length}
@@ -185,60 +184,65 @@ export function Lesson({ steps, accent, renderStage, renderExtra }: Props) {
         <div className="h-full rounded transition-[width] duration-300" style={{ width: `${((index + 1) / steps.length) * 100}%`, background: accent }} />
       </div>
 
-      <div>{renderStage(step, ctx)}</div>
-      </div>
+      {/* The picture stays on the left. The chapter and Back / Next sit beside it
+          once there is room, and under it on a phone, so both share one view. */}
+      <div className="mt-4 grid items-start gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(17rem,0.85fr)]">
+        <div className="lg:sticky lg:top-20">
+          {renderStage(step, ctx)}
 
-      {showControls && (
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)]"
-            style={{ background: accent }}
-          >
-            {paused ? "Play" : "Pause"}
-          </button>
-          <div className="flex rounded-md border border-[var(--line)] p-0.5">
-            {SPEEDS.map((value) => {
-              const on = value === speed;
-              return (
-                <button
-                  key={value}
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => setSpeed(value)}
-                  className="min-h-11 rounded px-3 font-mono text-sm"
-                  style={on ? { background: `color-mix(in srgb, ${accent} 18%, transparent)`, color: "var(--text)" } : { color: "var(--muted)" }}
-                >
-                  {value}×
-                </button>
-              );
-            })}
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              setPaused(false);
-              setRunId((n) => n + 1);
-            }}
-            className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
-          >
-            Replay
-          </button>
-        </div>
-      )}
-
-      <article aria-live="polite" className="mt-6">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">{step.chapter}</p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">{step.title}</h2>
-        <div className="mt-3 space-y-3 text-[var(--muted)]">
-          {step.body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {showControls && (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setPaused((p) => !p)}
+                className="min-h-11 rounded-md px-4 text-sm font-semibold text-[var(--on-accent)]"
+                style={{ background: accent }}
+              >
+                {paused ? "Play" : "Pause"}
+              </button>
+              <div className="flex rounded-md border border-[var(--line)] p-0.5">
+                {SPEEDS.map((value) => {
+                  const on = value === speed;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() => setSpeed(value)}
+                      className="min-h-11 rounded px-3 font-mono text-sm"
+                      style={on ? { background: `color-mix(in srgb, ${accent} 18%, transparent)`, color: "var(--text)" } : { color: "var(--muted)" }}
+                    >
+                      {value}×
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setPaused(false);
+                  setRunId((n) => n + 1);
+                }}
+                className="min-h-11 rounded-md border border-[var(--line-strong)] px-4 text-sm"
+              >
+                Replay
+              </button>
+            </div>
+          )}
         </div>
 
-        {step.predict && (
-          <div className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
+        <div>
+          <article aria-live="polite">
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">{step.chapter}</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">{step.title}</h2>
+            <div className="mt-3 space-y-3 text-[var(--muted)]">
+              {step.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            {step.predict && (
+              <div className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]">Your turn · predict</p>
             <p className="mt-2 font-medium text-[var(--text)]">{step.predict.prompt}</p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -281,34 +285,36 @@ export function Lesson({ steps, accent, renderStage, renderExtra }: Props) {
                 {answer === null ? step.predict.why[step.predict.correct] : step.predict.why[answer]}
               </p>
             )}
+              </div>
+            )}
+
+            {renderExtra && <div className="mt-4">{renderExtra(step, ctx)}</div>}
+          </article>
+
+          <div className="mt-6 flex items-stretch gap-2">
+            <button
+              type="button"
+              onClick={() => go(index - 1)}
+              disabled={index === 0}
+              className="min-h-11 shrink-0 rounded-md border border-[var(--line-strong)] px-4 text-sm disabled:opacity-40"
+            >
+              ← Back
+            </button>
+            <button
+              type="button"
+              onClick={() => go(index + 1)}
+              disabled={!next}
+              className="flex min-h-11 min-w-0 flex-1 items-center justify-between gap-3 rounded-md px-4 py-2 text-left disabled:opacity-50"
+              style={{ background: accent, color: "var(--on-accent)" }}
+            >
+              <span className="min-w-0">
+                <span className="block font-mono text-[10px] uppercase tracking-wider opacity-80">{next ? "Next" : "Done"}</span>
+                <span className="block font-semibold">{next ? next.title : "Lesson complete"}</span>
+              </span>
+              <span aria-hidden>→</span>
+            </button>
           </div>
-        )}
-
-        {renderExtra && <div className="mt-4">{renderExtra(step, ctx)}</div>}
-      </article>
-
-      <div className="mt-6 flex items-stretch gap-2">
-        <button
-          type="button"
-          onClick={() => go(index - 1)}
-          disabled={index === 0}
-          className="min-h-11 shrink-0 rounded-md border border-[var(--line-strong)] px-4 text-sm disabled:opacity-40"
-        >
-          ← Back
-        </button>
-        <button
-          type="button"
-          onClick={() => go(index + 1)}
-          disabled={!next}
-          className="flex min-h-11 min-w-0 flex-1 items-center justify-between gap-3 rounded-md px-4 py-2 text-left disabled:opacity-50"
-          style={{ background: accent, color: "var(--on-accent)" }}
-        >
-          <span className="min-w-0">
-            <span className="block font-mono text-[10px] uppercase tracking-wider opacity-80">{next ? "Next" : "Done"}</span>
-            <span className="block font-semibold">{next ? next.title : "Lesson complete"}</span>
-          </span>
-          <span aria-hidden>→</span>
-        </button>
+        </div>
       </div>
     </div>
   );

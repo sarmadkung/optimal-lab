@@ -147,6 +147,9 @@ pnpm lint
 | `src/app/tracks/[track]/[session]/` | One page per session: breadcrumbs, the demo, then previous/next in the track |
 | `src/components/` | Shared UI: `SiteHeader`, `SiteFooter`, `ThemeToggle`, `Breadcrumbs`, `TrackCard`, `SessionCard`, `HomeTabs` (the home page tab bar), the step flow (`flow/Flow.tsx`), the system map (`system/SystemMap.tsx`) and the guided lesson (`lesson/Lesson.tsx`) |
 | `src/components/session/ui.tsx` | Session controls: `useWalk` + `RunButton` for one walk through the steps, `usePlayback` + `PlaybackControls` for stepping through simulator frames, `Slider`, `Choices`, `Meter` |
+| `src/components/session/SessionHeader.tsx` | `SessionPage` (`max-w-6xl`) and `SessionHeader` (kicker, title, blurb) for live demos |
+| `src/components/session/SessionSplitLayout.tsx` | Side-by-side visual + panel from `lg` up; optional `detail` for the step flow below |
+| `src/components/session/SessionControlBar.tsx` | Sticky run strip so Play / Generate stays reachable on long step flows |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
 ## Explaining a process: the step flow
@@ -271,9 +274,15 @@ and which keys move), rolling deploys (replicas, probes, rollback), GitHub Actio
 workflow, jobs), the thread pool (main thread vs workers), and scheduled automations
 (clock, runner, missed run).
 
+For live system-map sessions, use **`SessionSplitLayout`** so the map stays visible while the reader scrolls the step flow. Put `<SystemMap chrome="split" … />` in `visual`, and **`SystemMapPanel`** in `panel` (one `aria-live` caption plus playback and any inputs that apply to the whole run). Put the `FlowStep` chain in `detail`. Wrap the page in **`SessionPage`** + **`SessionHeader`**. Reference: `/tracks/system-design/load-balancing`.
+
+Long step-flow-only sessions (no system map) can keep a single column but should use **`SessionControlBar`** for the main run action and global toggles, and leave per-step sliders inside the step they change. Reference: `/tracks/ai/next-token`, `/tracks/dsa/sliding-window`.
+
+Comparison layouts (Two Sum, containers vs VMs) use **`SessionPage`** + **`SessionHeader`** only; they keep their own tabs or side-by-side structure.
+
 ## Guided lessons
 
-Use a guided lesson when the reader should watch one system change, commit to a guess, then break it. The stage stays on screen. Only the current chapter is written out. Back / Next moves the chapter, and the URL hash keeps the place (`#predict-b`).
+Use a guided lesson when the reader should watch one system change, commit to a guess, then break it. The stage stays on screen. Only the current chapter is written out. Back / Next moves the chapter, and the URL hash keeps the place (`#predict-b`). From 1024px up, the chapter, the prediction and Back / Next sit to the right of the stage, so the picture and the controls share one view. Below that they stack under the stage.
 
 Use `Lesson` from `src/components/lesson/Lesson.tsx`. The stage is the system picture for this concept (a specialised picture, or `SystemMap` when the generic boxes are enough). Drive the picture from the lesson index plus one pure simulator in `src/lib/`, the same way a system map shares its frame with a step flow.
 
@@ -294,7 +303,7 @@ How to write one:
 4. **Put the control in the chapter it changes.** A cache-size slider belongs to the chapter that replays the sequence at that size.
 5. **End on a playground** when the reader should send their own input. Set `controls: false` on that chapter so Pause / Replay does not fight their clicks.
 6. **The caption states what just happened**, in one sentence, including when motion is reduced. The stage already respects `prefers-reduced-motion`.
-7. **Check 390px and 768px.** The stage, the choices and Back / Next have to fit with no sideways scroll.
+7. **Check 390px, 768px and 1280px.** The stage, the choices and Back / Next have to fit with no sideways scroll. At 1280px they share one view: the picture on the left, the chapter and Back / Next on the right.
 
 Reference implementation: `/tracks/system-design/caching`.
 

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
-import { Choices, RunButton, useWalk } from "@/components/session/ui";
+import { Choices, useWalk } from "@/components/session/ui";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 
 const ACCENT = "var(--ops)";
 
@@ -28,15 +30,20 @@ export default function ContainersDemo() {
   const { stage, busy, run, setStage } = useWalk(steps.length, 480);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">DevOps · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Containers vs virtual machines</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Both run your app on someone else&apos;s hardware. A container shares the host kernel. A virtual
-        machine boots a second operating system.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="DevOps · interactive"
+        title="Containers vs virtual machines"
+        blurb="Both run your app on someone else's hardware. A container shares the host kernel. A virtual machine boots a second operating system."
+      />
 
-      <div className="mt-6">
+      <SessionControlBar
+        label={stage !== null ? `Step ${stage + 1} of ${steps.length}` : "Pick a path, then walk the steps"}
+        busy={busy}
+        onRun={run}
+        runLabel={mode === "container" ? "Start the container" : "Boot the machine"}
+        accent={ACCENT}
+      >
         <Choices
           accent={ACCENT}
           value={mode}
@@ -45,24 +52,17 @@ export default function ContainersDemo() {
             setStage(null);
           }}
           options={[
-            { id: "container", label: "Start a container" },
-            { id: "vm", label: "Boot a virtual machine" },
+            { id: "container", label: "Container" },
+            { id: "vm", label: "Virtual machine" },
           ]}
         />
-      </div>
+      </SessionControlBar>
 
       <div className="mt-6">
         {steps.map((step, index) => (
           <div key={step.title}>
             <FlowStep n={index + 1} title={step.title} what={step.what} accent={ACCENT} active={stage === index}>
               <p className="text-sm text-[var(--muted)]">{step.body}</p>
-              {index === steps.length - 1 && (
-                <div className="mt-4">
-                  <RunButton busy={busy} onClick={run} accent={ACCENT}>
-                    {mode === "container" ? "Start the container" : "Boot the machine"}
-                  </RunButton>
-                </div>
-              )}
             </FlowStep>
             {index < steps.length - 1 && (
               <FlowArrow
@@ -74,6 +74,6 @@ export default function ContainersDemo() {
           </div>
         ))}
       </div>
-    </div>
+    </SessionPage>
   );
 }

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, Slider } from "@/components/session/ui";
+import { SessionControlBar } from "@/components/session/SessionControlBar";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { VALUES, costs, trace } from "@/lib/slidingWindow";
 
 const ACCENT = "var(--dsa)";
@@ -35,13 +37,35 @@ export default function SlidingWindowDemo() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">DSA · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Sliding window</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Find the {k} adjacent cells with the biggest sum. The first window is added in full. Every
-        later window only drops the cell that left and adds the cell that entered.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="DSA · interactive"
+        title="Sliding window"
+        blurb={`Find the ${k} adjacent cells with the biggest sum. The first window is added in full. Every later window only drops the cell that left and adds the cell that entered.`}
+      />
+
+      <SessionControlBar
+        label={`Window ${i + 1} of ${frames.length} · sum ${frame.sum}`}
+        onRun={slide}
+        runLabel={atEnd ? "Restart" : "Next step"}
+        accent={ACCENT}
+      >
+        <Slider
+          label="Window size (k)"
+          hint={`${frames.length} positions`}
+          value={k}
+          min={1}
+          max={VALUES.length}
+          step={1}
+          format={(v) => String(v)}
+          accent={ACCENT}
+          onChange={(v) => {
+            setK(v);
+            setI(0);
+            setPlaying(false);
+          }}
+        />
+      </SessionControlBar>
 
       <div className="mt-6">
         <FlowStep n={1} title="Choose the window size" what="k is how many adjacent cells you look at together." accent={ACCENT} active={i === 0}>
@@ -135,7 +159,7 @@ export default function SlidingWindowDemo() {
           </p>
         </FlowStep>
       </div>
-    </div>
+    </SessionPage>
   );
 }
 

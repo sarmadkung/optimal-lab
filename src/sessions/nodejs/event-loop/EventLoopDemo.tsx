@@ -3,7 +3,9 @@
 import { useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
-import { SystemMap, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
+import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionSplitLayout } from "@/components/session/SessionSplitLayout";
+import { SystemMap, SystemMapPanel, hops, type NodeState, type Packet } from "@/components/system/SystemMap";
 import { JOBS, PHASES, script, type Job, type PhaseId } from "@/lib/eventLoop";
 
 const ACCENT = "var(--node)";
@@ -70,45 +72,55 @@ export default function EventLoopDemo() {
     : `${PHASES[stage!].title}: nothing queued here, so the loop moves on.`;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Node.js · interactive</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">The event loop, phase by phase</h1>
-      <p className="mt-3 text-[var(--muted)]">
-        Synchronous code finishes first. Queued callbacks then run in a fixed order. Turn some off and
-        run the loop again.
-      </p>
+    <SessionPage>
+      <SessionHeader
+        kicker="Node.js · interactive"
+        title="The event loop, phase by phase"
+        blurb="Synchronous code finishes first. Queued callbacks then run in a fixed order. Turn some off and run the loop again."
+      />
 
       <div className="mt-6">
-        <SystemMap
-          title="The call stack and the five callback queues around it"
-          accent={ACCENT}
-          nodes={[
-            { id: "stack", label: "Call stack", sub: log.length ? log[log.length - 1] : "empty", at: [50, 42], mobileAt: [50, 38], state: current ? "active" : "idle" },
-            ...JOBS.map((j) => {
-              const q = QUEUE[j.phase as Exclude<PhaseId, "sync">];
-              return {
-                id: j.phase,
-                label: q.label,
-                sub: !on[j.id] ? "empty" : log.includes(j.line) ? "ran" : j.label,
-                at: q.at,
-                mobileAt: q.mobileAt,
-                state: queueState(j),
-              };
-            }),
-          ]}
-          links={JOBS.map((j) => ({ from: j.phase, to: "stack", dim: !on[j.id] }))}
-          packets={packets}
-          aspect={2}
-          mobileAspect={0.9}
-          caption={caption}
-        >
-          <RunButton busy={busy} onClick={run} accent={ACCENT} running="Running the loop…">
-            Run one turn
-          </RunButton>
-        </SystemMap>
-      </div>
-
-      <div className="mt-6">
+        <SessionSplitLayout
+          visual={
+            <SystemMap
+              title="The call stack and the five callback queues around it"
+              accent={ACCENT}
+              chrome="split"
+              nodes={[
+                { id: "stack", label: "Call stack", sub: log.length ? log[log.length - 1] : "empty", at: [50, 42], mobileAt: [50, 38], state: current ? "active" : "idle" },
+                ...JOBS.map((j) => {
+                  const q = QUEUE[j.phase as Exclude<PhaseId, "sync">];
+                  return {
+                    id: j.phase,
+                    label: q.label,
+                    sub: !on[j.id] ? "empty" : log.includes(j.line) ? "ran" : j.label,
+                    at: q.at,
+                    mobileAt: q.mobileAt,
+                    state: queueState(j),
+                  };
+                }),
+              ]}
+              links={JOBS.map((j) => ({ from: j.phase, to: "stack", dim: !on[j.id] }))}
+              packets={packets}
+              aspect={2}
+              mobileAspect={0.9}
+            />
+          }
+          panel={
+            <SystemMapPanel caption={caption}>
+              <p className="text-xs text-[var(--muted)]">Queue callbacks, then run one turn.</p>
+              <div className="flex w-full flex-col gap-2">
+                {JOBS.map((j) => (
+                  <JobToggle key={j.id} id={j.id} on={on} toggle={toggle} />
+                ))}
+              </div>
+              <RunButton busy={busy} onClick={run} accent={ACCENT} running="Running the loop…">
+                Run one turn
+              </RunButton>
+            </SystemMapPanel>
+          }
+          detail={
+            <>
         <FlowStep n={1} title="Run synchronous code" what={PHASES[0].what} accent={ACCENT} active={phaseOn("sync")}>
           <p className="font-mono text-sm">
             console.log(&quot;start&quot;)
@@ -118,29 +130,20 @@ export default function EventLoopDemo() {
         </FlowStep>
         <FlowArrow label="call stack empty" accent={ACCENT} active={stage === 1} />
 
-        <FlowStep n={2} title="Drain nextTick" what={PHASES[1].what} accent={ACCENT} active={phaseOn("nextTick")}>
-          <JobToggle id="nextTick" on={on} toggle={toggle} />
-        </FlowStep>
+        <FlowStep n={2} title="Drain nextTick" what={PHASES[1].what} accent={ACCENT} active={phaseOn("nextTick")} />
         <FlowArrow label="nextTick queue" accent={ACCENT} active={stage === 2} />
 
-        <FlowStep n={3} title="Drain promise reactions" what={PHASES[2].what} accent={ACCENT} active={phaseOn("micro")}>
-          <JobToggle id="promise" on={on} toggle={toggle} />
-        </FlowStep>
+        <FlowStep n={3} title="Drain promise reactions" what={PHASES[2].what} accent={ACCENT} active={phaseOn("micro")} />
         <FlowArrow label="microtask queue" accent={ACCENT} active={stage === 3} />
 
-        <FlowStep n={4} title="Timers phase" what={PHASES[3].what} accent={ACCENT} active={phaseOn("timers")}>
-          <JobToggle id="timeout" on={on} toggle={toggle} />
-        </FlowStep>
+        <FlowStep n={4} title="Timers phase" what={PHASES[3].what} accent={ACCENT} active={phaseOn("timers")} />
         <FlowArrow label="due timers" accent={ACCENT} active={stage === 4} />
 
-        <FlowStep n={5} title="Poll for I/O" what={PHASES[4].what} accent={ACCENT} active={phaseOn("poll")}>
-          <JobToggle id="io" on={on} toggle={toggle} />
-        </FlowStep>
+        <FlowStep n={5} title="Poll for I/O" what={PHASES[4].what} accent={ACCENT} active={phaseOn("poll")} />
         <FlowArrow label="ready I/O" accent={ACCENT} active={stage === 5} />
 
         <FlowStep n={6} title="Check phase" what={PHASES[5].what} accent={ACCENT} active={phaseOn("check")}>
-          <JobToggle id="immediate" on={on} toggle={toggle} />
-          <ol className="mt-4 space-y-1 font-mono text-sm">
+          <ol className="space-y-1 font-mono text-sm">
             {log.length === 0 && <li className="text-[var(--faint)]">The print order shows up here.</li>}
             {log.map((line, idx) => (
               <li key={`${line}-${idx}`}>
@@ -149,13 +152,14 @@ export default function EventLoopDemo() {
             ))}
           </ol>
         </FlowStep>
+              <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">
+                This is the order when the timer is already due and the file callback is already ready. If the timer is still waiting, poll can run first.
+              </p>
+            </>
+          }
+        />
       </div>
-
-      <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">
-        This is the order when the timer is already due and the file callback is already ready. If the
-        timer is still waiting, poll can run first.
-      </p>
-    </div>
+    </SessionPage>
   );
 }
 
