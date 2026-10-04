@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { QuickSearchSlot } from "@/components/QuickSearch";
 import ThemeToggle from "@/components/ThemeToggle";
 import { TRACKS, liveCount, trackHref } from "@/lib/tracks";
 
@@ -46,6 +47,8 @@ export default function SiteHeader() {
             );
           })}
         </nav>
+
+        <QuickSearchSlot />
 
         <ThemeToggle />
 

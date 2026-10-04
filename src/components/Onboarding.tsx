@@ -6,6 +6,7 @@ import {
   finishOnboarding,
   getOnboardingServerSnapshot,
   getOnboardingSnapshot,
+  initOnboardingFromStorage,
   setOnboardingStep,
   subscribeOnboarding,
 } from "@/lib/onboarding";
@@ -38,6 +39,10 @@ export default function Onboarding() {
   const { open, step } = useSyncExternalStore(subscribeOnboarding, getOnboardingSnapshot, getOnboardingServerSnapshot);
   const dialogRef = useRef<HTMLDivElement>(null);
   const start = liveSessions()[0];
+
+  useEffect(() => {
+    initOnboardingFromStorage();
+  }, []);
 
   useEffect(() => {
     if (!open) return;

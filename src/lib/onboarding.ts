@@ -13,6 +13,9 @@ const CLOSED: Snap = { open: false, step: 0 };
 
 let step = 0;
 let replay = false;
+/** Set true once the client has read localStorage (avoids SSR / first-paint reopen). */
+let storageReady = false;
+let finished = true;
 let cached: Snap = CLOSED;
 const listeners = new Set<() => void>();
 
@@ -20,14 +23,21 @@ function emit() {
   for (const listener of listeners) listener();
 }
 
-function read(): Snap {
-  let open = replay;
+function syncFromStorage() {
+  if (typeof window === "undefined") return;
   try {
-    if (localStorage.getItem(ONBOARDING_KEY) !== ONBOARDING_DONE) open = true;
+    finished = localStorage.getItem(ONBOARDING_KEY) === ONBOARDING_DONE;
   } catch {
-    // storage blocked: don't keep a tour on screen that can't be remembered as finished
-    open = replay;
+    finished = true;
   }
+  storageReady = true;
+}
+
+function read(): Snap {
+  if (typeof window === "undefined") return CLOSED;
+  if (!storageReady) syncFromStorage();
+
+  const open = replay || !finished;
   if (cached.open !== open || cached.step !== step) cached = { open, step };
   return cached;
 }
@@ -38,6 +48,7 @@ export function subscribeOnboarding(onChange: () => void) {
 }
 
 export function getOnboardingSnapshot() {
+  if (typeof window === "undefined") return CLOSED;
   return read();
 }
 
@@ -51,18 +62,26 @@ export function setOnboardingStep(next: number) {
 }
 
 export function finishOnboarding() {
+  replay = false;
+  step = 0;
+  finished = true;
+  cached = CLOSED;
   try {
     localStorage.setItem(ONBOARDING_KEY, ONBOARDING_DONE);
   } catch {
-    // still close it for this page load
+    // still closed for this visit
   }
-  replay = false;
-  step = 0;
   emit();
 }
 
 export function openOnboarding() {
   replay = true;
   step = 0;
+  emit();
+}
+
+/** Call once on the client so the tour can open after we know localStorage state. */
+export function initOnboardingFromStorage() {
+  syncFromStorage();
   emit();
 }

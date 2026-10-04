@@ -153,6 +153,8 @@ pnpm lint
 | `src/lib/realWorldTools.ts` | Per-session list of language-agnostic tools (Redis, NGINX, MCP, …) |
 | `src/components/session/RealWorldTools.tsx` | **In production** on session pages and aggregated on each track page (`/tracks/<track>#tools`) |
 | `src/components/session/TrackLearningPath.tsx` | Step strip for live sessions in a track (optional `learningPathBlurb` on `Track` in `tracks.ts`) |
+| `src/lib/searchIndex.ts` | Search index built from tracks, sessions, and in-production tools |
+| `src/components/QuickSearch.tsx` | Header quick search (⌘K): sessions, tracks, tools |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
 ## Explaining a process: the step flow
