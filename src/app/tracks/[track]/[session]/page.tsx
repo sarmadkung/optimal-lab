@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { RealWorldTools } from "@/components/session/RealWorldTools";
 import { TRACKS, getSession, neighbours, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
 import { sessionDemo } from "@/sessions/registry";
 
@@ -39,6 +40,8 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
       </div>
 
       {demo ?? <ComingSoon track={track} session={session} />}
+
+      {session.status === "live" ? <RealWorldTools trackId={track.id} sessionId={session.id} /> : null}
 
       <nav aria-label="More in this track" className="mx-auto w-full max-w-3xl px-4 pb-16">
         <div className="border-t border-[var(--line)] pt-8">

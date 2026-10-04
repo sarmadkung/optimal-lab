@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SessionCard from "@/components/SessionCard";
+import { RealWorldTools } from "@/components/session/RealWorldTools";
+import { listRealWorldToolsForTrack } from "@/lib/realWorldTools";
 import { TRACKS, firstLive, getTrack, sessionHref } from "@/lib/tracks";
 
 export const dynamicParams = false;
@@ -25,6 +27,7 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
   const live = t.sessions.filter((s) => s.status === "live");
   const soon = t.sessions.filter((s) => s.status === "soon");
   const start = firstLive(t);
+  const hasTools = listRealWorldToolsForTrack(t.id, live).length > 0;
 
   return (
     <main
@@ -64,6 +67,7 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
       <nav className="mt-8 flex flex-wrap gap-2 text-sm" aria-label="On this page">
         {[
           ["sessions", "Sessions"],
+          ...(hasTools ? [["tools", "In production"] as const] : []),
           ["roadmap", "Roadmap"],
           ["projects", "Projects"],
         ].map(([id, label]) => (
@@ -95,6 +99,8 @@ export default async function TrackPage(props: PageProps<"/tracks/[track]">) {
           ))}
         </ol>
       </section>
+
+      {hasTools ? <RealWorldTools track={t} /> : null}
 
       <section id="roadmap" className="mt-14 scroll-mt-20">
         <div className="flex items-center gap-3">

@@ -150,6 +150,8 @@ pnpm lint
 | `src/components/session/SessionHeader.tsx` | `SessionPage` (`max-w-6xl`) and `SessionHeader` (kicker, title, blurb) for live demos |
 | `src/components/session/SessionSplitLayout.tsx` | Side-by-side visual + panel from `lg` up; optional `detail` for the step flow below |
 | `src/components/session/SessionControlBar.tsx` | Sticky run strip so Play / Generate stays reachable on long step flows |
+| `src/lib/realWorldTools.ts` | Per-session list of language-agnostic tools (Redis, NGINX, MCP, …) |
+| `src/components/session/RealWorldTools.tsx` | **In production** on session pages and aggregated on each track page (`/tracks/<track>#tools`) |
 | `src/app/globals.css` | Colour tokens, shared with the social-content post visuals |
 
 ## Explaining a process: the step flow
@@ -317,5 +319,9 @@ Reference implementation: `/tracks/system-design/caching`.
 3. Register it in `src/sessions/registry.tsx`, set the session's `status: "live"` in
    `src/lib/tracks.ts`, and add it to the Pages table above. The route
    `/tracks/<track>/<session>` and the previous/next links come for free.
-4. Check it at phone width (390px) and tablet width (768px), in both themes: no sideways scroll. See "Responsive layout" above.
-5. Link it from the matching post in social-content.
+4. Add an **In production** entry in `src/lib/realWorldTools.ts`: name real services and
+   standards (Redis, NGINX, JSON Schema), not language-specific libraries. Each tool needs
+   an **`href`** to its official site or GitHub repo. Session and track pages render the
+   list automatically.
+5. Check it at phone width (390px) and tablet width (768px), in both themes: no sideways scroll. See "Responsive layout" above.
+6. Link it from the matching post in social-content.
