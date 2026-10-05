@@ -62,7 +62,7 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/dsa/binary-search` | Halve a sorted list until the target is found or the range is empty | — |
 | `/tracks/nodejs/event-loop` | One turn of the event loop: sync, nextTick, promises, timers, poll, check | — |
 | `/tracks/nodejs/streams-backpressure` | Producer, buffer, high water mark, consumer | — |
-| `/tracks/system-design/load-balancing` | Round robin vs least connections when one server is faster | — |
+| `/tracks/system-design/load-balancing` | Round robin, least connections, and weighted routing — queues, health checks, LB timeouts | — |
 | `/tracks/system-design/caching` | A guided cache: hits, misses, eviction, three predictions, then a playground | — |
 | `/tracks/devops/ci-cd-pipeline` | Lint, test, build, deploy — stop at the first failure | — |
 | `/tracks/devops/containers-vs-vms` | Start a container, or boot a virtual machine | — |
@@ -132,17 +132,31 @@ pnpm lint
 - Deployed on [Vercel](https://vercel.com)
 - Optional [Supabase](https://supabase.com) Postgres for project **started** counts (see below)
 
-### Projects catalog (optional Supabase)
+### Optional Supabase (public stats + project starts)
 
-Home → **Projects** is a [roadmap.sh/projects](https://roadmap.sh/projects)-style browser: filter by pillar and area, cards show level and format, **I'm starting** records interest.
+Free tier is enough. The app works without it; with it you get **anonymous** metrics only (no accounts yet):
 
-The catalog itself lives in `src/lib/projects.ts` (git-reviewed, no CMS yet). **Started** counts are optional:
+| Metric | Meaning |
+|---|---|
+| **Visitors** | Unique browsers (random cookie id `ol_vid`) |
+| **Page views** | One ping per tab session (`VisitTracker` in the root layout) |
+| **Project starts** | Clicks on **I'm starting** on Home → Projects |
 
-1. Create a Supabase project and run `supabase/migrations/20260322120000_project_start_counts.sql` in the SQL editor.
-2. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` in `.env.local` (service role is **server-only** — Route Handlers in `src/app/api/projects/`).
-3. Redeploy. Without env vars the UI still works; counts are optimistic in the browser only.
+Catalog copy stays in `src/lib/projects.ts`. Counts live in Postgres.
 
-Later you can add auth (Supabase Auth), per-user progress, and project detail pages without changing the catalog shape.
+**Setup**
+
+1. Create a [Supabase](https://supabase.com) project.
+2. In the SQL editor, run **both** files in order:
+   - `supabase/migrations/20260322120000_project_start_counts.sql`
+   - `supabase/migrations/20260322130000_site_analytics.sql`
+3. **Project settings → API** — copy URL, anon key, and **service role** key.
+4. **Local:** `.env.local` with `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (service role never ships to the browser).
+5. **Vercel:** same three variables on the production project → redeploy.
+
+Public totals appear in the site footer when any count is &gt; 0. APIs: `src/app/api/analytics/` and `src/app/api/projects/`.
+
+**Not included yet (add when you need them):** signed-in users, Vercel Web Analytics, email waitlist. Supabase Auth can reuse the same project for “join with account” later.
 
 ## Layout
 
@@ -165,7 +179,9 @@ Later you can add auth (Supabase Auth), per-user progress, and project detail pa
 | `src/components/` | Shared UI: `SiteHeader`, `SiteFooter`, `ThemeToggle`, `Breadcrumbs`, `TrackCard`, `SessionCard`, `HomeTabs` (the home page tab bar), the step flow (`flow/Flow.tsx`), the system map (`system/SystemMap.tsx`) and the guided lesson (`lesson/Lesson.tsx`) |
 | `src/components/session/ui.tsx` | Session controls: `useWalk` + `RunButton` for one walk through the steps, `usePlayback` + `PlaybackControls` for stepping through simulator frames, `Slider`, `Choices`, `Meter` |
 | `src/components/session/SessionHeader.tsx` | `SessionPage` (`max-w-6xl`) and `SessionHeader` (kicker, title, blurb) for live demos |
-| `src/components/session/SessionSplitLayout.tsx` | Side-by-side visual + panel from `lg` up; optional `detail` for the step flow below |
+| `src/lib/sessionLayout.ts` | The layout rule: a session's `shape` → one view, left to right, or top to bottom |
+| `src/components/session/SessionSplitLayout.tsx` | `SessionLayout`: arranges `visual`, `panel` and the step flow (`detail`) for the chosen layout |
+| `src/components/session/SessionLayoutContext.tsx` | Passes the layout from the session page to the demo; dev-only layout switcher |
 | `src/components/session/SessionControlBar.tsx` | Sticky run strip so Play / Generate stays reachable on long step flows |
 | `src/lib/realWorldTools.ts` | Per-session list of language-agnostic tools (Redis, NGINX, MCP, …) |
 | `src/components/session/RealWorldTools.tsx` | **In production** on session pages and aggregated on each track page (`/tracks/<track>#tools`) |
@@ -296,11 +312,98 @@ and which keys move), rolling deploys (replicas, probes, rollback), GitHub Actio
 workflow, jobs), the thread pool (main thread vs workers), and scheduled automations
 (clock, runner, missed run).
 
-For live system-map sessions, use **`SessionSplitLayout`** so the map stays visible while the reader scrolls the step flow. Put `<SystemMap chrome="split" … />` in `visual`, and **`SystemMapPanel`** in `panel` (one `aria-live` caption plus playback and any inputs that apply to the whole run). Put the `FlowStep` chain in `detail`. Wrap the page in **`SessionPage`** + **`SessionHeader`**. Reference: `/tracks/system-design/load-balancing`.
+For live system-map sessions, use **`SessionLayout`** (see "Choosing a session layout" below for how the page is arranged). Put `<SystemMap chrome="split" … />` in `visual`, and **`SystemMapPanel`** in `panel` (one `aria-live` caption plus playback and any inputs that apply to the whole run). Put the `FlowStep` chain in `detail`. Wrap the page in **`SessionPage`** + **`SessionHeader`**. Reference: `/tracks/system-design/load-balancing`.
 
-Long step-flow-only sessions (no system map) can keep a single column but should use **`SessionControlBar`** for the main run action and global toggles, and leave per-step sliders inside the step they change. Reference: `/tracks/ai/next-token`, `/tracks/dsa/sliding-window`.
+Step-flow-only sessions with no picture can keep a single column but should use **`SessionControlBar`** for the main run action and global toggles, wrap the chain in `FlowSequence`, and leave per-step sliders inside the step they change. Reference: `/tracks/ai/next-token`.
 
-Comparison layouts (Two Sum, containers vs VMs) use **`SessionPage`** + **`SessionHeader`** only; they keep their own tabs or side-by-side structure.
+Comparison layouts (Two Sum, containers vs VMs) keep their own tabs or side-by-side lanes inside **`SessionPage`** + **`SessionHeader`**, and must fit one view for up to three approaches.
+
+## Choosing a session layout
+
+Every live session is shown in one of three layouts. The author never picks one by
+feel: each session declares its **shape** in `src/lib/tracks.ts`, and
+`chooseLayout` in `src/lib/sessionLayout.ts` turns that shape into a layout. A new
+session follows the same rule for free, and `next build` fails if a live session
+has no shape.
+
+| Layout | What the reader sees | Good for |
+|---|---|---|
+| **One view** (`stage`) | The picture stays pinned on the left. The caption, the controls and the steps sit beside it. Every step title is visible; the active step opens, the rest fold. | A few repeating steps, one structure changing in place, a guided lesson, 2–3 approaches side by side |
+| **Left to right** (`rail`) | The picture and the panel sit side by side on top. The steps run sideways underneath, one card each, with ← / → and a step counter. On a phone it is a swipe carousel. | A pipeline: one input travels start → finish once (CI/CD, RAG-like chains, MCP, n8n, workflows) |
+| **Top to bottom** (`scroll`) | The picture and the panel stay pinned on the left; long steps read down the page on the right. | Many steps, or steps that each hold their own charts, tables, sliders or long text |
+
+Below 1024px every layout stacks in one column, in reading order, with no sideways
+page scroll (the rail scrolls inside itself).
+
+### The shape
+
+```ts
+{ id: "n8n", …, status: "live", shape: { kind: "system", steps: 5, flow: "pipeline" } }
+```
+
+| Field | Values | Meaning |
+|---|---|---|
+| `kind` | `system`, `process`, `algorithm`, `comparison`, `simulation` | Same as "Which visual to use" above |
+| `steps` | number | Flow steps, lesson chapters, or approaches in a comparison |
+| `flow` | `pipeline`, `cycle`, `state` | One trip start → finish, the same steps repeating, or one structure changing in place |
+| `richSteps` | boolean | Steps hold their own charts, tables, long text or sliders |
+| `layout` + `reason` | optional | Override the rule. A `reason` is required so the exception is written down |
+
+### The rule (first match wins)
+
+1. `layout` set by hand → use it.
+2. `simulation` → **one view** (a guided lesson).
+3. `comparison` → **one view** for up to 3 approaches, otherwise **left to right**.
+4. More than 6 steps → **top to bottom**.
+5. Rich steps and more than 4 of them → **top to bottom**.
+6. `pipeline` → **left to right**.
+7. Anything else (cycles, state) → **one view**.
+
+The limits (`STAGE_MAX_STEPS`, `RICH_MAX_STEPS`, `COMPARE_MAX_OPTIONS`) live at the top of
+`sessionLayout.ts`.
+
+### Building for it
+
+- Use **`SessionLayout`** (`src/components/session/SessionSplitLayout.tsx`) with `visual`,
+  `panel` and `detail`. It reads the layout from context, so the demo does not choose.
+  `SessionSplitLayout` is the old name for the same component.
+- Write the steps once as `FlowStep` / `FlowArrow` in `detail`. **`FlowSequence`** lays them
+  out top to bottom, folded, or as a rail. Keep steps and arrows as direct children or inside
+  fragments (`<Fragment key>`), not wrapped in a `div`, so it can find them.
+- Mark the running step with `active`. In one view the newly active step opens; in a rail it
+  scrolls into view. The reader can still open or scroll to any step.
+- A session with no system map still passes a `visual`: the state picture (array cells, a
+  range). Global controls (k, the target, Play) go in the `panel`.
+- A step-flow-only session with no picture (next token, structured output) wraps its chain in
+  `<FlowSequence>` directly, under its `SessionControlBar`.
+- Comparisons and guided lessons lay themselves out (`Lesson`, side-by-side lanes) and use
+  `<FlowSequence mode="stage">` for each lane's steps.
+
+**Try another layout locally:** in `pnpm dev`, every session shows a **Layout** switcher in the
+bottom-right corner with the rule's reason, or open the page with `?layout=stage|rail|scroll`.
+It never ships to production.
+
+| Session | Shape | Layout |
+|---|---|---|
+| Two Sum | comparison, 3 | One view |
+| Sliding window | algorithm, 5, state | One view |
+| Binary search | algorithm, 4, state | One view |
+| Event loop | system, 6, cycle | One view |
+| Streams and backpressure | system, 4, cycle, rich | One view |
+| Load balancing | system, 3, cycle, rich | One view |
+| Caching | simulation, 10 | One view |
+| Containers vs VMs | comparison, 2 | One view |
+| CI/CD pipeline | system, 5, pipeline | Left to right |
+| Embeddings | process, 4, pipeline, rich | Left to right |
+| Structured output | process, 4, pipeline, rich | Left to right |
+| Tool calling | system, 5, pipeline | Left to right |
+| Email workflow | system, 5, pipeline | Left to right |
+| Human approval | system, 4, pipeline | Left to right |
+| MCP | system, 6, pipeline | Left to right |
+| n8n | system, 5, pipeline | Left to right |
+| Next token | process, 8, cycle, rich | Top to bottom |
+| RAG | system, 6, pipeline, rich | Top to bottom |
+| Coding agent loop | system, 5, cycle, rich | Top to bottom |
 
 ## Guided lessons
 
@@ -336,8 +439,8 @@ Reference implementation: `/tracks/system-design/caching`.
    If things move between parts of a system, add a system map above it, driven by the same stage
    (see "Showing the system" and "Which visual to use"). If the reader should predict and break a running system, use a guided lesson instead.
    Use colour tokens, not hex, so it works in light and dark mode.
-3. Register it in `src/sessions/registry.tsx`, set the session's `status: "live"` in
-   `src/lib/tracks.ts`, and add it to the Pages table above. The route
+3. Register it in `src/sessions/registry.tsx`, set the session's `status: "live"` and its
+   `shape` in `src/lib/tracks.ts` (see "Choosing a session layout"), and add it to the Pages table above. The route
    `/tracks/<track>/<session>` and the previous/next links come for free.
 4. Add an **In production** entry in `src/lib/realWorldTools.ts`: name real services and
    standards (Redis, NGINX, JSON Schema), not language-specific libraries. Each tool needs

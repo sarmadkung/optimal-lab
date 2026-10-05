@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FlowArrow, FlowStep } from "@/components/flow/Flow";
+import { FlowArrow, FlowSequence, FlowStep } from "@/components/flow/Flow";
 import { useWalk } from "@/components/session/ui";
 import { SessionControlBar } from "@/components/session/SessionControlBar";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
@@ -44,6 +44,7 @@ export default function StructuredDemo() {
       </SessionControlBar>
 
       <div className="mt-6">
+        <FlowSequence accent={ACCENT}>
         <FlowStep n={1} title="Ask for the facts" what="The question is ordinary. The constraint comes next." accent={ACCENT} active={stage === 0}>
           <p>{QUESTION}</p>
         </FlowStep>
@@ -90,6 +91,7 @@ export default function StructuredDemo() {
           </p>
           <p className="mt-2 text-xs text-[var(--faint)]">Use Generate in the bar above to walk the steps.</p>
         </FlowStep>
+        </FlowSequence>
       </div>
     </SessionPage>
   );

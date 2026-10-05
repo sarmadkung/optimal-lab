@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { FlowArrow, FlowStep } from "@/components/flow/Flow";
+import { FlowArrow, FlowSequence, FlowStep } from "@/components/flow/Flow";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
 import { SessionControlBar } from "@/components/session/SessionControlBar";
 import { decode, pct, sample, type Candidate } from "@/lib/sampling";
@@ -150,6 +150,7 @@ export default function NextTokenDemo() {
       </div>
 
       <div className="mt-6">
+        <FlowSequence accent="var(--ai)">
         {/* 1 */}
         <FlowStep n={1} title="Read the text so far" what="The prompt and everything written so far go in." active={on(0)}>
           <p className="font-mono text-xs text-[var(--faint)]">prompt</p>
@@ -424,6 +425,7 @@ export default function NextTokenDemo() {
 
           <p className="mt-4 font-mono text-xs text-[var(--faint)]">↺ back to step 1 with the new text</p>
         </FlowStep>
+        </FlowSequence>
       </div>
 
       <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Onboarding from "@/components/Onboarding";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import VisitTracker from "@/components/VisitTracker";
 import { THEME_SCRIPT } from "@/lib/theme";
 
 const geistSans = Geist({
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </div>
         <SiteFooter />
+        <VisitTracker />
         <Onboarding />
       </body>
     </html>

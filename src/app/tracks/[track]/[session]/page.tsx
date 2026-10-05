@@ -3,14 +3,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { RealWorldTools } from "@/components/session/RealWorldTools";
+import { SessionLayoutProvider } from "@/components/session/SessionLayoutContext";
 import { TrackLearningPath } from "@/components/session/TrackLearningPath";
-import { TRACKS, getSession, neighbours, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
+import { TRACKS, getSession, layoutFor, neighbours, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
 import { sessionDemo } from "@/sessions/registry";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return TRACKS.flatMap((t) => t.sessions.map((s) => ({ track: t.id, session: s.id })));
+  return TRACKS.flatMap((t) =>
+    t.sessions.map((s) => {
+      // Fails the build when a live session has not declared its shape.
+      if (s.status === "live") layoutFor(t, s);
+      return { track: t.id, session: s.id };
+    }),
+  );
 }
 
 export async function generateMetadata(props: PageProps<"/tracks/[track]/[session]">): Promise<Metadata> {
@@ -27,6 +34,7 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
 
   const demo = session.status === "live" ? sessionDemo(track.id, session.id) : undefined;
   const { prev, next } = neighbours(track, session.id);
+  const layout = demo ? layoutFor(track, session) : undefined;
 
   return (
     <main style={{ "--accent": track.accent } as React.CSSProperties}>
@@ -40,9 +48,16 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
         />
       </div>
 
-      {session.status === "live" ? <TrackLearningPath trackId={track.id} sessionId={session.id} /> : null}
+      {demo && layout ? (
+        <SessionLayoutProvider mode={layout.mode} why={layout.why}>
+          {demo}
+        </SessionLayoutProvider>
+      ) : (
+        <ComingSoon track={track} session={session} />
+      )}
 
-      {demo ?? <ComingSoon track={track} session={session} />}
+      {/* Where this session sits in the track. Below the demo, so the demo starts in the first screen. */}
+      {session.status === "live" ? <TrackLearningPath trackId={track.id} sessionId={session.id} /> : null}
 
       {session.status === "live" ? <RealWorldTools trackId={track.id} sessionId={session.id} /> : null}
 

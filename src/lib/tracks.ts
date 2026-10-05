@@ -4,6 +4,8 @@
 // To add a visual: build it in src/sessions/<track>/<session>/, register it in
 // src/sessions/registry.tsx, then set the session's status to "live" here.
 
+import { chooseLayout, type LayoutDecision, type SessionShape } from "./sessionLayout";
+
 export type SessionStatus = "live" | "soon";
 
 export type Session = {
@@ -12,6 +14,12 @@ export type Session = {
   blurb: string;
   status: SessionStatus;
   tag?: string; // small label, e.g. "DSA #01"
+  /**
+   * What the session contains. Required once a session is live: the layout
+   * (one view, left to right, top to bottom) is chosen from it by
+   * `chooseLayout` in src/lib/sessionLayout.ts.
+   */
+  shape?: SessionShape;
 };
 
 export type Track = {
@@ -41,9 +49,12 @@ export const TRACKS: Track[] = [
         title: "Two Sum, three ways",
         blurb: "Step through brute force, two pointers and a hash map. Then scale n and see the gap.",
         status: "live",
+        shape: { kind: "comparison", steps: 3 },
       },
-      { id: "sliding-window", title: "Sliding window", blurb: "Slide a fixed window and watch each step add one cell and drop one.", status: "live" },
-      { id: "binary-search", title: "Binary search", blurb: "Halve the search space and see why it takes log n steps.", status: "live" },
+      { id: "sliding-window", title: "Sliding window", blurb: "Slide a fixed window and watch each step add one cell and drop one.", status: "live",
+        shape: { kind: "algorithm", steps: 5, flow: "state" } },
+      { id: "binary-search", title: "Binary search", blurb: "Halve the search space and see why it takes log n steps.", status: "live",
+        shape: { kind: "algorithm", steps: 4, flow: "state" } },
       { id: "bfs-vs-dfs", title: "BFS vs DFS", blurb: "Run both on the same graph and compare the order they visit nodes.", status: "soon" },
     ],
     roadmap: ["Arrays & hashing", "Two pointers & sliding window", "Stacks, queues & linked lists", "Trees & graphs", "Dynamic programming"],
@@ -56,8 +67,10 @@ export const TRACKS: Track[] = [
     tagline: "See what really happens inside the runtime when your code runs.",
     accent: "var(--node)",
     sessions: [
-      { id: "event-loop", title: "The event loop, phase by phase", blurb: "Queue timers, promises and I/O, then step through each loop phase.", status: "live" },
-      { id: "streams-backpressure", title: "Streams and backpressure", blurb: "Push data faster than it drains and watch the buffer fill.", status: "live" },
+      { id: "event-loop", title: "The event loop, phase by phase", blurb: "Queue timers, promises and I/O, then step through each loop phase.", status: "live",
+        shape: { kind: "system", steps: 6, flow: "cycle" } },
+      { id: "streams-backpressure", title: "Streams and backpressure", blurb: "Push data faster than it drains and watch the buffer fill.", status: "live",
+        shape: { kind: "system", steps: 4, flow: "cycle", richSteps: true } },
       { id: "thread-pool", title: "The libuv thread pool", blurb: "Fire file and crypto work and see which calls block the pool.", status: "soon" },
     ],
     roadmap: ["Runtime & V8 basics", "Event loop & async", "Streams & buffers", "Workers & clustering", "Profiling & performance"],
@@ -70,8 +83,10 @@ export const TRACKS: Track[] = [
     tagline: "Push traffic through real architectures and watch where they break.",
     accent: "var(--sys)",
     sessions: [
-      { id: "load-balancing", title: "Load balancing strategies", blurb: "Compare round robin and least connections under uneven load.", status: "live" },
-      { id: "caching", title: "Caching and eviction", blurb: "Watch a cache hit, miss and evict, then predict the next request.", status: "live" },
+      { id: "load-balancing", title: "Load balancing strategies", blurb: "Queues, health checks, and timeouts — not just which server is next.", status: "live",
+        shape: { kind: "system", steps: 4, flow: "cycle", richSteps: true } },
+      { id: "caching", title: "Caching and eviction", blurb: "Watch a cache hit, miss and evict, then predict the next request.", status: "live",
+        shape: { kind: "simulation", steps: 10 } },
       { id: "consistent-hashing", title: "Consistent hashing", blurb: "Add and remove nodes and see how few keys move.", status: "soon" },
     ],
     roadmap: ["Scaling basics", "Caching & CDNs", "Databases, replication & sharding", "Queues & async work", "Designing for failure"],
@@ -84,8 +99,10 @@ export const TRACKS: Track[] = [
     tagline: "Ship, scale and recover. See every step of the pipeline move.",
     accent: "var(--ops)",
     sessions: [
-      { id: "ci-cd-pipeline", title: "A CI/CD pipeline, stage by stage", blurb: "Break a test or a build and see where the pipeline stops.", status: "live" },
-      { id: "containers-vs-vms", title: "Containers vs virtual machines", blurb: "Start a container, then boot a VM, and see what each one shares.", status: "live" },
+      { id: "ci-cd-pipeline", title: "A CI/CD pipeline, stage by stage", blurb: "Break a test or a build and see where the pipeline stops.", status: "live",
+        shape: { kind: "system", steps: 5, flow: "pipeline" } },
+      { id: "containers-vs-vms", title: "Containers vs virtual machines", blurb: "Start a container, then boot a VM, and see what each one shares.", status: "live",
+        shape: { kind: "comparison", steps: 2 } },
       { id: "rolling-deploys", title: "Kubernetes rolling deploys", blurb: "Roll out a bad version and watch probes and rollback kick in.", status: "soon" },
     ],
     roadmap: ["Linux & networking", "Containers & Docker", "CI/CD", "Kubernetes", "Observability & incidents"],
@@ -106,9 +123,12 @@ export const TRACKS: Track[] = [
         title: "How an LLM picks the next token",
         blurb: "Drag temperature, top-k and top-p. Watch the odds move, then sample.",
         status: "live",
+        shape: { kind: "process", steps: 8, flow: "cycle", richSteps: true },
       },
-      { id: "embeddings", title: "Embeddings and similarity search", blurb: "Move a query in vector space and see which notes come back.", status: "live" },
-      { id: "rag", title: "RAG, step by step", blurb: "Chunk, retrieve and prompt, and see what the model actually gets.", status: "live" },
+      { id: "embeddings", title: "Embeddings and similarity search", blurb: "Move a query in vector space and see which notes come back.", status: "live",
+        shape: { kind: "process", steps: 4, flow: "pipeline", richSteps: true } },
+      { id: "rag", title: "RAG, step by step", blurb: "Chunk, retrieve and prompt, and see what the model actually gets.", status: "live",
+        shape: { kind: "system", steps: 6, flow: "pipeline", richSteps: true } },
     ],
     roadmap: ["How LLMs work", "Prompting & sampling", "Embeddings & retrieval", "Agents & tools", "Evaluation"],
     projects: ["Build a RAG chatbot over your docs", "Build a tool-using agent", "Write an eval harness"],
@@ -125,12 +145,14 @@ export const TRACKS: Track[] = [
         title: "Force valid JSON",
         blurb: "Turn a schema on and watch illegal tokens get refused.",
         status: "live",
+        shape: { kind: "process", steps: 4, flow: "pipeline", richSteps: true },
       },
       {
         id: "tool-calling",
         title: "Call a tool, then answer",
         blurb: "Give the model a weather tool, then take it away and watch it guess.",
         status: "live",
+        shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
       {
         id: "evals",
@@ -154,12 +176,14 @@ export const TRACKS: Track[] = [
         title: "One item through a workflow",
         blurb: "Send three different emails down the same path and watch the branch change.",
         status: "live",
+        shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
       {
         id: "human-approval",
         title: "Pause for a person",
         blurb: "Draft a refund, then approve or reject it before anything is sent.",
         status: "live",
+        shape: { kind: "system", steps: 4, flow: "pipeline" },
       },
       {
         id: "schedules",
@@ -183,18 +207,21 @@ export const TRACKS: Track[] = [
         title: "A coding agent's loop",
         blurb: "Watch search, edit, and a check repeat until the test passes.",
         status: "live",
+        shape: { kind: "system", steps: 5, flow: "cycle", richSteps: true },
       },
       {
         id: "mcp",
         title: "MCP: tools the model can call",
         blurb: "A server lists tools. The app forwards the one the model picks.",
         status: "live",
+        shape: { kind: "system", steps: 6, flow: "pipeline" },
       },
       {
         id: "n8n",
         title: "An n8n workflow, node by node",
         blurb: "Cross a threshold and see the run switch from email to Slack.",
         status: "live",
+        shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
       {
         id: "github-actions",
@@ -242,3 +269,18 @@ export const liveCount = (t: Track) => t.sessions.filter((s) => s.status === "li
 
 // the first live session in a track: where its "Start" button goes
 export const firstLive = (t: Track) => t.sessions.find((s) => s.status === "live");
+
+/**
+ * The layout for a live session, from its declared `shape`.
+ * Throws for a live session with no shape, so `next build` fails until the
+ * author says what the session contains.
+ */
+export const layoutFor = (track: Track, session: Session): LayoutDecision => {
+  if (!session.shape) {
+    throw new Error(
+      `Session ${track.id}/${session.id} is live but has no \`shape\` in src/lib/tracks.ts. ` +
+        'Add one (kind, steps, flow, richSteps) so its layout can be chosen. See "Choosing a session layout" in README.md.',
+    );
+  }
+  return chooseLayout(session.shape);
+};

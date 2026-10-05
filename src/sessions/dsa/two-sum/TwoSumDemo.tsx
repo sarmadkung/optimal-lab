@@ -3,6 +3,7 @@
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
+import { SessionLayout } from "@/components/session/SessionSplitLayout";
 import { APPROACHES, TARGET, TRACES, growth, type Approach } from "@/lib/twoSum";
 
 const SIZES = [8, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000];
@@ -52,8 +53,12 @@ export default function TwoSumDemo() {
         blurb={`DSA is not about writing code. It is about spotting the pattern and knowing more than one way to solve it. Here is the classic example: find two numbers that add up to ${TARGET}.`}
       />
 
+      <div className="mt-8">
+        <SessionLayout
+          visual={
+            <>
       {/* approach tabs */}
-      <div className="mt-8 grid gap-2 sm:grid-cols-3">
+      <div className="grid gap-2 sm:grid-cols-3">
         {APPROACHES.map((a) => {
           const active = a.id === approach;
           return (
@@ -247,8 +252,12 @@ export default function TwoSumDemo() {
         </p>
       </section>
 
+            </>
+          }
+          panel={
+            <>
       {/* small-n surprise */}
-      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
+      <section className="rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
         <h2 className="font-semibold">Checks to find the answer in these 8 numbers</h2>
         <ul className="mt-4 space-y-2">
           {APPROACHES.map((a) => {
@@ -280,7 +289,7 @@ export default function TwoSumDemo() {
       </section>
 
       {/* growth */}
-      <section className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
+      <section className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-5">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 className="font-semibold">Now make the input bigger</h2>
           <p className="font-mono text-xs text-[var(--faint)]">log scale · 1 check = 1 ns</p>
@@ -332,6 +341,10 @@ export default function TwoSumDemo() {
           about a millisecond. Knowing the pattern is what lets you pick.
         </p>
       </section>
+            </>
+          }
+        />
+      </div>
     </SessionPage>
   );
 }

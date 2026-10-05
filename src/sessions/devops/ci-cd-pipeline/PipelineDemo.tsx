@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { Choices, RunButton, wait } from "@/components/session/ui";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
@@ -142,7 +142,7 @@ export default function PipelineDemo() {
           const copy =
             state === "fail" ? stage.fail : state === "skip" ? "Skipped. An earlier stage failed." : state === "pass" ? stage.pass : stage.pass;
           return (
-            <div key={stage.id}>
+            <Fragment key={stage.id}>
               <FlowStep
                 n={index + 2}
                 title={stage.title}
@@ -164,7 +164,7 @@ export default function PipelineDemo() {
               {index < STAGES.length - 1 && (
                 <FlowArrow label={state === "fail" ? "stopped" : "next stage"} accent={ACCENT} active={cursor === index + 1} />
               )}
-            </div>
+            </Fragment>
           );
         })}
             </>

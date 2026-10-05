@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { FlowArrow, FlowStep } from "@/components/flow/Flow";
 import { RunButton, wait } from "@/components/session/ui";
 import { SessionHeader, SessionPage } from "@/components/session/SessionHeader";
@@ -126,7 +126,7 @@ export default function AgentLoopDemo() {
           detail={
             <>
         {STEPS.map((step, index) => (
-          <div key={step.title}>
+          <Fragment key={step.title}>
             <FlowStep n={index + 1} title={step.title} what={step.what} accent={ACCENT} active={stage === index}>
               {index === 0 && (
                 <p className="text-xs text-[var(--faint)]">Toggle the first-check behaviour in the panel.</p>
@@ -155,7 +155,7 @@ export default function AgentLoopDemo() {
             {index < STEPS.length - 1 && (
               <FlowArrow label={index === 3 ? "check result" : "next"} accent={ACCENT} active={stage === index + 1} />
             )}
-          </div>
+          </Fragment>
         ))}
             </>
           }

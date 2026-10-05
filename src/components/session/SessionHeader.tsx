@@ -18,5 +18,5 @@ export function SessionHeader({ kicker, title, blurb }: Props) {
 
 /** Shared width and padding for interactive session pages with a split visual. */
 export function SessionPage({ children }: { children: ReactNode }) {
-  return <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-12">{children}</div>;
+  return <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:py-8">{children}</div>;
 }

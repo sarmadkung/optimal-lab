@@ -43,7 +43,7 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
   "system-design/load-balancing": {
     lead: "Load balancers sit between clients and your app tier regardless of how the backends are written.",
     tools: [
-      { name: "NGINX", kind: "software", note: "Reverse proxy with round robin, least connections, health checks.", href: "https://nginx.org/" },
+      { name: "NGINX", kind: "software", note: "Reverse proxy with round robin, least connections, weighted upstreams, and health checks.", href: "https://nginx.org/" },
       { name: "HAProxy", kind: "software", note: "L4/L7 balancing and observability for large deployments.", href: "https://www.haproxy.org/" },
       { name: "Envoy", kind: "software", note: "Service mesh data plane; advanced routing and retries.", href: "https://envoyproxy.io/" },
       { name: "AWS Application Load Balancer", kind: "platform", note: "Managed HTTP balancing with target groups.", href: "https://aws.amazon.com/elasticloadbalancing/" },

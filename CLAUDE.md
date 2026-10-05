@@ -6,6 +6,7 @@
 - Any visual that explains how something works step by step must use the step flow: top-to-bottom steps with an arrow between each. Follow "Explaining a process: the step flow" in README.md and use `src/components/flow/Flow.tsx`.
 - Any visual where requests or data move between parts of a real system (load balancer, cache, database, model, tool server, pipeline) must add a system map above the step flow, with the request animated hop by hop. Follow "Showing the system: the system map" in README.md and use `src/components/system/SystemMap.tsx`.
 - A simulation the reader should predict and break uses a guided lesson: one live stage, one chapter at a time, then a playground. Follow "Guided lessons" in README.md and use `src/components/lesson/Lesson.tsx`.
+- Every live session declares a `shape` in `src/lib/tracks.ts`; the layout (one view, left to right, top to bottom) is chosen from it by `src/lib/sessionLayout.ts`. Build with `SessionLayout` + `FlowSequence`. Follow "Choosing a session layout" in README.md.
 - Live sessions include an **In production** section: language-agnostic tools (Redis, NGINX, MCP, …) from `src/lib/realWorldTools.ts`, rendered by `RealWorldTools` on session and track pages. Do not tie examples to one programming language. Every tool entry requires an official **`href`** (website or GitHub repo).
 
 ## Related repositories

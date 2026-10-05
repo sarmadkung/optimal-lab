@@ -11,6 +11,9 @@ export function useWalk(steps: number, ms = 420) {
   const cancel = useRef(false);
 
   useEffect(() => {
+    // Reset on mount too: React Strict Mode (dev) mounts, unmounts and mounts again,
+    // and a flag left at true would cancel every later run.
+    cancel.current = false;
     return () => {
       cancel.current = true;
     };
