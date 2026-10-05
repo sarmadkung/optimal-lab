@@ -109,8 +109,8 @@ export default function EmbeddingsDemo() {
               <FlowStep n={4} title="Hand those notes onward" what="Search stops here. RAG is what pastes the retrieved chunks into a prompt for the model." accent={ACCENT} active={stage === 3}>
                 <p className="text-sm text-[var(--muted)]">
                   Next in this track:{" "}
-                  <Link href="/tracks/ai/rag" className="text-[var(--accent)] hover:underline">
-                    RAG, step by step →
+                  <Link href="/tracks/ai/hybrid-search" className="text-[var(--accent)] hover:underline">
+                    Hybrid search and reranking →
                   </Link>
                 </p>
               </FlowStep>

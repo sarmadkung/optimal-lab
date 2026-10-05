@@ -66,9 +66,14 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/system-design/caching` | A guided cache: hits, misses, eviction, three predictions, then a playground | — |
 | `/tracks/devops/ci-cd-pipeline` | Lint, test, build, deploy — stop at the first failure | — |
 | `/tracks/devops/containers-vs-vms` | Start a container, or boot a virtual machine | — |
+| `/tracks/ai/tokenization` | Train a tiny BPE tokenizer merge by merge, then tokenize your own text | — |
+| `/tracks/ai/attention` | One attention head: query, key, value, score, scale, mask, softmax, blend | — |
 | `/tracks/ai/next-token` | How an LLM picks the next token: logits, softmax, temperature, top-k, top-p, sampling | social-content AI Engineering #02 |
+| `/tracks/ai/context-window` | A long chat fills the window: trimming strategies, max_tokens and prompt caching cost | — |
 | `/tracks/ai/embeddings` | Cosine similarity: move a query and see which notes return | — |
+| `/tracks/ai/hybrid-search` | BM25 + vector search, Reciprocal Rank Fusion, then a reranker | — |
 | `/tracks/ai/rag` | Chunk, retrieve, paste into the prompt, answer only from that | — |
+| `/tracks/ai/evals` | Two prompt versions graded by code checks and an LLM judge, checked against people | — |
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
@@ -390,7 +395,7 @@ It never ships to production.
 | Binary search | algorithm, 4, state | One view |
 | Event loop | system, 6, cycle | One view |
 | Streams and backpressure | system, 4, cycle, rich | One view |
-| Load balancing | system, 3, cycle, rich | One view |
+| Load balancing | system, 4, cycle, rich | One view |
 | Caching | simulation, 10 | One view |
 | Containers vs VMs | comparison, 2 | One view |
 | CI/CD pipeline | system, 5, pipeline | Left to right |
@@ -401,6 +406,11 @@ It never ships to production.
 | Human approval | system, 4, pipeline | Left to right |
 | MCP | system, 6, pipeline | Left to right |
 | n8n | system, 5, pipeline | Left to right |
+| Tokenization | algorithm, 5, state | One view |
+| Context window | process, 6, cycle | One view |
+| Hybrid search | system, 5, pipeline | Left to right |
+| Attention | process, 6, pipeline, rich | Top to bottom |
+| Evals | process, 6, pipeline, rich | Top to bottom |
 | Next token | process, 8, cycle, rich | Top to bottom |
 | RAG | system, 6, pipeline, rich | Top to bottom |
 | Coding agent loop | system, 5, cycle, rich | Top to bottom |

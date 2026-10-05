@@ -2,9 +2,14 @@
 // A session in src/lib/tracks.ts with status "live" must have an entry here.
 
 import type { ReactNode } from "react";
+import AttentionDemo from "./ai/attention/AttentionDemo";
+import ContextWindowDemo from "./ai/context-window/ContextWindowDemo";
 import EmbeddingsDemo from "./ai/embeddings/EmbeddingsDemo";
+import EvalsDemo from "./ai/evals/EvalsDemo";
+import HybridSearchDemo from "./ai/hybrid-search/HybridSearchDemo";
 import NextTokenDemo from "./ai/next-token/NextTokenDemo";
 import RagDemo from "./ai/rag/RagDemo";
+import TokenizationDemo from "./ai/tokenization/TokenizationDemo";
 import WorkflowDemo from "./ai-automation/workflow/WorkflowDemo";
 import ApprovalDemo from "./ai-automation/human-approval/ApprovalDemo";
 import StructuredDemo from "./ai-native/structured-output/StructuredDemo";
@@ -32,9 +37,14 @@ const SESSIONS: Record<string, ReactNode> = {
   "system-design/caching": <CachingDemo />,
   "devops/ci-cd-pipeline": <PipelineDemo />,
   "devops/containers-vs-vms": <ContainersDemo />,
+  "ai/tokenization": <TokenizationDemo />,
+  "ai/attention": <AttentionDemo />,
   "ai/next-token": <NextTokenDemo />,
+  "ai/context-window": <ContextWindowDemo />,
   "ai/embeddings": <EmbeddingsDemo />,
+  "ai/hybrid-search": <HybridSearchDemo />,
   "ai/rag": <RagDemo />,
+  "ai/evals": <EvalsDemo />,
   "ai-native/structured-output": <StructuredDemo />,
   "ai-native/tool-calling": <ToolCallDemo />,
   "ai-automation/workflow": <WorkflowDemo />,

@@ -434,8 +434,8 @@ export default function NextTokenDemo() {
       </p>
       <p className="mt-3 text-sm text-[var(--muted)]">
         Next in this track:{" "}
-        <Link href="/tracks/ai/embeddings" className="font-medium text-[var(--accent)] hover:underline">
-          Embeddings and similarity search →
+        <Link href="/tracks/ai/context-window" className="font-medium text-[var(--accent)] hover:underline">
+          The context window, turn by turn →
         </Link>
       </p>
     </SessionPage>
