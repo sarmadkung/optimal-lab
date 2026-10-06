@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Onboarding from "@/components/Onboarding";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import VisitTracker from "@/components/VisitTracker";
@@ -53,7 +52,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </div>
         <SiteFooter />
         <VisitTracker />
-        <Onboarding />
       </body>
     </html>
   );

@@ -13,6 +13,7 @@ const SITE_LINKS = [
     label: "All tracks",
     match: (path: string) => path === "/tracks" || path.startsWith("/tracks/"),
   },
+  { href: "/practice", label: "Practice", match: (path: string) => path.startsWith("/practice") },
 ] as const;
 
 export default function SiteHeader() {

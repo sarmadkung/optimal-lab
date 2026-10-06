@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PROBLEM_COUNT, TOPICS, practiceHref } from "@/lib/practice";
 import HomeTabs from "@/components/HomeTabs";
 import ProjectCatalog from "@/components/ProjectCatalog";
 import TrackCard from "@/components/TrackCard";
@@ -85,17 +86,28 @@ export default function Home() {
             {
               id: "practice",
               label: "Practice",
+              count: PROBLEM_COUNT,
               content: (
-                <TabPanel hint="DSA problems by pattern, linked to the sessions that teach each pattern." soon>
-                  <div className="rounded-xl border border-dashed border-[var(--line)] px-5 py-8 text-center">
-                    <p className="text-sm text-[var(--muted)]">The editor is not live yet.</p>
-                    <Link
-                      href="/tracks/dsa"
-                      className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-[var(--line-strong)] px-4 text-sm transition-colors hover:border-[var(--accent)]"
-                    >
-                      Browse DSA sessions instead →
-                    </Link>
-                  </div>
+                <TabPanel hint={`${PROBLEM_COUNT} DSA problems by pattern, each linked to the session that teaches it.`}>
+                  <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                    {TOPICS.filter((t) => t.sessions.length).map((t) => (
+                      <li key={t.slug}>
+                        <Link
+                          href={practiceHref(t)}
+                          className="flex min-h-11 items-center justify-between gap-2 rounded-lg border border-[var(--line)] bg-[var(--panel)] px-4 py-3 text-sm transition-colors hover:border-[var(--dsa)]"
+                        >
+                          <span className="font-medium">{t.title}</span>
+                          <span className="font-mono text-xs text-[var(--faint)]">{t.problems.length} problems</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/practice"
+                    className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-[var(--line-strong)] px-4 text-sm transition-colors hover:border-[var(--dsa)]"
+                  >
+                    All {TOPICS.length} patterns →
+                  </Link>
                 </TabPanel>
               ),
             },

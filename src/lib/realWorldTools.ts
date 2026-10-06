@@ -68,6 +68,62 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Reactive Streams", kind: "standard", note: "Publisher / subscriber contract for demand-driven flow.", href: "https://www.reactive-streams.org/" },
     ],
   },
+  "system-design/cdn": {
+    lead: "Every CDN works the same way: edges near users, a cache with a TTL, and a way to purge.",
+    tools: [
+      { name: "Cloudflare CDN", kind: "service", note: "Reverse-proxy CDN in hundreds of cities; purge by URL, tag or everything.", href: "https://www.cloudflare.com/application-services/products/cdn/" },
+      { name: "Amazon CloudFront", kind: "service", note: "AWS's CDN with invalidations and cache policies.", href: "https://aws.amazon.com/cloudfront/" },
+      { name: "Fastly", kind: "service", note: "Programmable edge cache with near-instant purge.", href: "https://www.fastly.com/products/cdn" },
+      { name: "Varnish Cache", kind: "software", note: "The open-source HTTP cache many CDNs grew from.", href: "https://github.com/varnishcache/varnish-cache" },
+      { name: "HTTP Cache-Control", kind: "standard", note: "max-age, s-maxage and immutable decide how long edges keep a copy.", href: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" },
+    ],
+  },
+  "system-design/rate-limiting": {
+    lead: "Rate limits live in the gateway in front of your API, with counters in a shared store.",
+    tools: [
+      { name: "Redis", kind: "software", note: "INCR and EXPIRE make a shared counter every gateway can see.", href: "https://github.com/redis/redis" },
+      { name: "Envoy rate limit service", kind: "software", note: "Global rate limiting for Envoy and Istio, backed by Redis.", href: "https://github.com/envoyproxy/ratelimit" },
+      { name: "NGINX limit_req", kind: "software", note: "Leaky-bucket request limiting in the web server.", href: "https://nginx.org/" },
+      { name: "Kong Gateway", kind: "software", note: "API gateway with rate-limiting plugins per consumer.", href: "https://github.com/Kong/kong" },
+      { name: "HTTP 429", kind: "standard", note: "Too Many Requests, with a Retry-After header.", href: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429" },
+    ],
+  },
+  "system-design/replication": {
+    lead: "Every major database ships leader–follower replication; the knobs are sync vs async and where reads go.",
+    tools: [
+      { name: "PostgreSQL streaming replication", kind: "software", note: "WAL shipped to standbys; synchronous_commit picks sync or async.", href: "https://github.com/postgres/postgres" },
+      { name: "MySQL replication", kind: "software", note: "Binlog replication, with semi-synchronous mode.", href: "https://github.com/mysql/mysql-server" },
+      { name: "Amazon RDS read replicas", kind: "service", note: "Managed async replicas and Multi-AZ failover.", href: "https://aws.amazon.com/rds/" },
+      { name: "MongoDB replica sets", kind: "software", note: "Write concern and read preference control durability and staleness.", href: "https://github.com/mongodb/mongo" },
+    ],
+  },
+  "system-design/sharding": {
+    lead: "When one database is too big, these systems split it by a shard key and route queries for you.",
+    tools: [
+      { name: "Vitess", kind: "software", note: "Sharding layer for MySQL, born at YouTube.", href: "https://github.com/vitessio/vitess" },
+      { name: "Citus", kind: "software", note: "Distributed PostgreSQL: pick a distribution column, queries fan out.", href: "https://github.com/citusdata/citus" },
+      { name: "CockroachDB", kind: "software", note: "Range-sharded SQL that splits and moves ranges automatically.", href: "https://github.com/cockroachdb/cockroach" },
+      { name: "MongoDB sharding", kind: "software", note: "Hashed or ranged shard keys, with a router (mongos).", href: "https://github.com/mongodb/mongo" },
+    ],
+  },
+  "system-design/message-queues": {
+    lead: "Queues decouple producers from consumers in every stack; the delivery guarantees are what differ.",
+    tools: [
+      { name: "Amazon SQS", kind: "service", note: "Visibility timeout, at-least-once delivery, dead-letter queues.", href: "https://aws.amazon.com/sqs/" },
+      { name: "RabbitMQ", kind: "software", note: "Acks, redelivery and dead-letter exchanges.", href: "https://github.com/rabbitmq/rabbitmq-server" },
+      { name: "Apache Kafka", kind: "software", note: "A replicated log; consumers commit offsets after processing.", href: "https://github.com/apache/kafka" },
+      { name: "Redis Streams", kind: "software", note: "Consumer groups with pending entries and claims.", href: "https://github.com/redis/redis" },
+    ],
+  },
+  "system-design/circuit-breaker": {
+    lead: "Timeouts, retries with backoff and circuit breakers are built into service meshes and resilience libraries.",
+    tools: [
+      { name: "Envoy", kind: "software", note: "Retry policies, timeouts and outlier detection between services.", href: "https://github.com/envoyproxy/envoy" },
+      { name: "Istio", kind: "platform", note: "Service mesh that configures Envoy's retries and circuit breaking.", href: "https://github.com/istio/istio" },
+      { name: "Resilience4j", kind: "software", note: "Circuit breaker, retry and bulkhead for JVM services.", href: "https://github.com/resilience4j/resilience4j" },
+      { name: "CircuitBreaker (Martin Fowler)", kind: "standard", note: "The classic write-up of the pattern and its three states.", href: "https://martinfowler.com/bliki/CircuitBreaker.html" },
+    ],
+  },
   "devops/ci-cd-pipeline": {
     lead: "The same lint → test → build → deploy gates run in CI products and self-hosted runners.",
     tools: [
@@ -171,6 +227,90 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Ragas", kind: "software", note: "Metrics for RAG: faithfulness, answer relevance, context recall.", href: "https://github.com/explodinggradients/ragas" },
       { name: "Braintrust", kind: "platform", note: "Hosted evals, scoring and experiment comparison.", href: "https://www.braintrust.dev/" },
       { name: "LangSmith", kind: "platform", note: "Tracing, datasets and evaluators for LLM apps.", href: "https://www.langchain.com/langsmith" },
+    ],
+  },
+  "dsa/hash-map": {
+    lead: "Grouping by a computed key is how databases and data tools group rows, not just an interview trick.",
+    tools: [
+      { name: "Optimal Round: arrays & hashing", kind: "software", note: "19 problems to practise this pattern, with a test runner.", href: "https://github.com/sarmadkung/optimal-round/tree/main/problems/01-arrays-hashing" },
+      { name: "Redis hashes", kind: "service", note: "A hash map per key, served over the network.", href: "https://github.com/redis/redis" },
+      { name: "SQL GROUP BY", kind: "standard", note: "Databases group rows with a hash table on the grouping key.", href: "https://www.postgresql.org/docs/current/queries-table-expressions.html" },
+    ],
+  },
+  "dsa/two-pointers": {
+    lead: "Two indices walking a sorted sequence is how merge joins and merge sort combine data.",
+    tools: [
+      { name: "Optimal Round: two pointers", kind: "software", note: "Explainer plus 15 problems to practise, with a test runner.", href: "https://github.com/sarmadkung/optimal-round/tree/main/algorithms/03-two-pointers" },
+      { name: "Merge join", kind: "standard", note: "Databases join two sorted inputs with one pointer in each.", href: "https://www.postgresql.org/docs/current/planner-optimizer.html" },
+    ],
+  },
+  "dsa/monotonic-stack": {
+    lead: "“Next greater element” questions show up in stock spans, histograms and skyline problems.",
+    tools: [
+      { name: "Optimal Round: monotonic stack", kind: "software", note: "Explainer plus stack problems, with a test runner.", href: "https://github.com/sarmadkung/optimal-round/tree/main/algorithms/10-monotonic-stack" },
+      { name: "Optimal Round: stack problems", kind: "software", note: "Daily temperatures, largest rectangle, car fleet and more.", href: "https://github.com/sarmadkung/optimal-round/tree/main/problems/04-stack" },
+    ],
+  },
+  "dsa/bfs-vs-dfs": {
+    lead: "Graph search runs inside route planners, web crawlers, dependency resolvers and garbage collectors.",
+    tools: [
+      { name: "Optimal Round: BFS and DFS", kind: "software", note: "Explainer for both searches and when to pick each.", href: "https://github.com/sarmadkung/optimal-round/tree/main/algorithms/11-bfs-and-dfs" },
+      { name: "Optimal Round: graph problems", kind: "software", note: "Islands, course schedule, clone graph and more.", href: "https://github.com/sarmadkung/optimal-round/tree/main/problems/08-graphs" },
+      { name: "Neo4j", kind: "software", note: "Graph database with built-in breadth- and depth-first traversals.", href: "https://github.com/neo4j/neo4j" },
+    ],
+  },
+  "nodejs/thread-pool": {
+    lead: "Any runtime with one event loop needs somewhere to put blocking work: a pool, a worker, or the OS.",
+    tools: [
+      { name: "libuv", kind: "software", note: "The thread pool itself: 4 threads by default, UV_THREADPOOL_SIZE up to 1024.", href: "https://github.com/libuv/libuv" },
+      { name: "Node.js", kind: "platform", note: "fs, crypto, zlib and dns.lookup run on the pool; sockets don't.", href: "https://github.com/nodejs/node" },
+      { name: "Tokio", kind: "software", note: "Rust's async runtime uses a separate blocking pool for the same reason.", href: "https://github.com/tokio-rs/tokio" },
+    ],
+  },
+  "system-design/consistent-hashing": {
+    lead: "Distributed caches, databases and load balancers all use rings or similar schemes to move as little data as possible.",
+    tools: [
+      { name: "Apache Cassandra", kind: "software", note: "Token ring with virtual nodes for data placement.", href: "https://github.com/apache/cassandra" },
+      { name: "Amazon DynamoDB", kind: "service", note: "Partitioning descended from the Dynamo paper's consistent hashing.", href: "https://aws.amazon.com/dynamodb/" },
+      { name: "Envoy ring hash / Maglev", kind: "software", note: "Load balancing that keeps a client on the same backend.", href: "https://github.com/envoyproxy/envoy" },
+      { name: "Memcached clients", kind: "software", note: "Ketama consistent hashing spreads keys over cache servers.", href: "https://github.com/memcached/memcached" },
+    ],
+  },
+  "devops/rolling-deploys": {
+    lead: "Rolling updates, readiness probes and rollbacks are the same idea on every orchestrator and cloud.",
+    tools: [
+      { name: "Kubernetes Deployments", kind: "platform", note: "maxSurge, maxUnavailable, readiness probes, rollout undo.", href: "https://github.com/kubernetes/kubernetes" },
+      { name: "Argo Rollouts", kind: "software", note: "Canary and blue-green with automatic rollback on bad metrics.", href: "https://github.com/argoproj/argo-rollouts" },
+      { name: "Flagger", kind: "software", note: "Progressive delivery that promotes or rolls back from metrics.", href: "https://github.com/fluxcd/flagger" },
+      { name: "Amazon ECS", kind: "service", note: "Rolling deployments with health checks and circuit breaker rollback.", href: "https://aws.amazon.com/ecs/" },
+    ],
+  },
+  "ai-automation/schedules": {
+    lead: "Every scheduler has to decide what a missed run means; the names differ, the choice doesn't.",
+    tools: [
+      { name: "Apache Airflow", kind: "software", note: "catchup and backfill decide whether missed intervals run.", href: "https://github.com/apache/airflow" },
+      { name: "Temporal Schedules", kind: "software", note: "Durable schedules with a catch-up window and overlap policy.", href: "https://github.com/temporalio/temporal" },
+      { name: "Kubernetes CronJob", kind: "platform", note: "startingDeadlineSeconds and concurrencyPolicy.", href: "https://github.com/kubernetes/kubernetes" },
+      { name: "n8n Schedule Trigger", kind: "software", note: "Cron-based triggers for workflows.", href: "https://github.com/n8n-io/n8n" },
+    ],
+  },
+  "tools/github-actions": {
+    lead: "Event-triggered YAML pipelines are the norm across CI products; the keywords change, the model doesn't.",
+    tools: [
+      { name: "GitHub Actions", kind: "platform", note: "Workflows in .github/workflows, triggered by repository events.", href: "https://github.com/features/actions" },
+      { name: "actions/runner", kind: "software", note: "The open-source runner; self-host it on your own machines.", href: "https://github.com/actions/runner" },
+      { name: "actions/cache", kind: "software", note: "Cache dependencies between runs to cut install time.", href: "https://github.com/actions/cache" },
+      { name: "act", kind: "software", note: "Run your workflows locally in containers before pushing.", href: "https://github.com/nektos/act" },
+    ],
+  },
+  "ai/agent-patterns": {
+    lead: "Agent frameworks are mostly ways to wire these patterns; the patterns work with a plain model API too.",
+    tools: [
+      { name: "Building effective agents", kind: "standard", note: "Anthropic's write-up of these six patterns (Dec 2024).", href: "https://www.anthropic.com/engineering/building-effective-agents" },
+      { name: "LangGraph", kind: "software", note: "Graphs of model calls with loops, branches and state.", href: "https://github.com/langchain-ai/langgraph" },
+      { name: "OpenAI Agents SDK", kind: "software", note: "Agents, handoffs and guardrails.", href: "https://github.com/openai/openai-agents-python" },
+      { name: "AutoGen", kind: "software", note: "Multi-agent conversations and orchestration.", href: "https://github.com/microsoft/autogen" },
+      { name: "Temporal", kind: "software", note: "Durable execution for long-running agent workflows.", href: "https://github.com/temporalio/temporal" },
     ],
   },
   "ai-native/structured-output": {

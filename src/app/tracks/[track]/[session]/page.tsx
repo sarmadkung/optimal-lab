@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { DoneToggle } from "@/components/Progress";
 import { RealWorldTools } from "@/components/session/RealWorldTools";
+import { SolveIt } from "@/components/session/SolveIt";
 import { SessionLayoutProvider } from "@/components/session/SessionLayoutContext";
 import { TrackLearningPath } from "@/components/session/TrackLearningPath";
 import { TRACKS, getSession, layoutFor, neighbours, sessionHref, trackHref, type Session, type Track } from "@/lib/tracks";
+import { sessionKey } from "@/lib/progressKeys";
 import { sessionDemo } from "@/sessions/registry";
 
 export const dynamicParams = false;
@@ -56,6 +59,8 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
         <ComingSoon track={track} session={session} />
       )}
 
+      {session.status === "live" ? <SolveIt trackId={track.id} sessionId={session.id} /> : null}
+
       {/* Where this session sits in the track. Below the demo, so the demo starts in the first screen. */}
       {session.status === "live" ? <TrackLearningPath trackId={track.id} sessionId={session.id} /> : null}
 
@@ -63,7 +68,10 @@ export default async function SessionPage(props: PageProps<"/tracks/[track]/[ses
 
       <nav aria-label="More in this track" className="mx-auto w-full max-w-3xl px-4 pb-16">
         <div className="border-t border-[var(--line)] pt-8">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Keep going</p>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Keep going</p>
+            {session.status === "live" ? <DoneToggle id={sessionKey(track.id, session.id)} label="Mark this session done" /> : null}
+          </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <Neighbour track={track} session={prev} direction="prev" />
             <Neighbour track={track} session={next} direction="next" />

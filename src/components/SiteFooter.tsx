@@ -1,6 +1,5 @@
 import Link from "next/link";
 import PublicMetrics from "@/components/PublicMetrics";
-import TourButton from "@/components/TourButton";
 import { TRACKS, trackHref } from "@/lib/tracks";
 
 export default function SiteFooter() {
@@ -10,7 +9,6 @@ export default function SiteFooter() {
         <div>
           <p className="font-semibold">Optimal Lab</p>
           <p className="mt-1 max-w-sm text-[var(--muted)]">Interactive visuals you can drag, step, and break.</p>
-          <TourButton />
           <PublicMetrics />
         </div>
         <nav aria-label="Footer">

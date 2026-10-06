@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { DoneCount, DoneMark } from "@/components/Progress";
+import { sessionKey } from "@/lib/progressKeys";
 import { getTrack, sessionHref } from "@/lib/tracks";
 
 type Props = { trackId: string; sessionId: string };
@@ -22,7 +24,8 @@ export function TrackLearningPath({ trackId, sessionId }: Props) {
       <div className="rounded-xl border border-[var(--line)] bg-[var(--panel)] px-4 py-3 sm:px-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--faint)]">
-            {track.short} track · {path.length} sessions
+            {track.short} track · {path.length} sessions ·{" "}
+            <DoneCount ids={path.map((s) => sessionKey(track.id, s.id))} />
           </p>
           {hasTools ? (
             <Link href={`/tracks/${trackId}#tools`} className="text-xs text-[var(--accent)] hover:underline">
@@ -48,7 +51,9 @@ export function TrackLearningPath({ trackId, sessionId }: Props) {
                       : "border-[var(--line)] text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)]"
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-[var(--faint)]">Step {i + 1}</span>
+                  <span className="flex items-center justify-between font-mono text-[10px] text-[var(--faint)]">
+                    Step {i + 1} <DoneMark id={sessionKey(track.id, s.id)} />
+                  </span>
                   <span className="mt-0.5 block leading-snug">{label}</span>
                 </Link>
               </li>

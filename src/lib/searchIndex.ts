@@ -40,6 +40,14 @@ export function buildSearchIndex(): SearchDoc[] {
       haystack: buildHaystack(["home", "start", "tracks", "roadmaps", "projects", "practice"]),
     },
     {
+      id: "page-practice",
+      title: "Practice",
+      subtitle: "DSA problems by pattern, linked to the sessions",
+      href: "/practice",
+      kind: "page",
+      haystack: buildHaystack(["practice", "problems", "dsa", "leetcode", "solve", "exercises", "optimal round"]),
+    },
+    {
       id: "page-tracks",
       title: "All tracks",
       subtitle: "Browse every subject and session",

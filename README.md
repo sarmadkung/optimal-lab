@@ -12,7 +12,7 @@ Domain: [optimallab.dev](https://optimallab.dev)
 | Section | Priority | What it holds |
 |---|---|---|
 | **Explore** | Main | One interactive visual per concept. You drag, step and break things to see how they work |
-| **Practice** | Second | A DSA editor with problems grouped by pattern, based on [Optimal Round](#optimal-round) |
+| **Practice** | Second | DSA problems grouped by pattern, from [Optimal Round](#optimal-round), each linked to the session that teaches it |
 
 Each visual ends with a "now solve it" link to Practice, and each problem links back
 to the visual that explains its pattern.
@@ -56,16 +56,32 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/` | Home: hero + tabs for Tracks, Roadmaps, Projects and Practice (hash e.g. `/#projects`; default tab is Tracks; `/#sessions` redirects to Tracks) | — |
 | *(header)* | Site chrome only: logo, **Home**, **All tracks**, quick search (⌘K), theme — not the per-track list (that lives on Home tabs and `/tracks`) | — |
 | `/tracks` | Every track with all its sessions | — |
+| `/practice` | Every practice pattern, with counts by difficulty and what you've solved | optimal-round |
+| `/practice/<pattern>` | One pattern's problems, its session and its written explainer | optimal-round |
+| `/practice/<pattern>/<problem>` | Statement, constraints, examples, edge cases, target complexity behind a spoiler, how to run it | optimal-round |
 | `/tracks/<track>` | One track: sessions, roadmap, projects. Tracks: `dsa`, `nodejs`, `system-design`, `devops`, `ai`, `ai-native`, `ai-automation`, `tools` | — |
 | `/tracks/dsa/two-sum` | Two Sum, three ways: brute force, sort + two pointers, hash map, and how each scales | social-content DSA #01 |
+| `/tracks/dsa/hash-map` | Group anagrams: one key per word, one lookup per word | — |
+| `/tracks/dsa/two-pointers` | Container with most water: always move the shorter line | — |
 | `/tracks/dsa/sliding-window` | Fixed window: drop the cell that left, add the cell that entered | — |
+| `/tracks/dsa/monotonic-stack` | Daily temperatures: a stack of days still waiting for a warmer one | — |
 | `/tracks/dsa/binary-search` | Halve a sorted list until the target is found or the range is empty | — |
+| `/tracks/dsa/bfs-vs-dfs` | Queue vs stack on the same graph; only BFS finds the fewest hops | — |
 | `/tracks/nodejs/event-loop` | One turn of the event loop: sync, nextTick, promises, timers, poll, check | — |
 | `/tracks/nodejs/streams-backpressure` | Producer, buffer, high water mark, consumer | — |
+| `/tracks/nodejs/thread-pool` | libuv pool: crypto fills the threads, a file read waits; UV_THREADPOOL_SIZE | — |
 | `/tracks/system-design/load-balancing` | Round robin, least connections, and weighted routing — queues, health checks, LB timeouts | — |
 | `/tracks/system-design/caching` | A guided cache: hits, misses, eviction, three predictions, then a playground | — |
+| `/tracks/system-design/consistent-hashing` | Hash ring vs hash % n, keys moved on add/remove, virtual nodes | — |
+| `/tracks/system-design/cdn` | Edges in three cities: TTL, hit ratio, and stale files after a deploy (wait, purge, versioned names) | — |
+| `/tracks/system-design/rate-limiting` | Fixed window, sliding window and token bucket on the same bursts | — |
+| `/tracks/system-design/replication` | Async vs semi-sync, replication lag, stale reads, read-your-writes, failover losing a write | — |
+| `/tracks/system-design/sharding` | Hash, country or month as the shard key: hot shards and scatter queries | — |
+| `/tracks/system-design/message-queues` | At-least-once delivery: visibility timeout, duplicate charges, idempotency, dead-letter queue | — |
+| `/tracks/system-design/circuit-breaker` | Retry storms, backoff with jitter, and a breaker that lets a failing service recover | — |
 | `/tracks/devops/ci-cd-pipeline` | Lint, test, build, deploy — stop at the first failure | — |
 | `/tracks/devops/containers-vs-vms` | Start a container, or boot a virtual machine | — |
+| `/tracks/devops/rolling-deploys` | maxSurge, readiness probes, a stalled rollout, kubectl rollout undo | — |
 | `/tracks/ai/tokenization` | Train a tiny BPE tokenizer merge by merge, then tokenize your own text | — |
 | `/tracks/ai/attention` | One attention head: query, key, value, score, scale, mask, softmax, blend | — |
 | `/tracks/ai/next-token` | How an LLM picks the next token: logits, softmax, temperature, top-k, top-p, sampling | social-content AI Engineering #02 |
@@ -74,17 +90,48 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/hybrid-search` | BM25 + vector search, Reciprocal Rank Fusion, then a reranker | — |
 | `/tracks/ai/rag` | Chunk, retrieve, paste into the prompt, answer only from that | — |
 | `/tracks/ai/evals` | Two prompt versions graded by code checks and an LLM judge, checked against people | — |
+| `/tracks/ai/agent-patterns` | Chaining, routing, parallel, orchestrator-workers, evaluator-optimizer, agent | — |
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
+| `/tracks/ai-automation/schedules` | Cron with a runner outage: skip, catch up once, or backfill | — |
 | `/tracks/tools/cursor-agent` | Search, edit, check, repeat | — |
 | `/tracks/tools/mcp` | A tool server lists tools; the app forwards the call | — |
 | `/tracks/tools/n8n` | Webhook → IF → Slack or email | — |
+| `/tracks/tools/github-actions` | on:, parallel jobs, a matrix, needs: and if: on three different events | — |
 
-Every session in `tracks.ts` gets a page. Sessions marked `soon` show a "coming soon" page.
+Every session in `tracks.ts` gets a page. Sessions marked `soon` show a "coming soon" page (none right now).
 The old URLs `/dsa-01` and `/next-token` redirect to the new ones (`next.config.ts`), so
 links in published posts keep working.
+
+## Practice
+
+The Practice section shows the problems from optimal-round, grouped by pattern. Statements are
+copied into `src/data/practice.json` by a script; the site never reads or shows solutions.
+
+```bash
+pnpm sync:practice              # reads ../optimal-round (or pass a path)
+```
+
+The script reads each problem file only up to the end of its header comment (problem,
+constraints, examples, edge cases, complexity). The solution below it is written by hand,
+with no AI, and stays in optimal-round. Run the script again after adding problems, and commit
+the JSON so the site builds without the sibling repo.
+
+- `src/lib/practice.ts` maps each optimal-round topic folder to its sessions and its explainer
+  in `optimal-round/algorithms/`. Add a mapping there when a new DSA session teaches a pattern.
+- Session pages show **Now solve it** (`SolveIt`) for any pattern that lists them; problem pages
+  link back with **Stuck? Watch the pattern run**.
+- Solving happens locally: clone optimal-round, fill in the stub, run `./practice c <number>`.
+- `src/data/practice.json` is large; import `practice.ts` from server components only.
+
+## Progress
+
+Readers can mark a session done and a problem solved. There are no accounts, so progress lives
+in `localStorage` under `progress` (`src/lib/progress.ts`; keys from `src/lib/progressKeys.ts`
+and `problemKey`). `DoneToggle`, `DoneMark` and `DoneCount` in `src/components/Progress.tsx`
+read the same store, so every mark on a page updates together, and other tabs follow.
 
 ## Light and dark mode
 
@@ -94,14 +141,6 @@ choice is saved in `localStorage`, and without one the site follows the OS setti
 first paint, so there is no flash. In components, use the colour tokens from
 `globals.css` (`var(--text)`, `var(--panel)`, `var(--c1)` …), never raw hex, so both
 themes work.
-
-## First-visit onboarding
-
-The first time someone opens the site on a device, a short tour explains tracks,
-sessions, and the theme button. There is no account or database, so "already seen"
-is saved in `localStorage` under the key `onboarding`. Skip and finish both count as
-done, so the tour does not come back on the next visit. **Take the tour** in the
-footer opens it again. The component is `src/components/Onboarding.tsx`.
 
 ## Responsive layout
 
@@ -118,7 +157,7 @@ desktop. Check these widths before finishing any UI change, in both themes:
 2. **Phone:** one column. The top bar collapses to the Menu button. Tap targets are at least 44px tall.
 3. **Tablet:** two columns where a grid has several cards. Track links in the top bar are visible, and nothing overflows the bar.
 4. **A row that is the visual itself** (the eight Two Sum cells, a bar chart) may stay in a row, but the labels and controls around it must still fit.
-5. Do this check for shared chrome too: header, menu, footer, onboarding, and 404.
+5. Do this check for shared chrome too: header, menu, footer, and 404.
 
 ## Run it
 
@@ -175,8 +214,6 @@ Public totals appear in the site footer when any count is &gt; 0. APIs: `src/app
 | `src/components/ProjectCatalog.tsx` | Home Projects tab: filters + project idea cards (`src/app/api/projects/` for counts) |
 | `supabase/migrations/` | SQL for optional project start counters |
 | `src/lib/theme.ts` | Light/dark mode: the storage key and the no-flash inline script |
-| `src/lib/onboarding.ts` | First-visit tour: the storage key and whether the tour is open |
-| `src/components/Onboarding.tsx` | The tour itself |
 | `src/app/page.tsx` | Home page, built from `TRACKS` |
 | `src/app/tracks/page.tsx` | All tracks with their sessions |
 | `src/app/tracks/[track]/` | One page per track: sessions, roadmap and projects |
@@ -312,10 +349,10 @@ How to build the map:
 | How an algorithm's state changes | Step flow with a state visual inside a step (array cells, pointers, a range) | sliding window, binary search |
 | Several approaches side by side | Comparison layout | Two Sum, containers vs VMs |
 
-Upcoming sessions that must use the system map when built: consistent hashing (the ring
-and which keys move), rolling deploys (replicas, probes, rollback), GitHub Actions (push,
-workflow, jobs), the thread pool (main thread vs workers), and scheduled automations
-(clock, runner, missed run).
+A system map can sit beside a second, specialised picture driven by the same frame: the
+thread pool adds a timeline of which thread ran which task, scheduled workflows add the day's
+hourly slots, GitHub Actions adds the workflow file with the active lines lit. Consistent
+hashing and rolling deploys use one specialised picture (the ring, the pod board) instead.
 
 For live system-map sessions, use **`SessionLayout`** (see "Choosing a session layout" below for how the page is arranged). Put `<SystemMap chrome="split" … />` in `visual`, and **`SystemMapPanel`** in `panel` (one `aria-live` caption plus playback and any inputs that apply to the whole run). Put the `FlowStep` chain in `detail`. Wrap the page in **`SessionPage`** + **`SessionHeader`**. Reference: `/tracks/system-design/load-balancing`.
 
@@ -414,6 +451,17 @@ It never ships to production.
 | Next token | process, 8, cycle, rich | Top to bottom |
 | RAG | system, 6, pipeline, rich | Top to bottom |
 | Coding agent loop | system, 5, cycle, rich | Top to bottom |
+| Hash map, two pointers | algorithm, 5, state | One view |
+| Monotonic stack | algorithm, 4, state | One view |
+| BFS vs DFS | comparison, 2 | One view |
+| Thread pool, rolling deploys, schedules | system, 5, cycle | One view |
+| Consistent hashing | system, 5, state | One view |
+| GitHub Actions | system, 5, pipeline | Left to right |
+| Agent patterns | comparison, 6 | Left to right |
+| CDN, message queues, retries and circuit breakers | system, 5, cycle | One view |
+| Rate limiting | comparison, 3 | One view |
+| Replication | system, 5, pipeline | Left to right |
+| Sharding | system, 5, state | One view |
 
 ## Guided lessons
 
