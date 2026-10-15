@@ -1078,10 +1078,14 @@ export const TRACKS: Track[] = [
         shape: { kind: "simulation", steps: 4, flow: "state" } },
       { id: "hallucinations", title: "Why models hallucinate", blurb: "Fluent text with no fact behind it, and what reduces it.", status: "soon", section: "llm-internals" },
       // Prompting
-      { id: "message-roles", title: "System, user and assistant messages", blurb: "What each role is for, and what the model actually sees.", status: "soon", section: "prompting" },
-      { id: "few-shot", title: "Zero-shot and few-shot prompting", blurb: "Show a few examples and watch the output format lock in.", status: "soon", section: "prompting" },
-      { id: "chain-of-thought", title: "Chain of thought and reasoning models", blurb: "Let the model think before answering, and when that helps.", status: "soon", section: "prompting" },
-      { id: "prompt-patterns", title: "Prompt patterns", blurb: "Delimiters, checklists, personas and asking for a plan first.", status: "soon", section: "prompting" },
+      { id: "message-roles", title: "System, user and assistant messages", blurb: "The same messages through three chat templates: the one string the model reads, and what the system prompt, earlier turns and a prefill change.", status: "live", section: "prompting",
+        shape: { kind: "process", steps: 5, flow: "cycle", richSteps: true } },
+      { id: "few-shot", title: "Zero-shot and few-shot prompting", blurb: "Sort eight support tickets with zero, one or six examples: the format locks in, conventions carry over, and one-sided examples bias every answer.", status: "live", section: "prompting",
+        shape: { kind: "process", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "chain-of-thought", title: "Chain of thought and reasoning models", blurb: "Answer directly, write the steps out, or vote over several chains, on problems from one step to six. Accuracy against tokens spent.", status: "live", section: "prompting",
+        shape: { kind: "process", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "prompt-patterns", title: "Prompt patterns", blurb: "Add delimiters, an output checklist, a plan-first step and a persona to one prompt, and see which checks each one fixes.", status: "live", section: "prompting",
+        shape: { kind: "process", steps: 5, flow: "pipeline", richSteps: true } },
       {
         id: "context-window",
         title: "The context window, turn by turn",
@@ -1111,7 +1115,8 @@ export const TRACKS: Track[] = [
         shape: { kind: "system", steps: 6, flow: "pipeline", richSteps: true } },
       { id: "query-rewriting", title: "Query rewriting and HyDE", blurb: "Rewrite a vague question before searching, so retrieval finds more.", status: "live", section: "retrieval",
         shape: { kind: "process", steps: 4, flow: "state" } },
-      { id: "graph-rag", title: "GraphRAG and knowledge graphs", blurb: "Retrieve through relationships, not just similar text.", status: "soon", section: "retrieval" },
+      { id: "graph-rag", title: "GraphRAG and knowledge graphs", blurb: "Vector search, a graph walk of 1 to 3 hops, or community summaries, on a one-hop, a multi-hop and a whole-dataset question.", status: "live", section: "retrieval",
+        shape: { kind: "system", steps: 5, flow: "pipeline" } },
       // Agents
       {
         id: "agent-patterns",

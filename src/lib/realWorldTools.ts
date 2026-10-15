@@ -1715,6 +1715,57 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "act", kind: "software", note: "Run your workflows locally in containers before pushing.", href: "https://github.com/nektos/act" },
     ],
   },
+  "ai/message-roles": {
+    lead: "Every chat API takes roles; open models ship the chat template that turns them into one string.",
+    tools: [
+      { name: "Hugging Face chat templates", kind: "software", note: "apply_chat_template renders messages with the template stored in each model.", href: "https://huggingface.co/docs/transformers/main/en/chat_templating" },
+      { name: "Anthropic system prompts", kind: "service", note: "The system prompt as a separate parameter of the Messages API.", href: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts" },
+      { name: "OpenAI Model Spec", kind: "standard", note: "The chain of command between developer, user and tool messages.", href: "https://model-spec.openai.com/" },
+      { name: "Llama models", kind: "software", note: "Meta's reference code, including the Llama 3 prompt format.", href: "https://github.com/meta-llama/llama-models" },
+      { name: "Gemma prompt format", kind: "standard", note: "Two roles only, user and model, for Gemma 1 to 3.", href: "https://ai.google.dev/gemma/docs/core/prompt-structure" },
+      { name: "Ollama", kind: "software", note: "Runs open models locally and applies each one's template for you.", href: "https://github.com/ollama/ollama" },
+    ],
+  },
+  "ai/few-shot": {
+    lead: "Few-shot examples are plain prompt text; tools help you pick them and measure whether they help.",
+    tools: [
+      { name: "Language Models are Few-Shot Learners", kind: "standard", note: "Brown et al., 2020: the GPT-3 paper that named zero-, one- and few-shot prompting.", href: "https://arxiv.org/abs/2005.14165" },
+      { name: "Calibrate Before Use", kind: "standard", note: "Zhao et al., 2021: majority-label and recency bias in few-shot prompts.", href: "https://arxiv.org/abs/2102.09690" },
+      { name: "DSPy", kind: "software", note: "Chooses and tunes few-shot examples automatically against a metric.", href: "https://github.com/stanfordnlp/dspy" },
+      { name: "promptfoo", kind: "software", note: "Runs prompt variants over a test set and scores every output.", href: "https://github.com/promptfoo/promptfoo" },
+    ],
+  },
+  "ai/chain-of-thought": {
+    lead: "Prompted chain of thought works with any model; reasoning models do it on their own, with a budget you set.",
+    tools: [
+      { name: "Chain-of-Thought Prompting", kind: "standard", note: "Wei et al., 2022: worked steps in the prompt lift multi-step accuracy.", href: "https://arxiv.org/abs/2201.11903" },
+      { name: "Self-Consistency", kind: "standard", note: "Wang et al., 2022: sample several chains and take the majority answer.", href: "https://arxiv.org/abs/2203.11171" },
+      { name: "Claude extended thinking", kind: "service", note: "Thinking tokens before the answer, with a token budget.", href: "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking" },
+      { name: "OpenAI reasoning models", kind: "service", note: "o-series models with a reasoning-effort setting.", href: "https://platform.openai.com/docs/guides/reasoning" },
+      { name: "DeepSeek-R1", kind: "software", note: "Open-weight reasoning model trained with reinforcement learning.", href: "https://github.com/deepseek-ai/DeepSeek-R1" },
+    ],
+  },
+  "ai/prompt-patterns": {
+    lead: "Provider guides agree on the same patterns; eval tools tell you whether a change actually helped.",
+    tools: [
+      { name: "Anthropic prompt engineering", kind: "standard", note: "XML tags, examples, letting the model think, and prefilling.", href: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" },
+      { name: "OpenAI prompt engineering", kind: "standard", note: "Delimiters, clear output formats and step-by-step instructions.", href: "https://platform.openai.com/docs/guides/prompt-engineering" },
+      { name: "OWASP LLM01: Prompt injection", kind: "standard", note: "Why delimiters reduce injection but can't be the only defence.", href: "https://genai.owasp.org/llmrisk/llm01-prompt-injection/" },
+      { name: "Personas in system prompts", kind: "standard", note: "Zheng et al., 2024: personas don't improve accuracy on factual questions.", href: "https://arxiv.org/abs/2311.10054" },
+      { name: "promptfoo", kind: "software", note: "Code and model-graded checks over every prompt version.", href: "https://github.com/promptfoo/promptfoo" },
+      { name: "Langfuse", kind: "software", note: "Version prompts and trace which version produced each reply.", href: "https://github.com/langfuse/langfuse" },
+    ],
+  },
+  "ai/graph-rag": {
+    lead: "Graph retrieval pairs an LLM that extracts entities with a graph store you can walk.",
+    tools: [
+      { name: "Microsoft GraphRAG", kind: "software", note: "Entity extraction, Leiden communities, and local and global search.", href: "https://github.com/microsoft/graphrag" },
+      { name: "From Local to Global", kind: "standard", note: "Edge et al., 2024: the GraphRAG paper on community summaries.", href: "https://arxiv.org/abs/2404.16130" },
+      { name: "Neo4j", kind: "software", note: "Graph database with Cypher queries and vector indexes.", href: "https://neo4j.com/" },
+      { name: "LightRAG", kind: "software", note: "A lighter graph RAG with cheaper indexing and incremental updates.", href: "https://github.com/HKUDS/LightRAG" },
+      { name: "LlamaIndex property graphs", kind: "software", note: "Build a knowledge graph from documents and retrieve by walking it.", href: "https://docs.llamaindex.ai/en/stable/module_guides/indexing/lpg_index_guide/" },
+    ],
+  },
   "ai/agent-patterns": {
     lead: "Agent frameworks are mostly ways to wire these patterns; the patterns work with a plain model API too.",
     tools: [

@@ -269,6 +269,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/rag` | Chunk, retrieve, paste into the prompt, answer only from that | — |
 | `/tracks/ai/evals` | Two prompt versions graded by code checks and an LLM judge, checked against people | — |
 | `/tracks/ai/agent-patterns` | Chaining, routing, parallel, orchestrator-workers, evaluator-optimizer, agent | — |
+| `/tracks/ai/message-roles` | The same messages through ChatML, Llama 3 and Gemma templates; flip the system prompt, earlier turns and a prefill | — |
+| `/tracks/ai/few-shot` | Sort eight tickets with zero to six examples: format locks in, conventions carry over, one-sided examples bias the answers | — |
+| `/tracks/ai/chain-of-thought` | Answer directly, think step by step or vote over chains, on problems of one to six steps; accuracy against tokens | — |
+| `/tracks/ai/prompt-patterns` | Delimiters, an output checklist, plan first and a persona on one prompt, graded by four code checks | — |
+| `/tracks/ai/graph-rag` | Vector search, a 1–3 hop graph walk or community summaries on one-hop, multi-hop and whole-dataset questions | — |
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |

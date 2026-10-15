@@ -28,6 +28,11 @@ import McpDemo from "./tools/mcp/McpDemo";
 import N8nDemo from "./tools/n8n/N8nDemo";
 
 import AgentPatternsDemo from "./ai/agent-patterns/AgentPatternsDemo";
+import MessageRolesDemo from "./ai/message-roles/MessageRolesDemo";
+import FewShotDemo from "./ai/few-shot/FewShotDemo";
+import ChainOfThoughtDemo from "./ai/chain-of-thought/ChainOfThoughtDemo";
+import PromptPatternsDemo from "./ai/prompt-patterns/PromptPatternsDemo";
+import GraphRagDemo from "./ai/graph-rag/GraphRagDemo";
 import ChunkingDemo from "./ai/chunking/ChunkingDemo";
 import FetchWaterfallDemo from "./frontend/data-fetching/FetchWaterfallDemo";
 import OptimisticDemo from "./frontend/optimistic-updates/OptimisticDemo";
@@ -431,6 +436,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/rag": <RagDemo />,
   "ai/evals": <EvalsDemo />,
   "ai/agent-patterns": <AgentPatternsDemo />,
+  "ai/message-roles": <MessageRolesDemo />,
+  "ai/few-shot": <FewShotDemo />,
+  "ai/chain-of-thought": <ChainOfThoughtDemo />,
+  "ai/prompt-patterns": <PromptPatternsDemo />,
+  "ai/graph-rag": <GraphRagDemo />,
   "ai-native/structured-output": <StructuredDemo />,
   "ai-native/tool-calling": <ToolCallDemo />,
   "ai-automation/workflow": <WorkflowDemo />,
