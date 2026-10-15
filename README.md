@@ -91,6 +91,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/llm-as-judge` | Eight answer pairs graded by a judge with position and length bias; swap orders and a rubric remove confident wrong picks | — |
 | `/tracks/ai/query-rewriting` | Search with the question as typed, rewritten, or as a HyDE fake answer, and see where the right page lands | — |
 | `/tracks/ai/lora` | Freeze W, train thin B and A: an 8×8 picture of B·A and trainable parameters by rank for a 7B model | — |
+| `/tracks/ai/token-embeddings` | Look up each token's row, add sinusoidal positions, and see “dog bit man” and “man bit dog” become different inputs | — |
+| `/tracks/ai/transformer-block` | LayerNorm, attention, residual adds and feed-forward on real numbers; without residuals 4 tokens blur into one; parameters for GPT-2 and Llama 3 | — |
+| `/tracks/ai/pretraining` | Clean a crawl, then train a tiny next-word model batch by batch and watch held-out loss fall; compute for real runs (6·N·D) | — |
+| `/tracks/ai/instruction-tuning` | One prompt through pretrained, SFT and RLHF; slide the KL penalty β and watch reward rise while people's rating falls | — |
+| `/tracks/ai/hallucinations` | Twelve questions seen 0 to 100,000 times in training: retrieval, a “not sure” threshold, and grading that stops rewarding guesses | — |
 | `/tracks/system-design/idempotency` | A lost payment response and a retry: two charges without a key, one with an idempotency key | — |
 | `/tracks/system-design/cap-theorem` | Three replicas and a partition: CP refuses the minority read, AP answers stale; then the network heals | — |
 | `/tracks/devops/images-layers` | Which Dockerfile layers rebuild after a code or dependency change, for two instruction orders | — |

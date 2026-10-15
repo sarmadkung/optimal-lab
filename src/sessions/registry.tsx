@@ -200,6 +200,11 @@ import RaceDemo from "./operating-systems/race-conditions/RaceDemo";
 import XssDemo from "./security/xss/XssDemo";
 import LlmJudgeDemo from "./ai/llm-as-judge/LlmJudgeDemo";
 import LoraDemo from "./ai/lora/LoraDemo";
+import TokenEmbeddingsDemo from "./ai/token-embeddings/TokenEmbeddingsDemo";
+import TransformerBlockDemo from "./ai/transformer-block/TransformerBlockDemo";
+import PretrainingDemo from "./ai/pretraining/PretrainingDemo";
+import InstructionTuningDemo from "./ai/instruction-tuning/InstructionTuningDemo";
+import HallucinationsDemo from "./ai/hallucinations/HallucinationsDemo";
 import QueryRewriteDemo from "./ai/query-rewriting/QueryRewriteDemo";
 import KvCacheDemo from "./ai/kv-cache/KvCacheDemo";
 import TrainingDemo from "./ai/training-loss/TrainingDemo";
@@ -399,6 +404,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/llm-as-judge": <LlmJudgeDemo />,
   "ai/query-rewriting": <QueryRewriteDemo />,
   "ai/lora": <LoraDemo />,
+  "ai/token-embeddings": <TokenEmbeddingsDemo />,
+  "ai/transformer-block": <TransformerBlockDemo />,
+  "ai/pretraining": <PretrainingDemo />,
+  "ai/instruction-tuning": <InstructionTuningDemo />,
+  "ai/hallucinations": <HallucinationsDemo />,
   "dsa/hash-map": <HashMapDemo />,
   "dsa/two-pointers": <TwoPointersDemo />,
   "dsa/sliding-window": <SlidingWindowDemo />,

@@ -230,6 +230,56 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "LoRA paper", kind: "standard", note: "Hu et al., 2021: Low-Rank Adaptation of Large Language Models.", href: "https://arxiv.org/abs/2106.09685" },
     ],
   },
+  "ai/token-embeddings": {
+    lead: "Every transformer starts with an embedding lookup; models differ mainly in how they encode position.",
+    tools: [
+      { name: "Attention Is All You Need", kind: "standard", note: "The paper that introduced sinusoidal position encodings.", href: "https://arxiv.org/abs/1706.03762" },
+      { name: "RoPE (RoFormer)", kind: "standard", note: "Rotary position embeddings, used by Llama, Mistral and Qwen.", href: "https://arxiv.org/abs/2104.09864" },
+      { name: "Hugging Face Transformers", kind: "software", note: "Inspect any open model's embedding table and position settings in its config.", href: "https://github.com/huggingface/transformers" },
+      { name: "Embedding Projector", kind: "software", note: "Explore word embeddings in 3D and find nearest neighbours.", href: "https://projector.tensorflow.org" },
+    ],
+  },
+  "ai/transformer-block": {
+    lead: "GPT-2, Llama and nearly every LLM since stack this same block; the configs only change its size and count.",
+    tools: [
+      { name: "nanoGPT", kind: "software", note: "A GPT whose whole block fits on one screen of code.", href: "https://github.com/karpathy/nanoGPT" },
+      { name: "LLM Visualization", kind: "software", note: "A 3D walk through every matrix in a small GPT.", href: "https://bbycroft.net/llm" },
+      { name: "Transformer Explainer", kind: "software", note: "GPT-2 running in the browser, block by block.", href: "https://github.com/poloclub/transformer-explainer" },
+      { name: "Llama models", kind: "software", note: "Meta's reference code and configs: width, layers, heads and feed-forward size.", href: "https://github.com/meta-llama/llama-models" },
+      { name: "Pure attention loses rank", kind: "standard", note: "Dong et al., 2021: why stacks without residual connections collapse.", href: "https://arxiv.org/abs/2103.03404" },
+    ],
+  },
+  "ai/pretraining": {
+    lead: "Open pretraining runs share the same parts: a web crawl, a cleaning pipeline, a tokenizer and a distributed trainer.",
+    tools: [
+      { name: "Common Crawl", kind: "platform", note: "The open web crawl behind most pretraining datasets.", href: "https://commoncrawl.org" },
+      { name: "FineWeb", kind: "platform", note: "15T tokens of filtered, deduplicated web text, with the recipe published.", href: "https://huggingface.co/datasets/HuggingFaceFW/fineweb" },
+      { name: "datatrove", kind: "software", note: "Filtering and deduplication pipelines for large text datasets.", href: "https://github.com/huggingface/datatrove" },
+      { name: "Megatron-LM", kind: "software", note: "NVIDIA's framework for training large transformers across many GPUs.", href: "https://github.com/NVIDIA/Megatron-LM" },
+      { name: "torchtitan", kind: "software", note: "PyTorch's reference for large-scale LLM pretraining.", href: "https://github.com/pytorch/torchtitan" },
+    ],
+  },
+  "ai/instruction-tuning": {
+    lead: "The same three stages, SFT, preference data and a KL-leashed optimizer, sit behind every chat model.",
+    tools: [
+      { name: "TRL", kind: "software", note: "SFT, reward modelling, PPO and DPO trainers for open models.", href: "https://github.com/huggingface/trl" },
+      { name: "OpenRLHF", kind: "software", note: "RLHF at scale with PPO, DPO and reward models.", href: "https://github.com/OpenRLHF/OpenRLHF" },
+      { name: "InstructGPT paper", kind: "standard", note: "Ouyang et al., 2022: SFT, a reward model and PPO.", href: "https://arxiv.org/abs/2203.02155" },
+      { name: "DPO paper", kind: "standard", note: "Rafailov et al., 2023: preference tuning without a separate reward model.", href: "https://arxiv.org/abs/2305.18290" },
+      { name: "Constitutional AI", kind: "standard", note: "Bai et al., 2022: AI feedback guided by written principles.", href: "https://arxiv.org/abs/2212.08073" },
+      { name: "Reward model overoptimization", kind: "standard", note: "Gao et al., 2022: reward keeps rising while real quality falls.", href: "https://arxiv.org/abs/2210.10760" },
+    ],
+  },
+  "ai/hallucinations": {
+    lead: "No setting turns hallucination off; teams ground answers in sources, measure faithfulness, and reward “not sure”.",
+    tools: [
+      { name: "Why Language Models Hallucinate", kind: "standard", note: "Kalai et al., 2025: rare facts and guess-rewarding grading.", href: "https://arxiv.org/abs/2509.04664" },
+      { name: "Claude citations", kind: "service", note: "Answers that point to the exact passages in your documents.", href: "https://platform.claude.com/docs/en/build-with-claude/citations" },
+      { name: "Ragas", kind: "software", note: "Faithfulness and answer-relevance scores for RAG outputs.", href: "https://github.com/explodinggradients/ragas" },
+      { name: "Vectara hallucination leaderboard", kind: "platform", note: "How often popular models invent facts when summarizing.", href: "https://github.com/vectara/hallucination-leaderboard" },
+      { name: "simple-evals (SimpleQA)", kind: "software", note: "Short factual questions graded right, wrong or not attempted.", href: "https://github.com/openai/simple-evals" },
+    ],
+  },
   "frontend/re-renders": {
     lead: "Every React app re-renders by these rules; the tools show you which renders happened and why.",
     tools: [
