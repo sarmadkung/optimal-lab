@@ -154,6 +154,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/distillation` | A teacher labels data for a student: softmax at a temperature, and accuracy by examples | — |
 | `/tracks/ai/synthetic-data` | Eight generations trained on generated data: topics vanish and errors compound, unless verified and mixed | — |
 | `/tracks/ai-native/streaming-ui` | Stream a JSON answer and compare waiting, raw text, and parsing partial chunks | — |
+| `/tracks/ai-native/trust-signals` | An HR assistant's answers with no signal, its own confidence or calibrated confidence, with and without sources: wrong answers acted on and minutes checking | — |
+| `/tracks/ai-native/user-control` | An AI tidy-up merges two people; undo with no history, a saved copy, or a per-change log that keeps your later edits | — |
+| `/tracks/ai-native/chat-vs-embedded` | Five expense-app jobs timed by chat and by inline controls with the keystroke-level model, weighed by frequency | — |
+| `/tracks/ai-native/copilots` | Replay a typed email with inline suggestions: debounce, model latency, stale answers, a confidence gate, keys saved and cost | — |
+| `/tracks/ai-native/graceful-failure` | Ten receipts autofilled: mark unsure fields, show the crop, a date rule and a manual fallback against wrong values and dead ends | — |
 | `/tracks/ai-automation/retries-errors` | Try no retries, immediate retries and backoff against a 503, a 429 and a 400 | — |
 | `/tracks/ai-automation/confidence-fallbacks` | Slide the auto-approve threshold and trade automation rate against errors that slip through | — |
 | `/tracks/tools/model-routers` | Twelve requests during a provider outage: one provider, a fallback chain, or routing by difficulty | — |

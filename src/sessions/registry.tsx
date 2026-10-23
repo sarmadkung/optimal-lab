@@ -241,6 +241,11 @@ import FineTuningDemo from "./ai/fine-tuning/FineTuningDemo";
 import DistillationDemo from "./ai/distillation/DistillationDemo";
 import SyntheticDataDemo from "./ai/synthetic-data/SyntheticDataDemo";
 import StreamingUiDemo from "./ai-native/streaming-ui/StreamingUiDemo";
+import TrustSignalsDemo from "./ai-native/trust-signals/TrustSignalsDemo";
+import UserControlDemo from "./ai-native/user-control/UserControlDemo";
+import ChatVsEmbeddedDemo from "./ai-native/chat-vs-embedded/ChatVsEmbeddedDemo";
+import CopilotsDemo from "./ai-native/copilots/CopilotsDemo";
+import GracefulFailureDemo from "./ai-native/graceful-failure/GracefulFailureDemo";
 import RetriesDemo from "./ai-automation/retries-errors/RetriesDemo";
 import ConfidenceDemo from "./ai-automation/confidence-fallbacks/ConfidenceDemo";
 import RouterDemo from "./tools/model-routers/RouterDemo";
@@ -581,6 +586,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/distillation": <DistillationDemo />,
   "ai/synthetic-data": <SyntheticDataDemo />,
   "ai-native/streaming-ui": <StreamingUiDemo />,
+  "ai-native/trust-signals": <TrustSignalsDemo />,
+  "ai-native/user-control": <UserControlDemo />,
+  "ai-native/chat-vs-embedded": <ChatVsEmbeddedDemo />,
+  "ai-native/copilots": <CopilotsDemo />,
+  "ai-native/graceful-failure": <GracefulFailureDemo />,
   "ai-automation/retries-errors": <RetriesDemo />,
   "ai-automation/confidence-fallbacks": <ConfidenceDemo />,
   "tools/model-routers": <RouterDemo />,

@@ -874,6 +874,47 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Server-Sent Events", kind: "standard", note: "The usual transport for token streams.", href: "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events" },
     ],
   },
+  "ai-native/trust-signals": {
+    lead: "Citations come from the model API; calibration and how you word confidence are design work, with published guidance.",
+    tools: [
+      { name: "Anthropic citations", kind: "service", note: "Answers that point at the exact passages of the documents they used.", href: "https://docs.anthropic.com/en/docs/build-with-claude/citations" },
+      { name: "Google PAIR Guidebook: explainability and trust", kind: "standard", note: "How to show confidence and sources so people trust a system the right amount.", href: "https://pair.withgoogle.com/chapter/explainability-trust/" },
+      { name: "Apple HIG: machine learning", kind: "standard", note: "Guidance on showing confidence, attribution and limits of ML features.", href: "https://developer.apple.com/design/human-interface-guidelines/machine-learning" },
+    ],
+  },
+  "ai-native/user-control": {
+    lead: "Undo per change needs data that keeps history: versioned databases and document formats built on operations.",
+    tools: [
+      { name: "Dolt", kind: "software", note: "A SQL database with Git-style history: diff, revert and branch table data.", href: "https://github.com/dolthub/dolt" },
+      { name: "Automerge", kind: "software", note: "Documents stored as a history of changes, so any change can be inspected or reverted.", href: "https://github.com/automerge/automerge" },
+      { name: "Google PAIR Guidebook: feedback and control", kind: "standard", note: "Patterns for letting people correct, override and undo AI output.", href: "https://pair.withgoogle.com/chapter/feedback-controls/" },
+    ],
+  },
+  "ai-native/chat-vs-embedded": {
+    lead: "Most products now ship both: AI inside the screens people use, and a chat for what nobody built a control for.",
+    tools: [
+      { name: "Notion AI", kind: "service", note: "AI actions inside the page and a chat over the workspace, in one product.", href: "https://www.notion.com/product/ai" },
+      { name: "Google PAIR Guidebook: user needs", kind: "standard", note: "Start from the job people are doing before choosing where AI fits.", href: "https://pair.withgoogle.com/chapter/user-needs/" },
+      { name: "Microsoft HAX Playbook", kind: "software", note: "Open-source tool for working through how an AI feature can fail before you build it.", href: "https://github.com/microsoft/HAXPlaybook" },
+    ],
+  },
+  "ai-native/copilots": {
+    lead: "Inline completion is a protocol and a latency budget; these ship it with debouncing, cancellation and small fast models.",
+    tools: [
+      { name: "GitHub Copilot", kind: "service", note: "Inline code suggestions accepted with Tab, the pattern most copilots copy.", href: "https://github.com/features/copilot" },
+      { name: "Tabby", kind: "software", note: "Self-hosted code completion server you can run on your own models.", href: "https://github.com/TabbyML/tabby" },
+      { name: "Continue", kind: "software", note: "Open-source assistant with configurable autocomplete debounce and model.", href: "https://github.com/continuedev/continue" },
+      { name: "Language Server Protocol", kind: "protocol", note: "Editor protocol with inline completion requests and cancellation.", href: "https://microsoft.github.io/language-server-protocol/" },
+    ],
+  },
+  "ai-native/graceful-failure": {
+    lead: "Failure handling is product design plus monitoring: plan each failure, then watch which ones happen.",
+    tools: [
+      { name: "Google PAIR Guidebook: errors and graceful failure", kind: "standard", note: "Types of AI errors and how a product should respond to each.", href: "https://pair.withgoogle.com/chapter/errors-failing/" },
+      { name: "Microsoft HAX Playbook", kind: "software", note: "Enumerates failure scenarios for an AI feature so each gets a designed response.", href: "https://github.com/microsoft/HAXPlaybook" },
+      { name: "Sentry", kind: "software", note: "Error and timeout monitoring, so dead ends show up before users report them.", href: "https://github.com/getsentry/sentry" },
+    ],
+  },
   "ai-automation/retries-errors": {
     lead: "Workflow tools have retries built in; the policy is yours to set.",
     tools: [
