@@ -168,6 +168,10 @@ import RedTeamingDemo from "./ai/red-teaming/RedTeamingDemo";
 import FeatureCostDemo from "./ai-native/feature-cost/FeatureCostDemo";
 import AbTestDemo from "./ai-native/ab-testing-ai/AbTestDemo";
 import LatencyUxDemo from "./ai-native/latency-ux/LatencyUxDemo";
+import SupportAssistantDemo from "./ai-native/support-assistant/SupportAssistantDemo";
+import InvoiceExtractorDemo from "./ai-native/invoice-extractor/InvoiceExtractorDemo";
+import MeetingNotesDemo from "./ai-native/meeting-notes/MeetingNotesDemo";
+import SmartSearchDemo from "./ai-native/smart-search/SmartSearchDemo";
 import ClassifyRouteDemo from "./ai-automation/classify-route/ClassifyRouteDemo";
 import McpServerDemo from "./tools/build-mcp-server/McpServerDemo";
 import MemoryHierarchyDemo from "./operating-systems/memory-hierarchy/MemoryHierarchyDemo";
@@ -508,6 +512,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai-native/feature-cost": <FeatureCostDemo />,
   "ai-native/ab-testing-ai": <AbTestDemo />,
   "ai-native/latency-ux": <LatencyUxDemo />,
+  "ai-native/support-assistant": <SupportAssistantDemo />,
+  "ai-native/invoice-extractor": <InvoiceExtractorDemo />,
+  "ai-native/meeting-notes": <MeetingNotesDemo />,
+  "ai-native/smart-search": <SmartSearchDemo />,
   "ai-automation/classify-route": <ClassifyRouteDemo />,
   "tools/build-mcp-server": <McpServerDemo />,
   "operating-systems/memory-hierarchy": <MemoryHierarchyDemo />,

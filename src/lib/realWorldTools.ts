@@ -1565,6 +1565,40 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Material skeleton loaders", kind: "standard", note: "Placeholder patterns.", href: "https://m3.material.io/components/progress-indicators/overview" },
     ],
   },
+  "ai-native/support-assistant": {
+    lead: "Helpdesks ship drafting and auto-reply built in; a vector store over your help centre does the retrieval if you build it yourself.",
+    tools: [
+      { name: "Intercom Fin", kind: "service", note: "AI agent that answers from your help content and hands off to people.", href: "https://fin.ai/" },
+      { name: "Zendesk AI", kind: "service", note: "Suggested replies and AI agents inside the helpdesk agents already use.", href: "https://www.zendesk.com/service/ai/" },
+      { name: "Qdrant", kind: "software", note: "Open-source vector database for searching help articles by meaning.", href: "https://github.com/qdrant/qdrant" },
+      { name: "Anthropic citations", kind: "service", note: "Answers that cite the exact passage of the article they came from.", href: "https://docs.anthropic.com/en/docs/build-with-claude/citations" },
+    ],
+  },
+  "ai-native/invoice-extractor": {
+    lead: "Document services ship invoice models; the checks against your own suppliers and orders live in your ERP; e-invoicing removes extraction altogether.",
+    tools: [
+      { name: "Azure AI Document Intelligence", kind: "service", note: "A prebuilt invoice model returning supplier, totals and line items.", href: "https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence" },
+      { name: "Amazon Textract", kind: "service", note: "Expense and invoice analysis with fields and line items from scans.", href: "https://aws.amazon.com/textract/" },
+      { name: "Peppol", kind: "standard", note: "Network and format for structured e-invoices, so there is nothing to extract.", href: "https://peppol.org/" },
+    ],
+  },
+  "ai-native/meeting-notes": {
+    lead: "Speech recognition with speaker labels is a commodity API; the owner lookup and the tracker integration are yours.",
+    tools: [
+      { name: "Whisper", kind: "software", note: "Open-source speech recognition you can run yourself.", href: "https://github.com/openai/whisper" },
+      { name: "AssemblyAI", kind: "service", note: "Transcription API with speaker labels and summaries.", href: "https://www.assemblyai.com/" },
+      { name: "Deepgram", kind: "service", note: "Fast transcription API with diarization.", href: "https://deepgram.com/" },
+    ],
+  },
+  "ai-native/smart-search": {
+    lead: "Engines that serve keyword and vector search together, with quantized indexes, at marketplace scale.",
+    tools: [
+      { name: "Vespa", kind: "software", note: "Open-source engine for hybrid search and ranking at large scale.", href: "https://github.com/vespa-engine/vespa" },
+      { name: "OpenSearch", kind: "software", note: "Open-source search with k-NN vector indexes alongside BM25.", href: "https://github.com/opensearch-project/OpenSearch" },
+      { name: "Qdrant", kind: "software", note: "Vector database with scalar and binary quantization to cut memory.", href: "https://github.com/qdrant/qdrant" },
+      { name: "Cohere Rerank", kind: "service", note: "Cross-encoder reranking of the top results for a query.", href: "https://cohere.com/rerank" },
+    ],
+  },
   "ai-automation/classify-route": {
     lead: "Workflow tools pair an LLM step with a switch node.",
     tools: [
