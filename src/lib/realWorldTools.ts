@@ -1557,6 +1557,40 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Evan Miller's calculator", kind: "software", note: "Sample size for A/B tests.", href: "https://www.evanmiller.org/ab-testing/sample-size.html" },
     ],
   },
+  "ai-native/pair-programming": {
+    lead: "Assistants differ in where they sit (editor, terminal, chat) more than in what they can do; time your own tasks with whichever you use.",
+    tools: [
+      { name: "Cursor", kind: "service", note: "Editor with chat, inline edits and an agent over your codebase.", href: "https://cursor.com/" },
+      { name: "GitHub Copilot", kind: "service", note: "Completions and chat in the editor, the tool in the 2023 randomized trial.", href: "https://github.com/features/copilot" },
+      { name: "Claude Code", kind: "software", note: "Terminal assistant that reads, edits and runs commands in your repository.", href: "https://github.com/anthropics/claude-code" },
+      { name: "Aider", kind: "software", note: "Open-source pair programmer in the terminal that commits each change to git.", href: "https://github.com/Aider-AI/aider" },
+    ],
+  },
+  "ai-native/specs-for-agents": {
+    lead: "Agents read standing instructions from files in the repo and task specs from you; both follow the same four parts.",
+    tools: [
+      { name: "AGENTS.md", kind: "standard", note: "A shared file format for repository instructions that many coding agents read.", href: "https://agents.md/" },
+      { name: "GitHub Spec Kit", kind: "software", note: "Templates and commands for writing a spec, a plan and tasks before an agent codes.", href: "https://github.com/github/spec-kit" },
+      { name: "Claude Code memory", kind: "service", note: "CLAUDE.md files that give the agent project context and rules on every task.", href: "https://docs.anthropic.com/en/docs/claude-code/memory" },
+    ],
+  },
+  "ai-native/ai-code-review": {
+    lead: "AI reviewers post to pull requests like any other check; linters and static analysis take the style and the patterns.",
+    tools: [
+      { name: "CodeRabbit", kind: "service", note: "AI review comments on every pull request, with configurable focus and filters.", href: "https://www.coderabbit.ai/" },
+      { name: "GitHub Copilot code review", kind: "service", note: "Copilot as a requested reviewer on a pull request.", href: "https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review" },
+      { name: "Semgrep", kind: "software", note: "Rule-based static analysis for bug and security patterns, with few false alarms.", href: "https://github.com/semgrep/semgrep" },
+      { name: "reviewdog", kind: "software", note: "Posts linter and analyzer findings as review comments on the changed lines only.", href: "https://github.com/reviewdog/reviewdog" },
+    ],
+  },
+  "ai-native/ai-tests": {
+    lead: "Mutation testing tools exist for most languages; they tell you whether generated tests check anything.",
+    tools: [
+      { name: "Stryker Mutator", kind: "software", note: "Mutation testing for JavaScript and TypeScript, C# and Scala.", href: "https://stryker-mutator.io/" },
+      { name: "PIT", kind: "software", note: "Mutation testing for the JVM.", href: "https://pitest.org/" },
+      { name: "Qodo Cover", kind: "software", note: "Open-source agent that generates tests and keeps those that raise coverage.", href: "https://github.com/qodo-ai/qodo-cover" },
+    ],
+  },
   "ai-native/latency-ux": {
     lead: "Design systems for AI products ship these patterns.",
     tools: [

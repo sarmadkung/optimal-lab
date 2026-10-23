@@ -1349,10 +1349,14 @@ export const TRACKS: Track[] = [
       { id: "user-feedback", title: "Collecting user feedback", blurb: "Thumbs, edits and abandons as signals for the next version.", status: "soon", section: "shipping-ai" },
       { id: "model-upgrades", title: "Upgrading the model under a live feature", blurb: "Switch models without changing what users get.", status: "soon", section: "shipping-ai" },
       // AI in your development workflow
-      { id: "pair-programming", title: "Pair programming with AI", blurb: "Where AI speeds you up, and where it quietly slows you down.", status: "soon", section: "ai-dev-workflow" },
-      { id: "specs-for-agents", title: "Writing specs for agents", blurb: "Describe the task so an agent can finish it without guessing.", status: "soon", section: "ai-dev-workflow" },
-      { id: "ai-code-review", title: "AI code review", blurb: "Let a model review pull requests, and check its findings.", status: "soon", section: "ai-dev-workflow" },
-      { id: "ai-tests", title: "Generating tests with AI", blurb: "Useful tests, not ones that only confirm the code as written.", status: "soon", section: "ai-dev-workflow" },
+      { id: "pair-programming", title: "Pair programming with AI", blurb: "Where AI speeds you up, and where it quietly slows you down.", status: "live", section: "ai-dev-workflow",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "specs-for-agents", title: "Writing specs for agents", blurb: "Describe the task so an agent can finish it without guessing.", status: "live", section: "ai-dev-workflow",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "ai-code-review", title: "AI code review", blurb: "Let a model review pull requests, and check its findings.", status: "live", section: "ai-dev-workflow",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "ai-tests", title: "Generating tests with AI", blurb: "Useful tests, not ones that only confirm the code as written.", status: "live", section: "ai-dev-workflow",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Case studies: build an AI feature
       { id: "support-assistant", title: "A support reply assistant", blurb: "Draft replies from your help docs, with sources and an approve button.", status: "soon", section: "native-projects" },
       { id: "invoice-extractor", title: "An invoice extractor", blurb: "PDF in, validated JSON out, with low-confidence fields flagged.", status: "soon", section: "native-projects" },

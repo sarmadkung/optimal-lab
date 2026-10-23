@@ -235,6 +235,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/red-teaming` | Eight attacks, ten tries each, against a support bot; add defenses and count successes and blocked users | — |
 | `/tracks/ai-native/feature-cost` | Size a feature's monthly bill from users, calls, prompt and answer length, model and caching | — |
 | `/tracks/ai-native/ab-testing-ai` | Two prompts with a small real difference: watch the confidence interval shrink as users grow | — |
+| `/tracks/ai-native/pair-programming` | Five kinds of task split into phases, by hand and with an assistant; weigh by how much of your week is familiar code, against two published trials | — |
+| `/tracks/ai-native/specs-for-agents` | One task handed to a coding agent with and without where the code is, when it's done, rules and scope: files, diff size, review rounds | — |
+| `/tracks/ai-native/ai-code-review` | A model reviewer on 12 pull requests with 10 hidden bugs: drop style, a confidence threshold and required evidence against precision and bugs caught | — |
+| `/tracks/ai-native/ai-tests` | Tests written from the code, from the spec, and from surviving mutants for a shipping function with a £50 bug; run them and mutation-test them | — |
 | `/tracks/ai-native/latency-ux` | The same 6-second agent task shown as a spinner, progress steps, streaming and optimistic UI | — |
 | `/tracks/ai-automation/classify-route` | Route support emails with free-text labels vs a fixed enum and see which ones fall through | — |
 | `/tracks/tools/build-mcp-server` | Three versions of an order-lookup tool and how a model uses each: names, schemas and lean results | — |

@@ -167,6 +167,10 @@ import BenchmarksDemo from "./ai/benchmarks/BenchmarksDemo";
 import RedTeamingDemo from "./ai/red-teaming/RedTeamingDemo";
 import FeatureCostDemo from "./ai-native/feature-cost/FeatureCostDemo";
 import AbTestDemo from "./ai-native/ab-testing-ai/AbTestDemo";
+import PairProgrammingDemo from "./ai-native/pair-programming/PairProgrammingDemo";
+import SpecsForAgentsDemo from "./ai-native/specs-for-agents/SpecsForAgentsDemo";
+import AiCodeReviewDemo from "./ai-native/ai-code-review/AiCodeReviewDemo";
+import AiTestsDemo from "./ai-native/ai-tests/AiTestsDemo";
 import LatencyUxDemo from "./ai-native/latency-ux/LatencyUxDemo";
 import ClassifyRouteDemo from "./ai-automation/classify-route/ClassifyRouteDemo";
 import McpServerDemo from "./tools/build-mcp-server/McpServerDemo";
@@ -507,6 +511,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/red-teaming": <RedTeamingDemo />,
   "ai-native/feature-cost": <FeatureCostDemo />,
   "ai-native/ab-testing-ai": <AbTestDemo />,
+  "ai-native/pair-programming": <PairProgrammingDemo />,
+  "ai-native/specs-for-agents": <SpecsForAgentsDemo />,
+  "ai-native/ai-code-review": <AiCodeReviewDemo />,
+  "ai-native/ai-tests": <AiTestsDemo />,
   "ai-native/latency-ux": <LatencyUxDemo />,
   "ai-automation/classify-route": <ClassifyRouteDemo />,
   "tools/build-mcp-server": <McpServerDemo />,
