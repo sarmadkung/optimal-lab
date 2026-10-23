@@ -2815,6 +2815,50 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "OpenAPI tools", kind: "standard", note: "Describe HTTP tools once; many agents can call them.", href: "https://www.openapis.org/" },
     ],
   },
+  "ai-native/classification": {
+    lead: "Label definitions, a constrained output and a labelled test set work the same with any model or provider.",
+    tools: [
+      { name: "JSON Schema", kind: "standard", note: "An enum of labels that structured-output modes enforce, so every answer is routable.", href: "https://json-schema.org/" },
+      { name: "Label Studio", kind: "software", note: "Open-source tool for labelling the past tickets you score classifiers on.", href: "https://github.com/HumanSignal/label-studio" },
+      { name: "Cohere Embed", kind: "service", note: "Multilingual embeddings for nearest-example classification.", href: "https://cohere.com/embed" },
+      { name: "Zendesk AI", kind: "service", note: "Help-desk triage that predicts intent, language and sentiment on incoming tickets.", href: "https://www.zendesk.com/service/ai/" },
+    ],
+  },
+  "ai-native/extraction": {
+    lead: "Text out first, fields by a model or a document service, then checks in your own code.",
+    tools: [
+      { name: "Amazon Textract", kind: "service", note: "OCR plus key-value and table extraction from scans and PDFs.", href: "https://aws.amazon.com/textract/" },
+      { name: "Azure AI Document Intelligence", kind: "service", note: "Prebuilt invoice, receipt and ID models, and custom extraction models.", href: "https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence" },
+      { name: "Google Document AI", kind: "service", note: "Document parsers for invoices, contracts and forms.", href: "https://cloud.google.com/document-ai" },
+      { name: "Tesseract", kind: "software", note: "Open-source OCR engine for turning scans into text before extraction.", href: "https://github.com/tesseract-ocr/tesseract" },
+    ],
+  },
+  "ai-native/summarization": {
+    lead: "Score summaries on the facts they keep and the claims they add, before and after every prompt change.",
+    tools: [
+      { name: "promptfoo", kind: "software", note: "Test sets with factuality and contains checks, run on each prompt change.", href: "https://github.com/promptfoo/promptfoo" },
+      { name: "Vectara hallucination leaderboard", kind: "software", note: "How often models add unsupported claims when summarizing, measured with an open evaluation model.", href: "https://github.com/vectara/hallucination-leaderboard" },
+      { name: "Langfuse", kind: "software", note: "Traces and scores for each summary in production, with human review.", href: "https://github.com/langfuse/langfuse" },
+    ],
+  },
+  "ai-native/writing-assist": {
+    lead: "Rewrite features lean on translation glossaries and message-format standards to keep what must not change.",
+    tools: [
+      { name: "DeepL API", kind: "service", note: "Translation with glossaries and tag handling for terms and markup that must stay.", href: "https://www.deepl.com/en/pro-api" },
+      { name: "ICU MessageFormat", kind: "standard", note: "Placeholder syntax that translation tools know to leave alone.", href: "https://unicode-org.github.io/icu/userguide/format_parse/messages/" },
+      { name: "Unicode CLDR", kind: "standard", note: "Locale data for dates, numbers and currencies filled into translated templates.", href: "https://cldr.unicode.org/" },
+      { name: "LanguageTool", kind: "software", note: "Open-source grammar and style checking alongside model rewrites.", href: "https://github.com/languagetool-org/languagetool" },
+    ],
+  },
+  "ai-native/semantic-search-feature": {
+    lead: "Search engines now ship keyword, vector and hybrid ranking together; filters and thresholds are yours to set.",
+    tools: [
+      { name: "Algolia", kind: "service", note: "Hosted search with keyword and AI ranking, filters and analytics on zero-result queries.", href: "https://www.algolia.com/" },
+      { name: "Typesense", kind: "software", note: "Open-source search engine with built-in hybrid keyword and vector search.", href: "https://github.com/typesense/typesense" },
+      { name: "Meilisearch", kind: "software", note: "Open-source search with typo tolerance, filters and hybrid search.", href: "https://github.com/meilisearch/meilisearch" },
+      { name: "pgvector", kind: "software", note: "Vector similarity inside Postgres, next to the product table and its filters.", href: "https://github.com/pgvector/pgvector" },
+    ],
+  },
   "ai-automation/workflow": {
     lead: "Visual or code-defined workflows route events through branches and actions — no single language required.",
     tools: [

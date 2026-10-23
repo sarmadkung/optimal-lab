@@ -380,6 +380,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/graph-rag` | Vector search, a 1–3 hop graph walk or community summaries on one-hop, multi-hop and whole-dataset questions | — |
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
+| `/tracks/ai-native/classification` | Sixteen tickets labelled by keyword rules, nearest examples, a model with label names and with definitions; recall per label and cost | — |
+| `/tracks/ai-native/extraction` | An invoice, a résumé and a contract: described fields, a quote per value, conversion and cross-checks in code, a review queue | — |
+| `/tracks/ai-native/summarization` | A support thread summarized plain or facts-first at three lengths; key facts kept and numbers checked against the source | — |
+| `/tracks/ai-native/writing-assist` | Rewrite an email template four ways: masked placeholders, a survival check, a diff, and German that breaks {first_name} | — |
+| `/tracks/ai-native/semantic-search-feature` | Eight logged queries through keyword, semantic and hybrid search, with filters parsed and a no-match threshold | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
 | `/tracks/ai-automation/schedules` | Cron with a runner outage: skip, catch up once, or backfill | — |

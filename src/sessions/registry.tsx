@@ -21,6 +21,11 @@ import WorkflowDemo from "./ai-automation/workflow/WorkflowDemo";
 import ApprovalDemo from "./ai-automation/human-approval/ApprovalDemo";
 import StructuredDemo from "./ai-native/structured-output/StructuredDemo";
 import ToolCallDemo from "./ai-native/tool-calling/ToolCallDemo";
+import ClassificationDemo from "./ai-native/classification/ClassificationDemo";
+import ExtractionDemo from "./ai-native/extraction/ExtractionDemo";
+import SummarizationDemo from "./ai-native/summarization/SummarizationDemo";
+import WritingAssistDemo from "./ai-native/writing-assist/WritingAssistDemo";
+import SemanticSearchFeatureDemo from "./ai-native/semantic-search-feature/SemanticSearchFeatureDemo";
 import PipelineDemo from "./devops/ci-cd-pipeline/PipelineDemo";
 import ContainersDemo from "./devops/containers-vs-vms/ContainersDemo";
 import BinarySearchDemo from "./dsa/binary-search/BinarySearchDemo";
@@ -691,6 +696,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/graph-rag": <GraphRagDemo />,
   "ai-native/structured-output": <StructuredDemo />,
   "ai-native/tool-calling": <ToolCallDemo />,
+  "ai-native/classification": <ClassificationDemo />,
+  "ai-native/extraction": <ExtractionDemo />,
+  "ai-native/summarization": <SummarizationDemo />,
+  "ai-native/writing-assist": <WritingAssistDemo />,
+  "ai-native/semantic-search-feature": <SemanticSearchFeatureDemo />,
   "ai-automation/workflow": <WorkflowDemo />,
   "ai-automation/human-approval": <ApprovalDemo />,
   "ai-automation/schedules": <SchedulesDemo />,
