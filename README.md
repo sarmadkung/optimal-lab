@@ -234,6 +234,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/benchmarks` | Five models on a fresh, a saturated and a leaked benchmark: error bars, ceilings and contamination | — |
 | `/tracks/ai/red-teaming` | Eight attacks, ten tries each, against a support bot; add defenses and count successes and blocked users | — |
 | `/tracks/ai-native/feature-cost` | Size a feature's monthly bill from users, calls, prompt and answer length, model and caching | — |
+| `/tracks/ai-native/prototype-to-production` | A demo that passed on 10 inputs meets 1,000 real requests; add input guards, retries with fallback, output checks and a cache | — |
+| `/tracks/ai-native/feature-evals` | Twelve test cases with checks as code, four prompt versions, a case-by-case diff and a merge gate that blocks regressions | — |
+| `/tracks/ai-native/user-feedback` | Thumbs, edits, regenerations and abandons from 200 to 5,000 sessions per prompt version: which signal can tell the better one | — |
+| `/tracks/ai-native/model-upgrades` | Move an action-items feature to a cheaper model: pin the snapshot, run both on evals, fix fences and keys, canary, keep rollback | — |
 | `/tracks/ai-native/ab-testing-ai` | Two prompts with a small real difference: watch the confidence interval shrink as users grow | — |
 | `/tracks/ai-native/latency-ux` | The same 6-second agent task shown as a spinner, progress steps, streaming and optimistic UI | — |
 | `/tracks/ai-automation/classify-route` | Route support emails with free-text labels vs a fixed enum and see which ones fall through | — |

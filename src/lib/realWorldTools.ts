@@ -1549,6 +1549,40 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Helicone", kind: "service", note: "Cost and usage per request and user.", href: "https://www.helicone.ai/" },
     ],
   },
+  "ai-native/prototype-to-production": {
+    lead: "An AI gateway in front of the provider gives you retries, fallbacks, caching and logs without rewriting the feature.",
+    tools: [
+      { name: "Portkey AI Gateway", kind: "software", note: "Open-source gateway with retries, fallbacks across providers, timeouts and caching.", href: "https://github.com/Portkey-AI/gateway" },
+      { name: "LiteLLM", kind: "software", note: "Proxy server with one API over many providers, retries, fallbacks and budgets.", href: "https://github.com/BerriAI/litellm" },
+      { name: "Helicone", kind: "software", note: "Request logging, caching and cost tracking for model calls.", href: "https://github.com/Helicone/helicone" },
+    ],
+  },
+  "ai-native/feature-evals": {
+    lead: "Eval runners read a test set and assertions from config and run in CI on every change, whatever language the feature is in.",
+    tools: [
+      { name: "promptfoo", kind: "software", note: "Test cases and assertions in YAML, run from the command line or CI.", href: "https://github.com/promptfoo/promptfoo" },
+      { name: "Braintrust", kind: "service", note: "Hosted eval sets, scoring and experiment comparison per prompt version.", href: "https://www.braintrust.dev/" },
+      { name: "OpenAI Evals", kind: "software", note: "Open-source framework and registry of evals.", href: "https://github.com/openai/evals" },
+      { name: "GitHub Actions", kind: "platform", note: "Run the eval suite on every pull request and fail the check on regressions.", href: "https://github.com/features/actions" },
+    ],
+  },
+  "ai-native/user-feedback": {
+    lead: "Feedback is events: product analytics and LLM tracing tools store them next to the prompt version that caused them.",
+    tools: [
+      { name: "Langfuse", kind: "software", note: "Attach user feedback and scores to each traced generation and prompt version.", href: "https://github.com/langfuse/langfuse" },
+      { name: "PostHog", kind: "software", note: "Open-source product analytics and experiments over every user action.", href: "https://github.com/PostHog/posthog" },
+      { name: "GrowthBook", kind: "software", note: "Open-source A/B testing with significance on any metric you log.", href: "https://github.com/growthbook/growthbook" },
+    ],
+  },
+  "ai-native/model-upgrades": {
+    lead: "Dated model snapshots, enforced schemas and feature flags make an upgrade a change you control.",
+    tools: [
+      { name: "Anthropic model versions", kind: "service", note: "Dated snapshot ids alongside moving aliases, so you can pin exactly what runs.", href: "https://docs.anthropic.com/en/docs/about-claude/models" },
+      { name: "JSON Schema", kind: "standard", note: "The schema structured-output modes enforce, so format doesn't drift between models.", href: "https://json-schema.org/" },
+      { name: "OpenFeature", kind: "standard", note: "Vendor-neutral feature flags for canarying a model to a share of traffic.", href: "https://openfeature.dev/" },
+      { name: "promptfoo", kind: "software", note: "Run the same eval set against two models side by side.", href: "https://github.com/promptfoo/promptfoo" },
+    ],
+  },
   "ai-native/ab-testing-ai": {
     lead: "Experiment platforms handle the statistics for you.",
     tools: [

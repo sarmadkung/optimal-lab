@@ -166,6 +166,10 @@ import AgentFailuresDemo from "./ai/agent-failures/AgentFailuresDemo";
 import BenchmarksDemo from "./ai/benchmarks/BenchmarksDemo";
 import RedTeamingDemo from "./ai/red-teaming/RedTeamingDemo";
 import FeatureCostDemo from "./ai-native/feature-cost/FeatureCostDemo";
+import PrototypeToProductionDemo from "./ai-native/prototype-to-production/PrototypeToProductionDemo";
+import FeatureEvalsDemo from "./ai-native/feature-evals/FeatureEvalsDemo";
+import UserFeedbackDemo from "./ai-native/user-feedback/UserFeedbackDemo";
+import ModelUpgradesDemo from "./ai-native/model-upgrades/ModelUpgradesDemo";
 import AbTestDemo from "./ai-native/ab-testing-ai/AbTestDemo";
 import LatencyUxDemo from "./ai-native/latency-ux/LatencyUxDemo";
 import ClassifyRouteDemo from "./ai-automation/classify-route/ClassifyRouteDemo";
@@ -506,6 +510,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/benchmarks": <BenchmarksDemo />,
   "ai/red-teaming": <RedTeamingDemo />,
   "ai-native/feature-cost": <FeatureCostDemo />,
+  "ai-native/prototype-to-production": <PrototypeToProductionDemo />,
+  "ai-native/feature-evals": <FeatureEvalsDemo />,
+  "ai-native/user-feedback": <UserFeedbackDemo />,
+  "ai-native/model-upgrades": <ModelUpgradesDemo />,
   "ai-native/ab-testing-ai": <AbTestDemo />,
   "ai-native/latency-ux": <LatencyUxDemo />,
   "ai-automation/classify-route": <ClassifyRouteDemo />,
