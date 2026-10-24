@@ -155,6 +155,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/synthetic-data` | Eight generations trained on generated data: topics vanish and errors compound, unless verified and mixed | — |
 | `/tracks/ai-native/streaming-ui` | Stream a JSON answer and compare waiting, raw text, and parsing partial chunks | — |
 | `/tracks/ai-automation/retries-errors` | Try no retries, immediate retries and backoff against a 503, a 429 and a 400 | — |
+| `/tracks/ai-automation/api-connections` | Copy 18,000 changing contacts from a rate-limited API: a pasted token or OAuth refresh, offset or cursor paging, per-record or batch reads, and what a 429 does | — |
+| `/tracks/ai-automation/email-automation` | Auto-acknowledge ten emails with real headers: out-of-office loops, a newsletter, bounces, a forged sender, threading, a crash re-read and DKIM, counting where replies land | — |
+| `/tracks/ai-automation/sheets-crms` | Two workflows and a sales team share a leads sheet for one night: append vs last row, IDs vs row numbers, headers vs column letters, raw vs typed values, batch vs cell writes | — |
+| `/tracks/ai-automation/document-processing` | Eight supplier documents from digital PDF to handwriting: text layer or OCR, a garbage-layer check, image cleanup, whole-document extraction, arithmetic checks and a confidence gate | — |
+| `/tracks/ai-automation/chat-bots` | Six events at a team bot: a slow slash command, a retried mention, its own message, a burst of deploy updates, a forged and a replayed click, with a real HMAC-SHA256 signature check | — |
 | `/tracks/ai-automation/confidence-fallbacks` | Slide the auto-approve threshold and trade automation rate against errors that slip through | — |
 | `/tracks/tools/model-routers` | Twelve requests during a provider outage: one provider, a fallback chain, or routing by difficulty | — |
 | `/tracks/system-design/citations` | A RAG answer with one miscited and one made-up sentence, cited four ways, the last verified against its chunks | — |

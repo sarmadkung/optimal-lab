@@ -882,6 +882,50 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "AWS backoff and jitter", kind: "standard", note: "Why jitter matters.", href: "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/" },
     ],
   },
+  "ai-automation/api-connections": {
+    lead: "Standard auth, documented rate-limit responses and connector platforms handle most of this for you.",
+    tools: [
+      { name: "OAuth 2.0", kind: "standard", note: "Access tokens that expire, renewed with a refresh token.", href: "https://oauth.net/2/" },
+      { name: "HTTP 429 (RFC 6585)", kind: "standard", note: "Too Many Requests, with Retry-After saying when to try again.", href: "https://www.rfc-editor.org/rfc/rfc6585" },
+      { name: "Airbyte", kind: "software", note: "Open-source connectors that page, batch and back off for each API.", href: "https://github.com/airbytehq/airbyte" },
+      { name: "n8n HTTP pagination", kind: "software", note: "Cursor and offset paging in a workflow's HTTP Request node.", href: "https://docs.n8n.io/code/cookbook/http-node/pagination/" },
+    ],
+  },
+  "ai-automation/email-automation": {
+    lead: "The rules for automatic mail are written down; mail APIs and providers do the rest.",
+    tools: [
+      { name: "RFC 3834", kind: "standard", note: "Which mail an automatic reply must never answer.", href: "https://www.rfc-editor.org/rfc/rfc3834" },
+      { name: "DKIM (RFC 6376)", kind: "standard", note: "Sign outgoing mail so receivers can trust your domain.", href: "https://www.rfc-editor.org/rfc/rfc6376" },
+      { name: "DMARC (RFC 7489)", kind: "standard", note: "Tell receivers what to do with mail that fails SPF and DKIM.", href: "https://www.rfc-editor.org/rfc/rfc7489" },
+      { name: "Gmail API push", kind: "service", note: "Get notified of new mail instead of polling the inbox.", href: "https://developers.google.com/workspace/gmail/api/guides/push" },
+      { name: "Postmark", kind: "service", note: "Inbound mail as webhooks and authenticated outbound sending.", href: "https://postmarkapp.com" },
+    ],
+  },
+  "ai-automation/sheets-crms": {
+    lead: "Spreadsheet APIs give you append, batch updates and raw values; database-backed sheets go further.",
+    tools: [
+      { name: "Google Sheets API", kind: "service", note: "append, batchUpdate and RAW vs USER_ENTERED values.", href: "https://developers.google.com/workspace/sheets/api/guides/concepts" },
+      { name: "Airtable", kind: "service", note: "A spreadsheet view over typed fields and stable record ids.", href: "https://www.airtable.com" },
+      { name: "NocoDB", kind: "software", note: "A spreadsheet interface on top of a real database.", href: "https://github.com/nocodb/nocodb" },
+    ],
+  },
+  "ai-automation/document-processing": {
+    lead: "OCR engines and document services read the pages; checks and routing are yours to build.",
+    tools: [
+      { name: "Tesseract", kind: "software", note: "The open-source OCR engine behind many pipelines.", href: "https://github.com/tesseract-ocr/tesseract" },
+      { name: "OCRmyPDF", kind: "software", note: "Deskews, cleans and adds a proper text layer to scanned PDFs.", href: "https://github.com/ocrmypdf/OCRmyPDF" },
+      { name: "Amazon Textract", kind: "service", note: "OCR with tables, forms and per-word confidence.", href: "https://aws.amazon.com/textract/" },
+      { name: "Google Document AI", kind: "service", note: "Document OCR and invoice parsing with confidence scores.", href: "https://cloud.google.com/document-ai" },
+    ],
+  },
+  "ai-automation/chat-bots": {
+    lead: "Chat platforms document their timeouts, retries, limits and request signing.",
+    tools: [
+      { name: "Slack Events API", kind: "platform", note: "Event delivery, the 3-second rule and retries with X-Slack-Retry-Num.", href: "https://docs.slack.dev/apis/events-api/" },
+      { name: "Slack request signing", kind: "standard", note: "HMAC-SHA256 of the timestamp and body with your signing secret.", href: "https://docs.slack.dev/authentication/verifying-requests-from-slack" },
+      { name: "Mattermost", kind: "software", note: "Open-source team chat with bots, webhooks and slash commands.", href: "https://github.com/mattermost/mattermost" },
+    ],
+  },
   "ai-automation/confidence-fallbacks": {
     lead: "Human review queues are a standard part of document automation.",
     tools: [
