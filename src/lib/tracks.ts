@@ -1479,8 +1479,10 @@ export const TRACKS: Track[] = [
       },
       { id: "build-mcp-server", title: "Building an MCP server", blurb: "Expose your own data and actions to any MCP client.", status: "live", section: "protocols",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
-      { id: "openapi-to-tools", title: "Turning an API into tools", blurb: "Generate tool definitions from an OpenAPI spec.", status: "soon", section: "protocols" },
-      { id: "agent-to-agent", title: "Agent-to-agent protocols", blurb: "How agents from different vendors hand work to each other.", status: "soon", section: "protocols" },
+      { id: "openapi-to-tools", title: "Turning an API into tools", blurb: "Generate tool definitions from an OpenAPI spec.", status: "live", section: "protocols",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "agent-to-agent", title: "Agent-to-agent protocols", blurb: "How agents from different vendors hand work to each other.", status: "live", section: "protocols",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Workflow builders
       {
         id: "n8n",
@@ -1490,9 +1492,12 @@ export const TRACKS: Track[] = [
         section: "workflow-builders",
         shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
-      { id: "zapier-make", title: "Zapier and Make", blurb: "No-code automation, and where it runs out.", status: "soon", section: "workflow-builders" },
-      { id: "langgraph", title: "LangGraph", blurb: "Agents as graphs of steps with saved state.", status: "soon", section: "workflow-builders" },
-      { id: "temporal", title: "Temporal", blurb: "Code-first durable workflows that survive crashes.", status: "soon", section: "workflow-builders" },
+      { id: "zapier-make", title: "Zapier and Make", blurb: "No-code automation, and where it runs out.", status: "live", section: "workflow-builders",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "langgraph", title: "LangGraph", blurb: "Agents as graphs of steps with saved state.", status: "live", section: "workflow-builders",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "temporal", title: "Temporal", blurb: "Code-first durable workflows that survive crashes.", status: "live", section: "workflow-builders",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Model APIs and SDKs
       { id: "model-providers", title: "Model provider APIs", blurb: "OpenAI, Anthropic and Gemini: messages, tools and streaming compared.", status: "soon", section: "model-apis" },
       { id: "ai-sdks", title: "AI SDKs", blurb: "Vercel AI SDK and friends: one interface over many providers.", status: "soon", section: "model-apis" },

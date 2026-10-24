@@ -244,6 +244,11 @@ import StreamingUiDemo from "./ai-native/streaming-ui/StreamingUiDemo";
 import RetriesDemo from "./ai-automation/retries-errors/RetriesDemo";
 import ConfidenceDemo from "./ai-automation/confidence-fallbacks/ConfidenceDemo";
 import RouterDemo from "./tools/model-routers/RouterDemo";
+import OpenapiToolsDemo from "./tools/openapi-to-tools/OpenapiToolsDemo";
+import AgentToAgentDemo from "./tools/agent-to-agent/AgentToAgentDemo";
+import ZapierMakeDemo from "./tools/zapier-make/ZapierMakeDemo";
+import LanggraphDemo from "./tools/langgraph/LanggraphDemo";
+import TemporalDemo from "./tools/temporal/TemporalDemo";
 import StreamHopsDemo from "./system-design/streaming-responses/StreamHopsDemo";
 import CitationsDemo from "./system-design/citations/CitationsDemo";
 import IncrementalIndexingDemo from "./system-design/incremental-indexing/IncrementalIndexingDemo";
@@ -584,6 +589,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai-automation/retries-errors": <RetriesDemo />,
   "ai-automation/confidence-fallbacks": <ConfidenceDemo />,
   "tools/model-routers": <RouterDemo />,
+  "tools/openapi-to-tools": <OpenapiToolsDemo />,
+  "tools/agent-to-agent": <AgentToAgentDemo />,
+  "tools/zapier-make": <ZapierMakeDemo />,
+  "tools/langgraph": <LanggraphDemo />,
+  "tools/temporal": <TemporalDemo />,
   "system-design/streaming-responses": <StreamHopsDemo />,
   "system-design/citations": <CitationsDemo />,
   "system-design/incremental-indexing": <IncrementalIndexingDemo />,

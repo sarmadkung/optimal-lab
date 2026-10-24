@@ -157,6 +157,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai-automation/retries-errors` | Try no retries, immediate retries and backoff against a 503, a 429 and a 400 | — |
 | `/tracks/ai-automation/confidence-fallbacks` | Slide the auto-approve threshold and trade automation rate against errors that slip through | — |
 | `/tracks/tools/model-routers` | Twelve requests during a provider outage: one provider, a fallback chain, or routing by difficulty | — |
+| `/tracks/tools/openapi-to-tools` | A 48-operation OpenAPI spec into tools for a support assistant: all of it or a curated few, descriptions for a model, flat validated arguments and trimmed responses | — |
+| `/tracks/tools/agent-to-agent` | A travel assistant delegates to flight, hotel and visa agents from other vendors: custom REST vs A2A tasks, polling vs streaming, and relaying input-required and auth-required to the traveller | — |
+| `/tracks/tools/zapier-make` | One order workflow on Zapier, Make and n8n: tasks, operations and executions per run, polling vs instant triggers, loops over line items, volume, and when to move to code | — |
+| `/tracks/tools/langgraph` | A support agent as a LangGraph graph: a restart mid-run, a retrieval loop, a rejected draft; checkpointers, interrupts for review and an attempt cap against the recursion limit | — |
+| `/tracks/tools/temporal` | An order workflow on Temporal broken four ways: flaky payments, a declined card, a lost charge response and a dead worker; retry policies, heartbeats, idempotency keys and the event history | — |
 | `/tracks/system-design/citations` | A RAG answer with one miscited and one made-up sentence, cited four ways, the last verified against its chunks | — |
 | `/tracks/system-design/incremental-indexing` | Keep a vector index current: nightly rebuild, per-document events, or per-chunk hashes; cost, staleness and deletes | — |
 | `/tracks/system-design/re-embedding` | Move 2 million chunks to a new embedding model: overwrite in place, or a second index with shadow traffic and a switch | — |

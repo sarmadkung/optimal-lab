@@ -898,6 +898,43 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Cloudflare AI Gateway", kind: "service", note: "Caching, retries and fallbacks.", href: "https://developers.cloudflare.com/ai-gateway/" },
     ],
   },
+  "tools/openapi-to-tools": {
+    lead: "An OpenAPI spec is the starting point; a tool server shapes it for a model.",
+    tools: [
+      { name: "OpenAPI", kind: "standard", note: "The machine-readable description of a REST API that tools are generated from.", href: "https://spec.openapis.org/oas/latest.html" },
+      { name: "Model Context Protocol", kind: "protocol", note: "Serve the curated tools to any MCP client.", href: "https://modelcontextprotocol.io" },
+    ],
+  },
+  "tools/agent-to-agent": {
+    lead: "A2A covers agents talking to agents; MCP covers agents using tools. Many systems use both.",
+    tools: [
+      { name: "A2A protocol", kind: "protocol", note: "Agent Cards, tasks with states, streaming and push notifications.", href: "https://a2a-protocol.org" },
+      { name: "A2A on GitHub", kind: "software", note: "The specification and SDKs.", href: "https://github.com/a2aproject/A2A" },
+      { name: "Model Context Protocol", kind: "protocol", note: "How each agent reaches its own tools.", href: "https://modelcontextprotocol.io" },
+    ],
+  },
+  "tools/zapier-make": {
+    lead: "No-code builders differ most in what they count and bill.",
+    tools: [
+      { name: "Zapier", kind: "service", note: "Bills tasks: each action step that runs.", href: "https://zapier.com/how-it-works" },
+      { name: "Make", kind: "service", note: "Bills operations: each module that runs, including polling checks.", href: "https://help.make.com/operations" },
+      { name: "n8n", kind: "software", note: "Counts executions per run; free to self-host.", href: "https://github.com/n8n-io/n8n" },
+    ],
+  },
+  "tools/langgraph": {
+    lead: "Graph-based agent frameworks save state between steps so runs can pause and resume.",
+    tools: [
+      { name: "LangGraph", kind: "software", note: "Agents as state graphs with checkpointers and interrupts.", href: "https://github.com/langchain-ai/langgraph" },
+      { name: "LangGraph docs", kind: "software", note: "Persistence, human-in-the-loop and time travel.", href: "https://langchain-ai.github.io/langgraph/" },
+    ],
+  },
+  "tools/temporal": {
+    lead: "Durable execution keeps workflow code running through crashes by recording every event.",
+    tools: [
+      { name: "Temporal", kind: "software", note: "Workflows, activities, retries, timers and signals.", href: "https://github.com/temporalio/temporal" },
+      { name: "Temporal docs", kind: "software", note: "Retry policies, timeouts and heartbeats explained.", href: "https://docs.temporal.io" },
+    ],
+  },
   "system-design/citations": {
     lead: "RAG frameworks keep source metadata on every chunk; some model APIs return citations as structured data.",
     tools: [
