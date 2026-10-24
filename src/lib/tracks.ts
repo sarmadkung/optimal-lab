@@ -1386,8 +1386,10 @@ export const TRACKS: Track[] = [
         section: "workflow-basics",
         shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
-      { id: "triggers", title: "Triggers: webhooks, events and schedules", blurb: "What starts a workflow, and making sure it starts once.", status: "soon", section: "workflow-basics" },
-      { id: "branching", title: "Branches and routing", blurb: "Send each item down the right path.", status: "soon", section: "workflow-basics" },
+      { id: "triggers", title: "Triggers: webhooks, events and schedules", blurb: "What starts a workflow, and making sure it starts once.", status: "live", section: "workflow-basics",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "branching", title: "Branches and routing", blurb: "Send each item down the right path.", status: "live", section: "workflow-basics",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       {
         id: "schedules",
         title: "Run it on a schedule",
@@ -1398,7 +1400,8 @@ export const TRACKS: Track[] = [
       },
       { id: "retries-errors", title: "Retries and error handling", blurb: "Retry what's temporary, alert on what isn't.", status: "live", section: "workflow-basics",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
-      { id: "idempotent-steps", title: "Idempotent steps", blurb: "Run a step twice without sending two emails.", status: "soon", section: "workflow-basics" },
+      { id: "idempotent-steps", title: "Idempotent steps", blurb: "Run a step twice without sending two emails.", status: "live", section: "workflow-basics",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // AI steps in workflows
       { id: "llm-step", title: "Adding an LLM step", blurb: "Prompt, parse and validate inside a workflow.", status: "soon", section: "ai-steps" },
       { id: "classify-route", title: "Classify and route", blurb: "Let a model decide which branch an item takes.", status: "live", section: "ai-steps",

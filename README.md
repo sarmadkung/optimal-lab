@@ -381,6 +381,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
+| `/tracks/ai-automation/triggers` | An hour of CRM changes with a six-minute outage: polling, webhooks and retried webhooks, then deduplication by event id | — |
+| `/tracks/ai-automation/branching` | Twelve orders through a switch: text amounts, a lower-case country, first match vs every match, and a missing default branch | — |
+| `/tracks/ai-automation/idempotent-steps` | A signup workflow breaks three ways (timeout, crash, a double trigger); retry from the top or the failed step, with or without keys | — |
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
 | `/tracks/ai-automation/schedules` | Cron with a runner outage: skip, catch up once, or backfill | — |
 | `/tracks/tools/cursor-agent` | Search, edit, check, repeat | — |

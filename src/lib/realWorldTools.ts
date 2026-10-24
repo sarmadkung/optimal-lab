@@ -2824,6 +2824,30 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "AWS Step Functions", kind: "platform", note: "State machines for serverless orchestration.", href: "https://aws.amazon.com/step-functions/" },
     ],
   },
+  "ai-automation/triggers": {
+    lead: "Webhook delivery with signatures, retries and dedupe is a solved problem: use a standard or a service rather than inventing one.",
+    tools: [
+      { name: "Standard Webhooks", kind: "standard", note: "A common spec for webhook ids, signatures and retries, so receivers can dedupe and verify.", href: "https://www.standardwebhooks.com/" },
+      { name: "Svix", kind: "software", note: "Open-source webhook sending with retries, signing and a delivery log.", href: "https://github.com/svix/svix-webhooks" },
+      { name: "Hookdeck", kind: "service", note: "Receives webhooks for you, queues them, retries and drops duplicates.", href: "https://hookdeck.com/" },
+    ],
+  },
+  "ai-automation/branching": {
+    lead: "Every workflow builder has a switch or router; they differ in whether all matching branches run and how they compare types.",
+    tools: [
+      { name: "n8n", kind: "software", note: "Switch and IF nodes, with typed comparisons and a fallback output.", href: "https://github.com/n8n-io/n8n" },
+      { name: "Zapier", kind: "service", note: "Paths run every branch whose rules match.", href: "https://zapier.com/" },
+      { name: "Make", kind: "service", note: "Routers with filters on each route and a fallback route.", href: "https://www.make.com/" },
+    ],
+  },
+  "ai-automation/idempotent-steps": {
+    lead: "Idempotency keys are a standard HTTP pattern; durable workflow engines record each step so a retry knows what already ran.",
+    tools: [
+      { name: "Idempotency-Key header", kind: "standard", note: "IETF draft for retry-safe POST requests with a client-chosen key.", href: "https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/" },
+      { name: "Stripe idempotent requests", kind: "service", note: "A payment API that returns the first result for a repeated key.", href: "https://docs.stripe.com/api/idempotent_requests" },
+      { name: "Temporal", kind: "software", note: "Durable workflows that record every step's result and replay instead of redoing it.", href: "https://github.com/temporalio/temporal" },
+    ],
+  },
   "ai-automation/human-approval": {
     lead: "Human-in-the-loop steps pause automation until someone approves — common in ticketing and chat ops.",
     tools: [
