@@ -78,6 +78,9 @@ import ReverseProxyDemo from "./devops/reverse-proxy-config/ReverseProxyDemo";
 import VpcDemo from "./devops/vpc/VpcDemo";
 import LayerCacheDemo from "./devops/dockerfiles/LayerCacheDemo";
 import ContainerNetDemo from "./devops/container-networking/ContainerNetDemo";
+import ComposeDemo from "./devops/docker-compose/ComposeDemo";
+import RegistryDemo from "./devops/container-registries/RegistryDemo";
+import ContainerSecurityDemo from "./devops/container-security/ContainerSecurityDemo";
 import VolumesDemo from "./devops/volumes/VolumesDemo";
 import HpaDemo from "./devops/pod-autoscaling/HpaDemo";
 import SchedulerDemo from "./devops/scheduling/SchedulerDemo";
@@ -418,6 +421,9 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/vpc": <VpcDemo />,
   "devops/dockerfiles": <LayerCacheDemo />,
   "devops/container-networking": <ContainerNetDemo />,
+  "devops/docker-compose": <ComposeDemo />,
+  "devops/container-registries": <RegistryDemo />,
+  "devops/container-security": <ContainerSecurityDemo />,
   "devops/volumes": <VolumesDemo />,
   "devops/pod-autoscaling": <HpaDemo />,
   "devops/scheduling": <SchedulerDemo />,

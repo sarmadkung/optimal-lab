@@ -2306,6 +2306,35 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Kubernetes networking model", kind: "software", note: "Pods, Services, DNS.", href: "https://kubernetes.io/docs/concepts/services-networking/" },
     ],
   },
+  "devops/docker-compose": {
+    lead: "One file for the whole local stack, with health checks and named volumes.",
+    tools: [
+      { name: "Docker Compose", kind: "software", note: "Multi-container apps from one YAML file.", href: "https://github.com/docker/compose" },
+      { name: "Compose Specification", kind: "standard", note: "depends_on conditions, healthchecks, volumes.", href: "https://github.com/compose-spec/compose-spec" },
+      { name: "Podman Compose", kind: "software", note: "Runs Compose files with Podman.", href: "https://github.com/containers/podman-compose" },
+      { name: "Dev Containers", kind: "standard", note: "A Compose stack as a development environment.", href: "https://containers.dev/" },
+    ],
+  },
+  "devops/container-registries": {
+    lead: "Store images once, name them immutably, delete only what nothing needs.",
+    tools: [
+      { name: "OCI Distribution Spec", kind: "standard", note: "How registries push, pull and address by digest.", href: "https://github.com/opencontainers/distribution-spec" },
+      { name: "Harbor", kind: "software", note: "Self-hosted registry with immutability and retention rules.", href: "https://github.com/goharbor/harbor" },
+      { name: "Amazon ECR", kind: "service", note: "Tag immutability and lifecycle policies.", href: "https://aws.amazon.com/ecr/" },
+      { name: "GitHub Container Registry", kind: "service", note: "Images next to the code.", href: "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" },
+      { name: "crane", kind: "software", note: "Inspect manifests and digests from the command line.", href: "https://github.com/google/go-containerregistry" },
+    ],
+  },
+  "devops/container-security": {
+    lead: "Small images, scanned in CI, run with nothing they don't need.",
+    tools: [
+      { name: "Trivy", kind: "software", note: "Scans images for CVEs, secrets and misconfigurations.", href: "https://github.com/aquasecurity/trivy" },
+      { name: "Grype", kind: "software", note: "Vulnerability scanner for images.", href: "https://github.com/anchore/grype" },
+      { name: "Distroless images", kind: "software", note: "Runtime-only base images.", href: "https://github.com/GoogleContainerTools/distroless" },
+      { name: "Docker build secrets", kind: "standard", note: "Secrets mounted for one build step.", href: "https://docs.docker.com/build/building/secrets/" },
+      { name: "Docker Bench for Security", kind: "software", note: "Checks hosts and containers against CIS advice.", href: "https://github.com/docker/docker-bench-security" },
+    ],
+  },
   "devops/volumes": {
     lead: "Persistent data in containers lives in volumes.",
     tools: [

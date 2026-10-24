@@ -319,6 +319,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/vpc` | Trace five flows through public and private subnets, gateways and security groups | — |
 | `/tracks/devops/dockerfiles` | Change code or dependencies and see which layers rebuild with two Dockerfile orderings | — |
 | `/tracks/devops/container-networking` | Try five connections between the host and containers: published ports, names and the localhost trap | — |
+| `/tracks/devops/docker-compose` | Start web, worker, Postgres and Redis second by second: depends_on vs healthchecks, localhost vs the service name, restart policies, and what down and down -v keep | — |
+| `/tracks/devops/container-registries` | A month of pushes, a release, a hotfix under the same tag, a scale-up and a rollback: shared layers, real manifest digests, immutable tags and retention rules | — |
+| `/tracks/devops/container-security` | Build and run one image five ways against five attacks: a known CVE, a token left in a layer, code execution, raw sockets and a mounted Docker socket | — |
 | `/tracks/devops/volumes` | Insert rows, restart, remove and recreate a database container with three kinds of storage | — |
 | `/tracks/devops/pod-autoscaling` | Change the app's CPU needs and step through the HPA's replica calculation, min and max | — |
 | `/tracks/devops/scheduling` | Place seven pods on three nodes by CPU requests, with a taint and a pod left pending | — |
