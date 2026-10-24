@@ -434,22 +434,22 @@ Every session in `tracks.ts` gets a page. Sessions marked `soon` show a "coming 
 (id, title, blurb, and `related` live sessions from other tracks), and each session names its
 `section`. The track page then shows the sessions under numbered section headings with jump
 links, and `/tracks` shows only the live ones plus a "+N topics coming" card. System Design has
-18 sections and 123 topics (46 live): scalability, data, networking, reliability, distributed
+18 sections and 123 topics, all live: scalability, data, networking, reliability, distributed
 systems, architecture, security, production, web applications, seven AI system design
 sections (LLM apps, RAG, agents, memory, evaluation, serving, security), specialized systems,
 and case studies (design a URL shortener, chat app, news feed, payment system, coding agent…).
-DevOps uses the same layout: 13 sections and 77 topics (3 live), from Linux, networking and Git
+DevOps uses the same layout: 13 sections and 77 topics, all live, from Linux, networking and Git
 through containers, CI/CD, Kubernetes, infrastructure as code, cloud, observability, SRE,
 DevSecOps and platform engineering, to end-to-end case studies.
 The four AI tracks are split by question so they don't repeat each other or System Design
 (which owns AI architecture: gateways, serving, RAG pipelines, memory, AI security):
-**AI Engineering** (53 topics) covers how models work and the core techniques; **AI Native**
-(28) covers AI features, AI UX and shipping them; **AI Automation** (28) covers workflows with
-AI steps and people in the loop; **Tools** (27) covers the actual tools: coding agents, MCP,
+**AI Engineering** (53 topics, all live) covers how models work and the core techniques; **AI Native**
+(28, all live) covers AI features, AI UX and shipping them; **AI Automation** (28, all live) covers workflows with
+AI steps and people in the loop; **Tools** (27, all live) covers the actual tools: coding agents, MCP,
 workflow builders, model SDKs, vector databases and LLMOps.
-Five more tracks have topic maps but no live sessions yet: **Frontend and the browser** (60
-topics), **Databases in depth** (40), **Networking** (37), **Operating systems and concurrency**
-(35) and **Security and cryptography** (40). Each has its own accent token in `globals.css`
+Five more tracks have their own topic maps, part live: **Frontend and the browser** (60
+topics, 33 live), **Databases in depth** (40, 21 live), **Networking** (37, 19 live), **Operating
+systems and concurrency** (35, 19 live) and **Security and cryptography** (40, 21 live). Each has its own accent token in `globals.css`
 (`--web`, `--db`, `--net`, `--os`, `--sec`) for dark and light mode.
 Topics already live in another track (structured output, MCP, CI/CD, evals and so on) are
 linked from the matching section through `related` instead of being repeated.
