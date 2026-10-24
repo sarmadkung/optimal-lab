@@ -2727,6 +2727,31 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "n8n Schedule Trigger", kind: "software", note: "Cron-based triggers for workflows.", href: "https://github.com/n8n-io/n8n" },
     ],
   },
+  "ai-automation/escalation": {
+    lead: "On-call and support tools already do routing by reason, handoff and escalation ladders; automations should hand off into them.",
+    tools: [
+      { name: "PagerDuty escalation policies", kind: "service", note: "Page the next level when nobody acknowledges in time.", href: "https://support.pagerduty.com/main/docs/escalation-policies" },
+      { name: "incident.io", kind: "service", note: "On-call schedules, escalation paths and incident channels.", href: "https://incident.io" },
+      { name: "Intercom Fin", kind: "service", note: "Hands a conversation to a person with its history attached.", href: "https://fin.ai" },
+    ],
+  },
+  "ai-automation/approval-timeouts": {
+    lead: "Workflow engines keep timers durably, so a wait for a person survives deploys and crashes.",
+    tools: [
+      { name: "Temporal", kind: "software", note: "Durable timers and signals: wait days for a person, then act.", href: "https://github.com/temporalio/temporal" },
+      { name: "AWS Step Functions", kind: "service", note: "Wait for a callback token with a timeout, then branch.", href: "https://aws.amazon.com/step-functions/" },
+      { name: "n8n Wait node", kind: "software", note: "Pause a workflow until a webhook arrives or a time limit passes.", href: "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.wait/" },
+    ],
+  },
+  "ai-automation/approval-audit": {
+    lead: "Named identity, policy checks and tamper-evident records are standard parts; approvals should use them.",
+    tools: [
+      { name: "OpenID Connect", kind: "standard", note: "A verified, named person behind every decision.", href: "https://openid.net/developers/how-connect-works/" },
+      { name: "Open Policy Agent", kind: "software", note: "Rules such as limits and separation of duties, checked at decision time.", href: "https://github.com/open-policy-agent/opa" },
+      { name: "immudb", kind: "software", note: "An append-only, verifiable database for decision records.", href: "https://github.com/codenotary/immudb" },
+      { name: "Slack interactivity", kind: "platform", note: "Approve buttons that carry the clicking user's id.", href: "https://docs.slack.dev/interactivity" },
+    ],
+  },
   "tools/github-actions": {
     lead: "Event-triggered YAML pipelines are the norm across CI products; the keywords change, the model doesn't.",
     tools: [

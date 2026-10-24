@@ -383,6 +383,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
 | `/tracks/ai-automation/schedules` | Cron with a runner outage: skip, catch up once, or backfill | — |
+| `/tracks/ai-automation/escalation` | Eight cases a support bot can't decide: a shared channel or an owner per reason, a handoff note, and paging the next level; cases lost, bounced and re-asked | — |
+| `/tracks/ai-automation/approval-timeouts` | Twenty refunds wait a week for an approver who goes on holiday, through a deploy: wait, approve, reject, a backup or by amount, with timers in memory or durable | — |
+| `/tracks/ai-automation/approval-audit` | Seven refunds through an Approve button: an edit after approval, self-approval, a shared login, an ignored limit, a double click; sign-in, rules, payload hashes and an append-only log against an auditor's six questions | — |
 | `/tracks/tools/cursor-agent` | Search, edit, check, repeat | — |
 | `/tracks/tools/mcp` | A tool server lists tools; the app forwards the call | — |
 | `/tracks/tools/n8n` | Webhook → IF → Slack or email | — |
