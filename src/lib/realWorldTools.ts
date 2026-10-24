@@ -2402,6 +2402,49 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Grafana Tempo", kind: "software", note: "Scalable trace backend.", href: "https://grafana.com/oss/tempo/" },
     ],
   },
+  "devops/dashboards": {
+    lead: "Latency, traffic, errors and saturation, drawn so they answer questions.",
+    tools: [
+      { name: "Grafana", kind: "software", note: "Dashboards over Prometheus and more.", href: "https://github.com/grafana/grafana" },
+      { name: "Prometheus", kind: "software", note: "Metrics, histograms and percentiles.", href: "https://github.com/prometheus/prometheus" },
+      { name: "The four golden signals", kind: "standard", note: "From Google's SRE book.", href: "https://sre.google/sre-book/monitoring-distributed-systems/" },
+      { name: "USE method", kind: "standard", note: "Utilisation, saturation, errors per resource.", href: "https://www.brendangregg.com/usemethod.html" },
+    ],
+  },
+  "devops/alerts-oncall": {
+    lead: "Page on burning error budget; route it to whoever owns the service.",
+    tools: [
+      { name: "Alertmanager", kind: "software", note: "Grouping, routing, silences, inhibition.", href: "https://github.com/prometheus/alertmanager" },
+      { name: "Alerting on SLOs", kind: "standard", note: "The SRE workbook's burn-rate alerts.", href: "https://sre.google/workbook/alerting-on-slos/" },
+      { name: "PagerDuty", kind: "service", note: "On-call schedules and escalation.", href: "https://www.pagerduty.com/" },
+      { name: "incident.io", kind: "service", note: "On-call and incident response.", href: "https://incident.io/" },
+    ],
+  },
+  "devops/runbooks": {
+    lead: "Write it down before 3 a.m., then turn it into a button.",
+    tools: [
+      { name: "Being on-call", kind: "standard", note: "Google's SRE book on on-call and playbooks.", href: "https://sre.google/sre-book/being-on-call/" },
+      { name: "Rundeck", kind: "software", note: "Runbook automation with access control.", href: "https://github.com/rundeck/rundeck" },
+      { name: "Systems Manager Automation", kind: "service", note: "AWS runbooks as reviewed documents.", href: "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation.html" },
+    ],
+  },
+  "devops/toil-automation": {
+    lead: "Measure toil, cap it, and spend the rest removing it.",
+    tools: [
+      { name: "Eliminating toil", kind: "standard", note: "The SRE book's definition and the 50% cap.", href: "https://sre.google/sre-book/eliminating-toil/" },
+      { name: "Backstage", kind: "software", note: "Self-service templates and a service catalog.", href: "https://github.com/backstage/backstage" },
+      { name: "StackStorm", kind: "software", note: "Event-driven automation for operations.", href: "https://github.com/StackStorm/st2" },
+    ],
+  },
+  "devops/capacity-load-testing": {
+    lead: "Ramp realistic traffic at something shaped like production.",
+    tools: [
+      { name: "Grafana k6", kind: "software", note: "Scripted load tests with ramps and thresholds.", href: "https://github.com/grafana/k6" },
+      { name: "Gatling", kind: "software", note: "Load tests as code with detailed reports.", href: "https://github.com/gatling/gatling" },
+      { name: "Apache JMeter", kind: "software", note: "The long-standing load testing tool.", href: "https://github.com/apache/jmeter" },
+      { name: "wrk2", kind: "software", note: "Constant-rate load that records honest latency.", href: "https://github.com/giltene/wrk2" },
+    ],
+  },
   "devops/dora-metrics": {
     lead: "DORA metrics are built into many engineering dashboards.",
     tools: [

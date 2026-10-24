@@ -331,6 +331,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/cloud-costs` | Apply six common savings to a monthly cloud bill and see which lines shrink | — |
 | `/tracks/devops/structured-logging` | Find a user's errors with grep on free-text logs, then with a query on structured JSON | — |
 | `/tracks/devops/opentelemetry` | Read a checkout trace waterfall: normal, a slow external API, and N+1 queries | — |
+| `/tracks/devops/dashboards` | An hour of a checkout service built request by request: averages vs p99, per-endpoint lines, error rates and the right saturation panel, against four questions | — |
+| `/tracks/devops/alerts-oncall` | A month of minute-by-minute metrics through cause alerts, a threshold or multiwindow SLO burn-rate alerts, then grouping, routing and escalation | — |
+| `/tracks/devops/runbooks` | A new on-call engineer and three 3 a.m. pages: a linked runbook, checks before fixes, scripts, verification and keeping it current, in minutes to mitigate | — |
+| `/tracks/devops/toil-automation` | A platform team's week of interrupts: context switching, automate or fix the cause, self-service, payback in weeks, and the 50% toil cap | — |
+| `/tracks/devops/capacity-load-testing` | Load test a product API modelled as queues: ramp or constant, realistic cache hits, staging vs production shape, p99 vs average, and which tier saturates | — |
 | `/tracks/devops/dora-metrics` | Compare quarterly, weekly and continuous delivery teams on the four DORA metrics | — |
 | `/tracks/frontend/url-to-pixels` | Step through one page load from DNS lookup to an interactive page | — |
 | `/tracks/frontend/web-workers` | Run a 1.2 s calculation on the main thread and in a Web Worker and count dropped frames | — |
