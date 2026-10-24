@@ -1426,10 +1426,14 @@ export const TRACKS: Track[] = [
       { id: "document-processing", title: "Document processing", blurb: "Scans and PDFs to structured data: OCR, extraction and checks.", status: "soon", section: "integrations" },
       { id: "chat-bots", title: "Slack and Teams bots", blurb: "Post updates, ask for approvals and answer questions in chat.", status: "soon", section: "integrations" },
       // Running automations
-      { id: "run-monitoring", title: "Monitoring runs and failures", blurb: "See every run, every failure and where it stopped.", status: "soon", section: "running-automations" },
-      { id: "automation-cost", title: "Controlling cost per run", blurb: "Model calls, API calls and runaway loops.", status: "soon", section: "running-automations" },
-      { id: "workflow-versioning", title: "Versioning and testing workflows", blurb: "Change a live workflow without breaking runs in progress.", status: "soon", section: "running-automations" },
-      { id: "durable-workflows", title: "Durable workflows", blurb: "Long-running flows that survive restarts and wait days for an event.", status: "soon", section: "running-automations" },
+      { id: "run-monitoring", title: "Monitoring runs and failures", blurb: "See every run, every failure and where it stopped.", status: "live", section: "running-automations",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "automation-cost", title: "Controlling cost per run", blurb: "Model calls, API calls and runaway loops.", status: "live", section: "running-automations",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "workflow-versioning", title: "Versioning and testing workflows", blurb: "Change a live workflow without breaking runs in progress.", status: "live", section: "running-automations",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "durable-workflows", title: "Durable workflows", blurb: "Long-running flows that survive restarts and wait days for an event.", status: "live", section: "running-automations",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Case studies: automate it
       { id: "inbox-triage", title: "Triage an inbox into Slack", blurb: "Classify every email and post the urgent ones.", status: "soon", section: "automation-projects" },
       { id: "invoice-to-accounting", title: "Invoice to accounting", blurb: "Extract, match to a purchase order, and book it.", status: "soon", section: "automation-projects" },

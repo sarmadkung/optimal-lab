@@ -2806,6 +2806,38 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Outlines / Guidance", kind: "software", note: "Open-source constrained decoding for local models.", href: "https://github.com/dottxt-ai/outlines" },
     ],
   },
+  "ai-automation/run-monitoring": {
+    lead: "Dead man's switches, alert rules and traces are standard parts; point them at your workflows.",
+    tools: [
+      { name: "Healthchecks", kind: "software", note: "A dead man's switch: alerts when a scheduled job stops checking in.", href: "https://github.com/healthchecks/healthchecks" },
+      { name: "Prometheus Alertmanager", kind: "software", note: "Rate-based alerts with grouping, so one incident is one page.", href: "https://github.com/prometheus/alertmanager" },
+      { name: "OpenTelemetry", kind: "standard", note: "Traces and metrics for every run and step.", href: "https://opentelemetry.io" },
+    ],
+  },
+  "ai-automation/automation-cost": {
+    lead: "LLM gateways and observability tools track spend per run and enforce budgets.",
+    tools: [
+      { name: "LiteLLM", kind: "software", note: "A model gateway with budgets and rate limits per key.", href: "https://github.com/BerriAI/litellm" },
+      { name: "Langfuse", kind: "software", note: "Traces with token counts and cost for every call in a run.", href: "https://github.com/langfuse/langfuse" },
+      { name: "Helicone", kind: "software", note: "An LLM proxy with cost tracking and response caching.", href: "https://github.com/Helicone/helicone" },
+    ],
+  },
+  "ai-automation/workflow-versioning": {
+    lead: "Workflow engines version running code explicitly and test changes against recorded histories.",
+    tools: [
+      { name: "Temporal patching", kind: "software", note: "Branch on a version marker so old runs keep their path.", href: "https://docs.temporal.io/patching" },
+      { name: "Temporal safe deployments", kind: "software", note: "Replay tests and worker versioning before a change ships.", href: "https://docs.temporal.io/develop/safe-deployments" },
+      { name: "AWS Step Functions versions", kind: "service", note: "Running executions keep the version they started on.", href: "https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html" },
+    ],
+  },
+  "ai-automation/durable-workflows": {
+    lead: "Durable execution engines keep timers, events and history so code can wait for days.",
+    tools: [
+      { name: "Temporal", kind: "software", note: "Durable timers, signals and replay of workflow code.", href: "https://github.com/temporalio/temporal" },
+      { name: "Restate", kind: "software", note: "Durable execution with timers and awakeables over plain services.", href: "https://github.com/restatedev/restate" },
+      { name: "Inngest", kind: "software", note: "Step functions that sleep for days and wait for events.", href: "https://github.com/inngest/inngest" },
+    ],
+  },
   "ai-native/tool-calling": {
     lead: "Models emit structured call requests; your app runs the tool and returns results — same pattern everywhere.",
     tools: [

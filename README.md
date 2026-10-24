@@ -379,6 +379,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/prompt-patterns` | Delimiters, an output checklist, plan first and a persona on one prompt, graded by four code checks | — |
 | `/tracks/ai/graph-rag` | Vector search, a 1–3 hop graph walk or community summaries on one-hop, multi-hop and whole-dataset questions | — |
 | `/tracks/ai-native/structured-output` | A schema refuses tokens that would break the JSON | — |
+| `/tracks/ai-automation/run-monitoring` | A week of an invoice workflow with a revoked token, a dead scheduler, a hung run and a parser bug: run history, failure-rate alerts, zero-output and heartbeat checks, against hours of trouble and alert noise | — |
+| `/tracks/ai-automation/automation-cost` | A month of a ticket workflow with a self-triggering loop and a spam wave: a small model for classifying, skipping junk, caching repeats, a loop guard and a daily cap | — |
+| `/tracks/ai-automation/workflow-versioning` | Ship v2 of an order workflow with 120 runs paused part-way: resume by step number, by name or finish on v1, read old data, and a replay test that blocks a bad deploy | — |
+| `/tracks/ai-automation/durable-workflows` | 700 fourteen-day trials through four deploys and a slow scan: sleep in a worker, cron over a status table, or a workflow engine, with row claims and deterministic replay | — |
 | `/tracks/ai-native/tool-calling` | Call a tool for live data, or watch the model guess | — |
 | `/tracks/ai-automation/workflow` | One email through classify → branch → action | — |
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
