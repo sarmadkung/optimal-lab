@@ -74,6 +74,10 @@ import DoraDemo from "./devops/dora-metrics/DoraDemo";
 import ProcessTreeDemo from "./devops/linux-processes/ProcessTreeDemo";
 import LoadAverageDemo from "./devops/system-resources/LoadAverageDemo";
 import DnsRecordsDemo from "./devops/dns-records/DnsRecordsDemo";
+import PipelineSecretsDemo from "./devops/pipeline-secrets/PipelineSecretsDemo";
+import VulnScanningDemo from "./devops/vulnerability-scanning/VulnScanningDemo";
+import NetworkPoliciesDemo from "./devops/network-policies/NetworkPoliciesDemo";
+import AuditDemo from "./devops/audit-compliance/AuditDemo";
 import ReverseProxyDemo from "./devops/reverse-proxy-config/ReverseProxyDemo";
 import VpcDemo from "./devops/vpc/VpcDemo";
 import LayerCacheDemo from "./devops/dockerfiles/LayerCacheDemo";
@@ -414,6 +418,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/linux-processes": <ProcessTreeDemo />,
   "devops/system-resources": <LoadAverageDemo />,
   "devops/dns-records": <DnsRecordsDemo />,
+  "devops/pipeline-secrets": <PipelineSecretsDemo />,
+  "devops/vulnerability-scanning": <VulnScanningDemo />,
+  "devops/network-policies": <NetworkPoliciesDemo />,
+  "devops/audit-compliance": <AuditDemo />,
   "devops/reverse-proxy-config": <ReverseProxyDemo />,
   "devops/vpc": <VpcDemo />,
   "devops/dockerfiles": <LayerCacheDemo />,

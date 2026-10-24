@@ -617,10 +617,14 @@ export const TRACKS: Track[] = [
       { id: "toil-automation", title: "Toil and automation", blurb: "Find repetitive manual work and automate it away.", status: "soon", section: "sre" },
       { id: "capacity-load-testing", title: "Load testing", blurb: "Find the breaking point before your users do.", status: "soon", section: "sre" },
       // DevSecOps
-      { id: "pipeline-secrets", title: "Secrets in pipelines and clusters", blurb: "Keep tokens out of logs and images, and rotate them safely.", status: "soon", section: "devsecops" },
-      { id: "vulnerability-scanning", title: "Dependency and image scanning", blurb: "Find known vulnerabilities before they ship, and decide what to fix first.", status: "soon", section: "devsecops" },
-      { id: "network-policies", title: "Kubernetes network policies", blurb: "Only let the pods that need to talk, talk.", status: "soon", section: "devsecops" },
-      { id: "audit-compliance", title: "Audit trails and compliance", blurb: "Prove who changed what in production, for SOC 2 and similar audits.", status: "soon", section: "devsecops" },
+      { id: "pipeline-secrets", title: "Secrets in pipelines and clusters", blurb: "Keep tokens out of logs and images, and rotate them safely.", status: "live", section: "devsecops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "vulnerability-scanning", title: "Dependency and image scanning", blurb: "Find known vulnerabilities before they ship, and decide what to fix first.", status: "live", section: "devsecops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "network-policies", title: "Kubernetes network policies", blurb: "Only let the pods that need to talk, talk.", status: "live", section: "devsecops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "audit-compliance", title: "Audit trails and compliance", blurb: "Prove who changed what in production, for SOC 2 and similar audits.", status: "live", section: "devsecops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Platform engineering
       { id: "developer-platforms", title: "Internal developer platforms", blurb: "One place for teams to create services, deploy and see their status.", status: "soon", section: "platform" },
       { id: "golden-paths", title: "Golden paths and templates", blurb: "A ready-made starting point with CI, monitoring and security already wired in.", status: "soon", section: "platform" },

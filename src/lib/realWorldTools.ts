@@ -2274,6 +2274,44 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "OctoDNS", kind: "software", note: "DNS records as code.", href: "https://github.com/octodns/octodns" },
     ],
   },
+  "devops/pipeline-secrets": {
+    lead: "Block, don't print, don't bake in, don't hand to forks, and let it expire.",
+    tools: [
+      { name: "Push protection", kind: "platform", note: "Rejects pushes that contain known secret formats.", href: "https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" },
+      { name: "Gitleaks", kind: "software", note: "Secret scanning for repos and pre-commit hooks.", href: "https://github.com/gitleaks/gitleaks" },
+      { name: "TruffleHog", kind: "software", note: "Finds and verifies leaked credentials.", href: "https://github.com/trufflesecurity/trufflehog" },
+      { name: "Preventing pwn requests", kind: "standard", note: "GitHub Security Lab on pull_request_target.", href: "https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/" },
+      { name: "HashiCorp Vault", kind: "software", note: "Short-lived, dynamic credentials.", href: "https://github.com/hashicorp/vault" },
+    ],
+  },
+  "devops/vulnerability-scanning": {
+    lead: "Scan everything, fix what attackers actually use.",
+    tools: [
+      { name: "Syft", kind: "software", note: "Generates an SBOM from images and lockfiles.", href: "https://github.com/anchore/syft" },
+      { name: "Trivy", kind: "software", note: "Scans images and dependencies.", href: "https://github.com/aquasecurity/trivy" },
+      { name: "OSV", kind: "service", note: "Open vulnerability database for packages.", href: "https://osv.dev/" },
+      { name: "CISA KEV catalog", kind: "standard", note: "Vulnerabilities known to be exploited.", href: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog" },
+      { name: "EPSS", kind: "standard", note: "Probability of exploitation in the next 30 days.", href: "https://www.first.org/epss/" },
+    ],
+  },
+  "devops/network-policies": {
+    lead: "Default deny, then allow each path by label.",
+    tools: [
+      { name: "NetworkPolicy", kind: "standard", note: "The Kubernetes API for pod traffic rules.", href: "https://kubernetes.io/docs/concepts/services-networking/network-policies/" },
+      { name: "Cilium", kind: "software", note: "eBPF networking that enforces policies, with L7 rules.", href: "https://github.com/cilium/cilium" },
+      { name: "Calico", kind: "software", note: "Network policy enforcement and global policies.", href: "https://github.com/projectcalico/calico" },
+    ],
+  },
+  "devops/audit-compliance": {
+    lead: "Controls that leave evidence behind as you work.",
+    tools: [
+      { name: "SOC 2", kind: "standard", note: "The AICPA's trust services criteria.", href: "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2" },
+      { name: "AWS CloudTrail", kind: "service", note: "Every API call, with log file integrity validation.", href: "https://aws.amazon.com/cloudtrail/" },
+      { name: "Kubernetes auditing", kind: "standard", note: "Audit logs from the API server.", href: "https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/" },
+      { name: "S3 Object Lock", kind: "service", note: "Write-once retention for logs.", href: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" },
+      { name: "Vanta", kind: "service", note: "Continuous evidence collection for audits.", href: "https://www.vanta.com/" },
+    ],
+  },
   "devops/reverse-proxy-config": {
     lead: "Reverse proxies front almost every web app.",
     tools: [
