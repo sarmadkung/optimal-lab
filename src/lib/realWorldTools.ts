@@ -2736,6 +2736,38 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "act", kind: "software", note: "Run your workflows locally in containers before pushing.", href: "https://github.com/nektos/act" },
     ],
   },
+  "ai-automation/inbox-triage": {
+    lead: "Mail push, chat posts and a workflow tool are all it takes; the design is in the rules and thresholds.",
+    tools: [
+      { name: "Gmail API push", kind: "service", note: "New-mail notifications instead of polling the inbox.", href: "https://developers.google.com/workspace/gmail/api/guides/push" },
+      { name: "Slack Block Kit", kind: "platform", note: "Posts with buttons for 👍 / 👎 feedback and threads for follow-ups.", href: "https://docs.slack.dev/block-kit" },
+      { name: "n8n", kind: "software", note: "Open-source workflow tool with email, model and Slack nodes.", href: "https://github.com/n8n-io/n8n" },
+    ],
+  },
+  "ai-automation/invoice-to-accounting": {
+    lead: "ERPs do matching and booking; e-invoicing networks remove much of the extraction.",
+    tools: [
+      { name: "Odoo", kind: "software", note: "Open-source ERP with purchase orders, receipts and 3-way matching.", href: "https://github.com/odoo/odoo" },
+      { name: "Peppol", kind: "standard", note: "Structured e-invoices exchanged between companies, no OCR needed.", href: "https://peppol.org" },
+    ],
+  },
+  "ai-automation/lead-enrichment": {
+    lead: "Enrichment APIs cover known companies; agents with web tools cover the rest, if their facts carry sources.",
+    tools: [
+      { name: "Apollo.io", kind: "service", note: "Company and contact enrichment from a domain.", href: "https://www.apollo.io" },
+      { name: "Firecrawl", kind: "software", note: "Turns websites into clean text for a research agent, with URLs kept.", href: "https://github.com/firecrawl/firecrawl" },
+      { name: "HubSpot CRM", kind: "service", note: "Where enriched contacts land, with a source on every property.", href: "https://www.hubspot.com/products/crm" },
+    ],
+  },
+  "ai-automation/daily-digest": {
+    lead: "Each source has an API; the work is in failure handling, chunking and citations.",
+    tools: [
+      { name: "GitHub REST API", kind: "platform", note: "Pull requests, reviews and merges since yesterday.", href: "https://docs.github.com/en/rest" },
+      { name: "Jira REST API", kind: "platform", note: "Issues changed since yesterday, with JQL.", href: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/" },
+      { name: "PagerDuty API", kind: "platform", note: "Incidents and their timelines.", href: "https://developer.pagerduty.com/api-reference/" },
+      { name: "Slack Block Kit", kind: "platform", note: "A digest message with links back to every source.", href: "https://docs.slack.dev/block-kit" },
+    ],
+  },
   "ai/message-roles": {
     lead: "Every chat API takes roles; open models ship the chat template that turns them into one string.",
     tools: [

@@ -314,6 +314,10 @@ import TwoPointersDemo from "./dsa/two-pointers/TwoPointersDemo";
 import ThreadPoolDemo from "./nodejs/thread-pool/ThreadPoolDemo";
 import ConsistentHashDemo from "./system-design/consistent-hashing/ConsistentHashDemo";
 import GithubActionsDemo from "./tools/github-actions/GithubActionsDemo";
+import InboxTriageDemo from "./ai-automation/inbox-triage/InboxTriageDemo";
+import InvoiceToAccountingDemo from "./ai-automation/invoice-to-accounting/InvoiceToAccountingDemo";
+import LeadEnrichmentDemo from "./ai-automation/lead-enrichment/LeadEnrichmentDemo";
+import DailyDigestDemo from "./ai-automation/daily-digest/DailyDigestDemo";
 
 import CdnDemo from "./system-design/cdn/CdnDemo";
 import CircuitBreakerDemo from "./system-design/circuit-breaker/CircuitBreakerDemo";
@@ -698,6 +702,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "tools/mcp": <McpDemo />,
   "tools/n8n": <N8nDemo />,
   "tools/github-actions": <GithubActionsDemo />,
+  "ai-automation/inbox-triage": <InboxTriageDemo />,
+  "ai-automation/invoice-to-accounting": <InvoiceToAccountingDemo />,
+  "ai-automation/lead-enrichment": <LeadEnrichmentDemo />,
+  "ai-automation/daily-digest": <DailyDigestDemo />,
   "databases/relational-model": <RelationalModelDemo />,
   "databases/sql-joins": <SqlJoinsDemo />,
   "databases/aggregation": <AggregationDemo />,

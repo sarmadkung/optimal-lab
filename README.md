@@ -387,6 +387,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/tools/mcp` | A tool server lists tools; the app forwards the call | — |
 | `/tracks/tools/n8n` | Webhook → IF → Slack or email | — |
 | `/tracks/tools/github-actions` | on:, parallel jobs, a matrix, needs: and if: on three different events | — |
+| `/tracks/ai-automation/inbox-triage` | Case study: 600 emails a day into #ops: header rules before the model, a threshold chosen from a sweep, one post per thread, quiet hours and reactions as examples | — |
+| `/tracks/ai-automation/invoice-to-accounting` | Case study: a month of 2,000 invoices from extracted fields to payment: 2- and 3-way matching, a price tolerance, duplicate numbers, closed periods and booking keys | — |
+| `/tracks/ai-automation/lead-enrichment` | Case study: 200 sign-ups a week: Gmail founders, an enrichment API before a research agent, sourced facts only, and routing on sign-up instead of nightly | — |
+| `/tracks/ai-automation/daily-digest` | Case study: 140 updates from GitHub, Jira, PagerDuty and Slack into a digest for 12 people: a failed source, a token budget, merged duplicates, linked lines and 8:00 in each time zone | — |
 | `/tracks/databases/relational-model` | Run INSERT, UPDATE and DELETE against customers and orders, and see what primary and foreign keys allow or reject | — |
 | `/tracks/databases/sql-joins` | Step through INNER, LEFT, RIGHT and FULL joins one row at a time, then filter in ON or in WHERE | — |
 | `/tracks/databases/aggregation` | Change WHERE, GROUP BY, the aggregate and HAVING, and watch eight orders regroup | — |
