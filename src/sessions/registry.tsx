@@ -64,6 +64,10 @@ import MemoDemo from "./frontend/memoization/MemoDemo";
 import BranchingDemo from "./devops/branching-strategies/BranchingDemo";
 import SemverDemo from "./devops/releases-versioning/SemverDemo";
 import AffectedDemo from "./devops/build-caching/AffectedDemo";
+import ShipToK8sDemo from "./devops/ship-node-app/ShipToK8sDemo";
+import ZeroDowntimeDemo from "./devops/zero-downtime-release/ZeroDowntimeDemo";
+import PreviewEnvsDemo from "./devops/preview-environments/PreviewEnvsDemo";
+import OutageDrillDemo from "./devops/outage-drill/OutageDrillDemo";
 import SupplyChainDemo from "./devops/supply-chain/SupplyChainDemo";
 import ZonesDemo from "./devops/regions-zones/ZonesDemo";
 import ServerlessDemo from "./devops/serverless/ServerlessDemo";
@@ -404,6 +408,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/branching-strategies": <BranchingDemo />,
   "devops/releases-versioning": <SemverDemo />,
   "devops/build-caching": <AffectedDemo />,
+  "devops/ship-node-app": <ShipToK8sDemo />,
+  "devops/zero-downtime-release": <ZeroDowntimeDemo />,
+  "devops/preview-environments": <PreviewEnvsDemo />,
+  "devops/outage-drill": <OutageDrillDemo />,
   "devops/supply-chain": <SupplyChainDemo />,
   "devops/regions-zones": <ZonesDemo />,
   "devops/serverless": <ServerlessDemo />,

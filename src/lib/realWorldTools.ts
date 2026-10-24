@@ -2354,6 +2354,42 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Bazel", kind: "software", note: "Hermetic, cached builds at scale.", href: "https://bazel.build/" },
     ],
   },
+  "devops/ship-node-app": {
+    lead: "From a laptop to an HTTPS URL on a cluster.",
+    tools: [
+      { name: "kind", kind: "software", note: "A Kubernetes cluster in Docker for local practice.", href: "https://github.com/kubernetes-sigs/kind" },
+      { name: "Gateway API", kind: "standard", note: "The successor to Ingress for routing traffic.", href: "https://gateway-api.sigs.k8s.io/" },
+      { name: "cert-manager", kind: "software", note: "Certificates for Ingress and Gateway.", href: "https://github.com/cert-manager/cert-manager" },
+      { name: "Argo CD", kind: "software", note: "Deploys the manifests from Git.", href: "https://github.com/argoproj/argo-cd" },
+    ],
+  },
+  "devops/zero-downtime-release": {
+    lead: "Schemas both versions can share, and canaries that judge themselves.",
+    tools: [
+      { name: "Argo Rollouts", kind: "software", note: "Canaries with automated analysis.", href: "https://github.com/argoproj/argo-rollouts" },
+      { name: "Flagger", kind: "software", note: "Progressive delivery driven by metrics.", href: "https://github.com/fluxcd/flagger" },
+      { name: "pgroll", kind: "software", note: "Expand-and-contract migrations for Postgres.", href: "https://github.com/xataio/pgroll" },
+      { name: "gh-ost", kind: "software", note: "Online schema changes for MySQL.", href: "https://github.com/github/gh-ost" },
+    ],
+  },
+  "devops/preview-environments": {
+    lead: "An environment per pull request that cleans up after itself.",
+    tools: [
+      { name: "ApplicationSet PR generator", kind: "software", note: "Argo CD creates an app per open pull request.", href: "https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Pull-Request/" },
+      { name: "vcluster", kind: "software", note: "Cheap virtual clusters per environment.", href: "https://github.com/loft-sh/vcluster" },
+      { name: "KEDA HTTP add-on", kind: "software", note: "Scale to zero until a request arrives.", href: "https://github.com/kedacore/http-add-on" },
+      { name: "Neon branching", kind: "service", note: "A database branch per preview.", href: "https://neon.com/docs/introduction/branching" },
+    ],
+  },
+  "devops/outage-drill": {
+    lead: "Break it on purpose, on your schedule, and fix what you find.",
+    tools: [
+      { name: "Chaos Mesh", kind: "software", note: "Fault injection for Kubernetes.", href: "https://github.com/chaos-mesh/chaos-mesh" },
+      { name: "LitmusChaos", kind: "software", note: "Chaos experiments and game days.", href: "https://github.com/litmuschaos/litmus" },
+      { name: "AWS Fault Injection Service", kind: "service", note: "Managed fault injection on AWS.", href: "https://aws.amazon.com/fis/" },
+      { name: "Postmortem culture", kind: "standard", note: "Google's SRE book on blameless postmortems.", href: "https://sre.google/sre-book/postmortem-culture/" },
+    ],
+  },
   "devops/supply-chain": {
     lead: "Supply chain security tooling is now standard in CI.",
     tools: [

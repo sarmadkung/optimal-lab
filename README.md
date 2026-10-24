@@ -325,6 +325,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/branching-strategies` | Three developers over two weeks with trunk-based, short and long-lived branches | — |
 | `/tracks/devops/releases-versioning` | Pick what changed, get the next version, and see which dependency ranges accept it | — |
 | `/tracks/devops/build-caching` | Change one package in a monorepo and compare building everything, affected only, and with a remote cache | — |
+| `/tracks/devops/ship-node-app` | Case study: containerize, build, deploy, expose and add TLS, with five classic first-deploy mistakes, then trace a visitor's request hop by hop | — |
+| `/tracks/devops/zero-downtime-release` | Case study: a column rename and a hidden 2% checkout bug, released with expand and contract, a batched backfill, an analysed canary and a working rollback | — |
+| `/tracks/devops/preview-environments` | Case study: a month of pull requests with their own environments: teardown, an idle TTL, scale to zero, seeded data and sandbox credentials | — |
+| `/tracks/devops/outage-drill` | Case study: stop the primary database at noon on purpose: alerts, an incident commander, automatic failover, apps that reconnect, and a postmortem that gets done | — |
 | `/tracks/devops/supply-chain` | Turn on lockfiles, scanning, CI builds, signing and verification and see which attacks get through | — |
 | `/tracks/devops/regions-zones` | Deploy in one zone, three zones or two regions, then fail a server, a zone and a region | — |
 | `/tracks/devops/serverless` | Compare function and container costs as traffic grows, and cold starts by traffic shape | — |
