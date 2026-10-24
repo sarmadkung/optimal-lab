@@ -622,8 +622,10 @@ export const TRACKS: Track[] = [
       { id: "network-policies", title: "Kubernetes network policies", blurb: "Only let the pods that need to talk, talk.", status: "soon", section: "devsecops" },
       { id: "audit-compliance", title: "Audit trails and compliance", blurb: "Prove who changed what in production, for SOC 2 and similar audits.", status: "soon", section: "devsecops" },
       // Platform engineering
-      { id: "developer-platforms", title: "Internal developer platforms", blurb: "One place for teams to create services, deploy and see their status.", status: "soon", section: "platform" },
-      { id: "golden-paths", title: "Golden paths and templates", blurb: "A ready-made starting point with CI, monitoring and security already wired in.", status: "soon", section: "platform" },
+      { id: "developer-platforms", title: "Internal developer platforms", blurb: "One place for teams to create services, deploy and see their status.", status: "live", section: "platform",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "golden-paths", title: "Golden paths and templates", blurb: "A ready-made starting point with CI, monitoring and security already wired in.", status: "live", section: "platform",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       { id: "dora-metrics", title: "DORA metrics", blurb: "Deploy frequency, lead time, change failure rate and time to restore.", status: "live", section: "platform",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
       // Case studies: run it in production

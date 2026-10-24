@@ -68,6 +68,8 @@ import SupplyChainDemo from "./devops/supply-chain/SupplyChainDemo";
 import ZonesDemo from "./devops/regions-zones/ZonesDemo";
 import ServerlessDemo from "./devops/serverless/ServerlessDemo";
 import CloudCostsDemo from "./devops/cloud-costs/CloudCostsDemo";
+import DevPlatformDemo from "./devops/developer-platforms/DevPlatformDemo";
+import GoldenPathsDemo from "./devops/golden-paths/GoldenPathsDemo";
 import StructuredLogsDemo from "./devops/structured-logging/StructuredLogsDemo";
 import TraceDemo from "./devops/opentelemetry/TraceDemo";
 import DoraDemo from "./devops/dora-metrics/DoraDemo";
@@ -408,6 +410,8 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/regions-zones": <ZonesDemo />,
   "devops/serverless": <ServerlessDemo />,
   "devops/cloud-costs": <CloudCostsDemo />,
+  "devops/developer-platforms": <DevPlatformDemo />,
+  "devops/golden-paths": <GoldenPathsDemo />,
   "devops/structured-logging": <StructuredLogsDemo />,
   "devops/opentelemetry": <TraceDemo />,
   "devops/dora-metrics": <DoraDemo />,

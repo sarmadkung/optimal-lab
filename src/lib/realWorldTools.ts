@@ -2386,6 +2386,24 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Kubecost", kind: "software", note: "Kubernetes cost allocation.", href: "https://www.kubecost.com/" },
     ],
   },
+  "devops/developer-platforms": {
+    lead: "Turn tickets into self-service, and keep a map of who owns what.",
+    tools: [
+      { name: "Backstage", kind: "software", note: "Developer portal: catalog, templates, docs.", href: "https://github.com/backstage/backstage" },
+      { name: "Crossplane", kind: "software", note: "Self-service cloud resources as Kubernetes claims.", href: "https://github.com/crossplane/crossplane" },
+      { name: "ExternalDNS", kind: "software", note: "DNS records created from ingresses and services.", href: "https://github.com/kubernetes-sigs/external-dns" },
+      { name: "Port", kind: "platform", note: "A hosted internal developer portal.", href: "https://www.getport.io/" },
+    ],
+  },
+  "devops/golden-paths": {
+    lead: "A supported starting point, kept current after day one.",
+    tools: [
+      { name: "Backstage Software Templates", kind: "software", note: "Create a repository from a template.", href: "https://backstage.io/docs/features/software-templates/" },
+      { name: "Copier", kind: "software", note: "Templates that can update projects made from them.", href: "https://github.com/copier-org/copier" },
+      { name: "OpenSSF Scorecard", kind: "software", note: "Scores repositories against security practices.", href: "https://github.com/ossf/scorecard" },
+      { name: "Golden paths at Spotify", kind: "standard", note: "Where the term comes from.", href: "https://engineering.atspotify.com/2020/08/how-we-use-golden-paths-to-solve-fragmentation-in-our-software-ecosystem" },
+    ],
+  },
   "devops/structured-logging": {
     lead: "Log platforms index structured fields.",
     tools: [
