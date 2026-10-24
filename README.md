@@ -313,6 +313,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/system-design/event-driven` | Checkout calls three services or publishes one event: add a consumer, change the payload, take a consumer down | — |
 | `/tracks/system-design/pub-sub` | A partitioned log tick by tick: keys to partitions, two consumer groups with their own offsets, an outage and a replay | — |
 | `/tracks/devops/linux-processes` | Send SIGTERM and SIGKILL, kill a parent, and leave children unreaped in a small process tree | — |
+| `/tracks/devops/shell-scripting` | A cron job's grep, cut, sort, uniq -c and head on four days: loose matches, an unsorted uniq, an empty report that exits 0, and pipefail | — |
+| `/tracks/devops/package-management` | Build three servers on days 0, 20 and 45 with apt: drift, an exact pin that vanishes from the mirror, a new series that breaks the config, and baked images | — |
+| `/tracks/devops/ssh` | Reach a private host through a bastion against five incidents: password bots, a fake host key, a rooted bastion with -A, a stolen laptop and a leaver | — |
+| `/tracks/devops/ports-firewalls` | Eight connections through a network ACL, a security group, ufw and bind addresses; Docker skipping ufw and a missing return rule | — |
+| `/tracks/devops/tls-certificates` | A year of ACME renewals: HTTP-01 vs DNS-01, a closed port 80, a rotated DNS token, a missing reload hook and expiry monitoring | — |
 | `/tracks/devops/system-resources` | Read load average and CPU breakdown on a 4-core box: healthy, busy, overloaded and stuck on disk | — |
 | `/tracks/devops/dns-records` | Look up A, CNAME, MX and TXT records in a zone and follow CNAME chains | — |
 | `/tracks/devops/reverse-proxy-config` | Route five requests through nginx location blocks to an upstream pool, WebSockets and static files | — |

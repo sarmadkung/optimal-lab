@@ -2258,6 +2258,58 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Kubernetes pod termination", kind: "software", note: "SIGTERM, grace period, SIGKILL.", href: "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination" },
     ],
   },
+  "devops/shell-scripting": {
+    lead: "Small tools joined by pipes, and a linter that catches the quoting mistakes.",
+    tools: [
+      { name: "GNU Bash", kind: "software", note: "set -euo pipefail, quoting and exit status.", href: "https://www.gnu.org/software/bash/" },
+      { name: "GNU coreutils", kind: "software", note: "cut, sort, uniq, head and friends.", href: "https://www.gnu.org/software/coreutils/" },
+      { name: "GNU Awk", kind: "software", note: "Split lines into fields and compare them exactly.", href: "https://www.gnu.org/software/gawk/" },
+      { name: "ShellCheck", kind: "software", note: "Flags unquoted variables and other script bugs.", href: "https://github.com/koalaman/shellcheck" },
+    ],
+  },
+  "devops/package-management": {
+    lead: "Choose versions once, test them, and copy the result everywhere.",
+    tools: [
+      { name: "APT", kind: "software", note: "Debian and Ubuntu package manager.", href: "https://wiki.debian.org/Apt" },
+      { name: "apt_preferences", kind: "standard", note: "Pin a package to a version pattern.", href: "https://manpages.debian.org/stable/apt/apt_preferences.5.en.html" },
+      { name: "unattended-upgrades", kind: "software", note: "Applies security updates daily.", href: "https://github.com/mvo5/unattended-upgrades" },
+      { name: "DNF", kind: "software", note: "The Fedora and RHEL package manager.", href: "https://github.com/rpm-software-management/dnf" },
+      { name: "Packer", kind: "software", note: "Bake tested machine images.", href: "https://github.com/hashicorp/packer" },
+      { name: "snapshot.debian.org", kind: "service", note: "Every version ever published, by date.", href: "https://snapshot.debian.org/" },
+    ],
+  },
+  "devops/ssh": {
+    lead: "Keys, short-lived certificates and a bastion you can't pivot through.",
+    tools: [
+      { name: "OpenSSH", kind: "software", note: "ssh, sshd, ssh-agent and ProxyJump.", href: "https://www.openssh.com/" },
+      { name: "OpenSSH certificates", kind: "standard", note: "CA-signed keys with an expiry.", href: "https://man.openbsd.org/ssh-keygen#CERTIFICATES" },
+      { name: "FIDO keys in OpenSSH", kind: "standard", note: "ed25519-sk keys that need a touch to sign.", href: "https://www.openssh.com/txt/release-8.2" },
+      { name: "Vault SSH secrets engine", kind: "software", note: "Signs short-lived SSH certificates.", href: "https://developer.hashicorp.com/vault/docs/secrets/ssh" },
+      { name: "Teleport", kind: "software", note: "Access proxy with certificates and audit.", href: "https://github.com/gravitational/teleport" },
+      { name: "AWS Session Manager", kind: "service", note: "Shell access without an open port 22.", href: "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html" },
+    ],
+  },
+  "devops/ports-firewalls": {
+    lead: "Filters at the subnet, the instance and the host, and a scan to prove it.",
+    tools: [
+      { name: "Security groups", kind: "service", note: "Stateful allow rules per instance.", href: "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" },
+      { name: "Network ACLs", kind: "service", note: "Stateless rules per subnet.", href: "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html" },
+      { name: "ufw", kind: "software", note: "A simple front end for the host firewall.", href: "https://launchpad.net/ufw" },
+      { name: "nftables", kind: "software", note: "The Linux packet filter behind it.", href: "https://wiki.nftables.org/" },
+      { name: "Docker packet filtering", kind: "standard", note: "How published ports bypass ufw.", href: "https://docs.docker.com/engine/network/packet-filtering-firewalls/" },
+      { name: "Nmap", kind: "software", note: "Scan from outside: open, closed, filtered.", href: "https://nmap.org/" },
+    ],
+  },
+  "devops/tls-certificates": {
+    lead: "Automate issuance and renewal, then watch what's actually served.",
+    tools: [
+      { name: "Let's Encrypt", kind: "service", note: "Free certificates over ACME.", href: "https://letsencrypt.org/" },
+      { name: "ACME (RFC 8555)", kind: "protocol", note: "Orders, challenges and issuance.", href: "https://datatracker.ietf.org/doc/html/rfc8555" },
+      { name: "Certbot", kind: "software", note: "ACME client with renewal and deploy hooks.", href: "https://github.com/certbot/certbot" },
+      { name: "cert-manager", kind: "software", note: "Certificates for Kubernetes Ingress.", href: "https://github.com/cert-manager/cert-manager" },
+      { name: "Caddy", kind: "software", note: "Web server with automatic HTTPS.", href: "https://github.com/caddyserver/caddy" },
+    ],
+  },
   "devops/system-resources": {
     lead: "The first tools anyone runs on a slow server.",
     tools: [

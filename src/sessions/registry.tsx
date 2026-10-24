@@ -72,6 +72,11 @@ import StructuredLogsDemo from "./devops/structured-logging/StructuredLogsDemo";
 import TraceDemo from "./devops/opentelemetry/TraceDemo";
 import DoraDemo from "./devops/dora-metrics/DoraDemo";
 import ProcessTreeDemo from "./devops/linux-processes/ProcessTreeDemo";
+import ShellPipesDemo from "./devops/shell-scripting/ShellPipesDemo";
+import PackagePinsDemo from "./devops/package-management/PackagePinsDemo";
+import SshAccessDemo from "./devops/ssh/SshAccessDemo";
+import FirewallDemo from "./devops/ports-firewalls/FirewallDemo";
+import CertRenewalDemo from "./devops/tls-certificates/CertRenewalDemo";
 import LoadAverageDemo from "./devops/system-resources/LoadAverageDemo";
 import DnsRecordsDemo from "./devops/dns-records/DnsRecordsDemo";
 import ReverseProxyDemo from "./devops/reverse-proxy-config/ReverseProxyDemo";
@@ -412,6 +417,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/opentelemetry": <TraceDemo />,
   "devops/dora-metrics": <DoraDemo />,
   "devops/linux-processes": <ProcessTreeDemo />,
+  "devops/shell-scripting": <ShellPipesDemo />,
+  "devops/package-management": <PackagePinsDemo />,
+  "devops/ssh": <SshAccessDemo />,
+  "devops/ports-firewalls": <FirewallDemo />,
+  "devops/tls-certificates": <CertRenewalDemo />,
   "devops/system-resources": <LoadAverageDemo />,
   "devops/dns-records": <DnsRecordsDemo />,
   "devops/reverse-proxy-config": <ReverseProxyDemo />,
