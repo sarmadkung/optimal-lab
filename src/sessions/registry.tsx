@@ -80,6 +80,11 @@ import LayerCacheDemo from "./devops/dockerfiles/LayerCacheDemo";
 import ContainerNetDemo from "./devops/container-networking/ContainerNetDemo";
 import VolumesDemo from "./devops/volumes/VolumesDemo";
 import HpaDemo from "./devops/pod-autoscaling/HpaDemo";
+import K8sApplyDemo from "./devops/k8s-architecture/K8sApplyDemo";
+import DeployReconcileDemo from "./devops/deployments-replicasets/DeployReconcileDemo";
+import ConfigSecretsDemo from "./devops/configmaps-secrets/ConfigSecretsDemo";
+import StatefulSetDemo from "./devops/statefulsets/StatefulSetDemo";
+import HelmKustomizeDemo from "./devops/helm-kustomize/HelmKustomizeDemo";
 import SchedulerDemo from "./devops/scheduling/SchedulerDemo";
 import BulkheadsDemo from "./system-design/bulkheads/BulkheadsDemo";
 import PermissionRetrievalDemo from "./system-design/permission-aware-retrieval/PermissionRetrievalDemo";
@@ -420,6 +425,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/container-networking": <ContainerNetDemo />,
   "devops/volumes": <VolumesDemo />,
   "devops/pod-autoscaling": <HpaDemo />,
+  "devops/k8s-architecture": <K8sApplyDemo />,
+  "devops/deployments-replicasets": <DeployReconcileDemo />,
+  "devops/configmaps-secrets": <ConfigSecretsDemo />,
+  "devops/statefulsets": <StatefulSetDemo />,
+  "devops/helm-kustomize": <HelmKustomizeDemo />,
   "devops/scheduling": <SchedulerDemo />,
   "system-design/bulkheads": <BulkheadsDemo />,
   "system-design/permission-aware-retrieval": <PermissionRetrievalDemo />,

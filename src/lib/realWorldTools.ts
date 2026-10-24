@@ -2322,6 +2322,52 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Cluster Autoscaler", kind: "software", note: "Adds nodes for pending pods.", href: "https://github.com/kubernetes/autoscaler" },
     ],
   },
+  "devops/k8s-architecture": {
+    lead: "The pieces every cluster has, managed or not.",
+    tools: [
+      { name: "Kubernetes components", kind: "standard", note: "API server, etcd, scheduler, controllers, kubelet.", href: "https://kubernetes.io/docs/concepts/overview/components/" },
+      { name: "etcd", kind: "software", note: "The cluster's only database.", href: "https://github.com/etcd-io/etcd" },
+      { name: "containerd", kind: "software", note: "The runtime the kubelet drives.", href: "https://github.com/containerd/containerd" },
+      { name: "k9s", kind: "software", note: "A terminal UI for pods and events.", href: "https://github.com/derailed/k9s" },
+    ],
+  },
+  "devops/deployments-replicasets": {
+    lead: "Declare the count; controllers keep it true.",
+    tools: [
+      { name: "Deployments", kind: "standard", note: "ReplicaSets per version, rollouts and rollback.", href: "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" },
+      { name: "ReplicaSet", kind: "standard", note: "Keeps a labelled set of pods at a count.", href: "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/" },
+      { name: "Taints and tolerations", kind: "standard", note: "How long pods wait on a lost node.", href: "https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" },
+      { name: "Argo Rollouts", kind: "software", note: "Canary and blue-green on top of ReplicaSets.", href: "https://github.com/argoproj/argo-rollouts" },
+    ],
+  },
+  "devops/configmaps-secrets": {
+    lead: "Config that rolls out, secrets that stay secret.",
+    tools: [
+      { name: "ConfigMaps", kind: "standard", note: "Env vars or mounted files.", href: "https://kubernetes.io/docs/concepts/configuration/configmap/" },
+      { name: "Encryption at rest", kind: "standard", note: "Encrypt Secrets in etcd with a KMS key.", href: "https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/" },
+      { name: "External Secrets Operator", kind: "software", note: "Syncs values from Vault or a cloud secret store.", href: "https://github.com/external-secrets/external-secrets" },
+      { name: "Sealed Secrets", kind: "software", note: "Encrypted Secrets that are safe in Git.", href: "https://github.com/bitnami-labs/sealed-secrets" },
+      { name: "SOPS", kind: "software", note: "Encrypt values inside YAML files.", href: "https://github.com/getsops/sops" },
+    ],
+  },
+  "devops/statefulsets": {
+    lead: "Stable names, a disk per replica, placed in the right zone.",
+    tools: [
+      { name: "StatefulSets", kind: "standard", note: "Ordinal names and volumeClaimTemplates.", href: "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/" },
+      { name: "Storage classes", kind: "standard", note: "volumeBindingMode and provisioners.", href: "https://kubernetes.io/docs/concepts/storage/storage-classes/" },
+      { name: "CloudNativePG", kind: "software", note: "A Postgres operator: failover and backups.", href: "https://github.com/cloudnative-pg/cloudnative-pg" },
+      { name: "Rook", kind: "software", note: "Ceph storage inside the cluster.", href: "https://github.com/rook/rook" },
+    ],
+  },
+  "devops/helm-kustomize": {
+    lead: "One set of manifests, a small file per environment.",
+    tools: [
+      { name: "Helm", kind: "software", note: "Charts, values and releases.", href: "https://github.com/helm/helm" },
+      { name: "Kustomize", kind: "software", note: "Overlays and patches, built into kubectl.", href: "https://github.com/kubernetes-sigs/kustomize" },
+      { name: "helm-diff", kind: "software", note: "See what an upgrade would change.", href: "https://github.com/databus23/helm-diff" },
+      { name: "Artifact Hub", kind: "service", note: "Find published charts.", href: "https://artifacthub.io/" },
+    ],
+  },
   "devops/scheduling": {
     lead: "Every pod goes through the scheduler.",
     tools: [

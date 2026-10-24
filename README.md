@@ -321,6 +321,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/container-networking` | Try five connections between the host and containers: published ports, names and the localhost trap | — |
 | `/tracks/devops/volumes` | Insert rows, restart, remove and recreate a database container with three kinds of storage | — |
 | `/tracks/devops/pod-autoscaling` | Change the app's CPU needs and step through the HPA's replica calculation, min and max | — |
+| `/tracks/devops/k8s-architecture` | kubectl apply through the API server, etcd, controllers, the scheduler and kubelets; a field typo, a namespace quota, unschedulable pods, a bad image and a control plane outage | — |
+| `/tracks/devops/deployments-replicasets` | A Deployment's control loop against bare pods: delete a pod, lose a node, ship a new image, roll back and relabel a pod, with tolerations and revision history | — |
+| `/tracks/devops/configmaps-secrets` | Change a setting and rotate a password through env vars, volumes and subPath; base64 decoded, RBAC, encryption at rest, and secrets kept out of Git | — |
+| `/tracks/devops/statefulsets` | Run three Postgres replicas across three zones as a Deployment or StatefulSet: per-pod claims, Multi-Attach, binding modes, a lost zone and scaling down | — |
+| `/tracks/devops/helm-kustomize` | Render one app for dev, staging and production with Helm values or Kustomize overlays; a values typo, an unpinned tag and a hand edit undone by the next deploy | — |
 | `/tracks/devops/scheduling` | Place seven pods on three nodes by CPU requests, with a taint and a pod left pending | — |
 | `/tracks/devops/branching-strategies` | Three developers over two weeks with trunk-based, short and long-lived branches | — |
 | `/tracks/devops/releases-versioning` | Pick what changed, get the next version, and see which dependency ranges accept it | — |
