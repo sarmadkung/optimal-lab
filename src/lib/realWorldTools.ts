@@ -2842,6 +2842,40 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Aider", kind: "software", note: "Terminal pair-programmer with git integration.", href: "https://github.com/Aider-AI/aider" },
     ],
   },
+  "tools/terminal-agents": {
+    lead: "Terminal agents share the same ideas: permission rules, prompts and sandboxed runs.",
+    tools: [
+      { name: "Claude Code", kind: "software", note: "A terminal agent with allow and deny rules for tools and commands.", href: "https://github.com/anthropics/claude-code" },
+      { name: "Codex CLI", kind: "software", note: "A terminal agent with approval modes and a sandbox.", href: "https://github.com/openai/codex" },
+      { name: "Gemini CLI", kind: "software", note: "A terminal agent with tool confirmation and sandboxing.", href: "https://github.com/google-gemini/gemini-cli" },
+      { name: "Dev Containers", kind: "standard", note: "A repo-defined container to run an agent in, without your credentials.", href: "https://containers.dev" },
+    ],
+  },
+  "tools/agent-context-files": {
+    lead: "Each agent reads a context file; the format is converging on plain Markdown in the repo.",
+    tools: [
+      { name: "AGENTS.md", kind: "standard", note: "A shared, tool-neutral file of instructions for coding agents.", href: "https://agents.md" },
+      { name: "Claude Code memory", kind: "software", note: "CLAUDE.md files at repo, folder and user level.", href: "https://docs.claude.com/en/docs/claude-code/memory" },
+      { name: "Cursor rules", kind: "software", note: "Project rules in .cursor/rules, scoped by path.", href: "https://cursor.com/docs/context/rules" },
+    ],
+  },
+  "tools/reviewing-agent-changes": {
+    lead: "Checks that read the diff run in CI; the merge rules live in the repository settings.",
+    tools: [
+      { name: "GitHub rulesets", kind: "platform", note: "Required reviews and status checks before anything reaches main.", href: "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" },
+      { name: "Gitleaks", kind: "software", note: "Finds secrets in diffs and history.", href: "https://github.com/gitleaks/gitleaks" },
+      { name: "OSV-Scanner", kind: "software", note: "Checks dependencies against known vulnerabilities.", href: "https://github.com/google/osv-scanner" },
+    ],
+  },
+  "tools/background-agents": {
+    lead: "Cloud agents take a task, run in their own machine and open a pull request.",
+    tools: [
+      { name: "GitHub Copilot coding agent", kind: "service", note: "Assign an issue; it works in an Actions runner and opens a PR.", href: "https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent" },
+      { name: "Claude Code on the web", kind: "service", note: "Tasks run in cloud sandboxes with network controls.", href: "https://docs.claude.com/en/docs/claude-code/claude-code-on-the-web" },
+      { name: "Devin", kind: "service", note: "A cloud agent with its own machine and setup.", href: "https://devin.ai" },
+      { name: "Dev Containers", kind: "standard", note: "Define the machine an agent starts in, from the repo.", href: "https://containers.dev" },
+    ],
+  },
   "tools/mcp": {
     lead: "MCP is the wire format between an app and a tool server — any language can implement either side.",
     tools: [

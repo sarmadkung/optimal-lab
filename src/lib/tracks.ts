@@ -1464,10 +1464,14 @@ export const TRACKS: Track[] = [
         section: "coding-agents",
         shape: { kind: "system", steps: 5, flow: "cycle", richSteps: true },
       },
-      { id: "terminal-agents", title: "Terminal coding agents", blurb: "Agents like Claude Code that run commands, edit files and run tests.", status: "soon", section: "coding-agents" },
-      { id: "agent-context-files", title: "Rules and context files", blurb: "AGENTS.md, rules and memory files that steer an agent.", status: "soon", section: "coding-agents" },
-      { id: "reviewing-agent-changes", title: "Reviewing agent changes", blurb: "Diffs, tests and sandboxes before you trust the output.", status: "soon", section: "coding-agents" },
-      { id: "background-agents", title: "Background and cloud agents", blurb: "Hand off a task and get a pull request back.", status: "soon", section: "coding-agents" },
+      { id: "terminal-agents", title: "Terminal coding agents", blurb: "Agents like Claude Code that run commands, edit files and run tests.", status: "live", section: "coding-agents",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "agent-context-files", title: "Rules and context files", blurb: "AGENTS.md, rules and memory files that steer an agent.", status: "live", section: "coding-agents",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "reviewing-agent-changes", title: "Reviewing agent changes", blurb: "Diffs, tests and sandboxes before you trust the output.", status: "live", section: "coding-agents",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "background-agents", title: "Background and cloud agents", blurb: "Hand off a task and get a pull request back.", status: "live", section: "coding-agents",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // Protocols and tool servers
       {
         id: "mcp",

@@ -31,6 +31,10 @@ import EventLoopDemo from "./nodejs/event-loop/EventLoopDemo";
 import CachingDemo from "./system-design/caching/CachingDemo";
 import LoadBalanceDemo from "./system-design/load-balancing/LoadBalanceDemo";
 import AgentLoopDemo from "./tools/cursor-agent/AgentLoopDemo";
+import TerminalAgentsDemo from "./tools/terminal-agents/TerminalAgentsDemo";
+import ContextFilesDemo from "./tools/agent-context-files/ContextFilesDemo";
+import ReviewAgentChangesDemo from "./tools/reviewing-agent-changes/ReviewAgentChangesDemo";
+import BackgroundAgentsDemo from "./tools/background-agents/BackgroundAgentsDemo";
 import McpDemo from "./tools/mcp/McpDemo";
 import N8nDemo from "./tools/n8n/N8nDemo";
 
@@ -695,6 +699,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai-automation/human-approval": <ApprovalDemo />,
   "ai-automation/schedules": <SchedulesDemo />,
   "tools/cursor-agent": <AgentLoopDemo />,
+  "tools/terminal-agents": <TerminalAgentsDemo />,
+  "tools/agent-context-files": <ContextFilesDemo />,
+  "tools/reviewing-agent-changes": <ReviewAgentChangesDemo />,
+  "tools/background-agents": <BackgroundAgentsDemo />,
   "tools/mcp": <McpDemo />,
   "tools/n8n": <N8nDemo />,
   "tools/github-actions": <GithubActionsDemo />,

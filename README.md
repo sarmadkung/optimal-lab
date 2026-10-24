@@ -384,6 +384,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai-automation/human-approval` | Draft a reply, then wait for approve or reject | — |
 | `/tracks/ai-automation/schedules` | Cron with a runner outage: skip, catch up once, or backfill | — |
 | `/tracks/tools/cursor-agent` | Search, edit, check, repeat | — |
+| `/tracks/tools/terminal-agents` | Sixteen tool calls from a terminal agent fixing one test: a deny list, allow rules in Tool(pattern) form, prompts people stop reading, and a sandbox with no secrets | — |
+| `/tracks/tools/agent-context-files` | Write an AGENTS.md section by section for a monorepo: commands, layout, what not to edit, conventions, a contradicting old style guide, and a nested file; mistakes prevented against tokens per turn | — |
+| `/tracks/tools/reviewing-agent-changes` | Eight green agent PRs: skipped and weakened tests, a typosquatted package, an auth check buried in reformatting, a live key; diff checks against careful review | — |
+| `/tracks/tools/background-agents` | Twelve backlog tasks to cloud agents: one-line titles or specs, a bare machine, setup script or snapshot, how many at once, and a network allowlist against an injected issue | — |
 | `/tracks/tools/mcp` | A tool server lists tools; the app forwards the call | — |
 | `/tracks/tools/n8n` | Webhook → IF → Slack or email | — |
 | `/tracks/tools/github-actions` | on:, parallel jobs, a matrix, needs: and if: on three different events | — |
