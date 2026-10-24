@@ -372,6 +372,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/hybrid-search` | BM25 + vector search, Reciprocal Rank Fusion, then a reranker | — |
 | `/tracks/ai/rag` | Chunk, retrieve, paste into the prompt, answer only from that | — |
 | `/tracks/ai/evals` | Two prompt versions graded by code checks and an LLM judge, checked against people | — |
+| `/tracks/tools/model-providers` | One conversation with a tool call sent to OpenAI, Anthropic and Gemini: the request body at each step, the stream's events, and the seven differences an app must handle | — |
+| `/tracks/tools/ai-sdks` | One call through your own adapters, an AI SDK or an OpenAI-compatible gateway to three providers: the converted request, feature coverage, escape hatches and switching cost | — |
+| `/tracks/tools/llm-frameworks` | A five-line RAG pipeline over a 40-page handbook: the chunk size, top k and response mode defaults that decide calls, tokens and whether the answer is complete; tracing to see them | — |
+| `/tracks/tools/ollama` | A team assistant on a 32 GB laptop through Ollama: models and quantizations that fit, num_ctx truncation, keep_alive reloads, parallel slots, and the OpenAI-compatible endpoint | — |
 | `/tracks/ai/agent-patterns` | Chaining, routing, parallel, orchestrator-workers, evaluator-optimizer, agent | — |
 | `/tracks/ai/message-roles` | The same messages through ChatML, Llama 3 and Gemma templates; flip the system prompt, earlier turns and a prefill | — |
 | `/tracks/ai/few-shot` | Sort eight tickets with zero to six examples: format locks in, conventions carry over, one-sided examples bias the answers | — |

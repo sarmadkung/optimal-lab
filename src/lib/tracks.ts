@@ -1494,10 +1494,14 @@ export const TRACKS: Track[] = [
       { id: "langgraph", title: "LangGraph", blurb: "Agents as graphs of steps with saved state.", status: "soon", section: "workflow-builders" },
       { id: "temporal", title: "Temporal", blurb: "Code-first durable workflows that survive crashes.", status: "soon", section: "workflow-builders" },
       // Model APIs and SDKs
-      { id: "model-providers", title: "Model provider APIs", blurb: "OpenAI, Anthropic and Gemini: messages, tools and streaming compared.", status: "soon", section: "model-apis" },
-      { id: "ai-sdks", title: "AI SDKs", blurb: "Vercel AI SDK and friends: one interface over many providers.", status: "soon", section: "model-apis" },
-      { id: "llm-frameworks", title: "LangChain and LlamaIndex", blurb: "What frameworks give you, and what they hide.", status: "soon", section: "model-apis" },
-      { id: "ollama", title: "Ollama and local runtimes", blurb: "Run open models on your laptop behind a local API.", status: "soon", section: "model-apis" },
+      { id: "model-providers", title: "Model provider APIs", blurb: "OpenAI, Anthropic and Gemini: messages, tools and streaming compared.", status: "live", section: "model-apis",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "ai-sdks", title: "AI SDKs", blurb: "Vercel AI SDK and friends: one interface over many providers.", status: "live", section: "model-apis",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "llm-frameworks", title: "LangChain and LlamaIndex", blurb: "What frameworks give you, and what they hide.", status: "live", section: "model-apis",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "ollama", title: "Ollama and local runtimes", blurb: "Run open models on your laptop behind a local API.", status: "live", section: "model-apis",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       { id: "model-routers", title: "Model routers", blurb: "OpenRouter-style services: one key, many models, automatic fallback.", status: "live", section: "model-apis",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
       // Data and retrieval tools

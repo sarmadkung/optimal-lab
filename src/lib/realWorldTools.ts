@@ -2662,6 +2662,39 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "LangSmith", kind: "platform", note: "Tracing, datasets and evaluators for LLM apps.", href: "https://www.langchain.com/langsmith" },
     ],
   },
+  "tools/model-providers": {
+    lead: "Each provider documents its request and streaming formats; the shapes differ more than the ideas.",
+    tools: [
+      { name: "OpenAI API spec", kind: "standard", note: "The OpenAPI description of OpenAI's API, including chat completions.", href: "https://github.com/openai/openai-openapi" },
+      { name: "Anthropic Messages API", kind: "service", note: "System prompt, messages, tools, tool_use and tool_result blocks.", href: "https://docs.claude.com/en/api/messages" },
+      { name: "Gemini generateContent", kind: "service", note: "contents, parts, functionDeclarations and functionResponse.", href: "https://ai.google.dev/api/generate-content" },
+    ],
+  },
+  "tools/ai-sdks": {
+    lead: "SDKs and gateways convert one call shape into each provider's API.",
+    tools: [
+      { name: "Vercel AI SDK", kind: "software", note: "One TypeScript interface over many providers, with tools and streaming.", href: "https://github.com/vercel/ai" },
+      { name: "LiteLLM", kind: "software", note: "A Python SDK and proxy that speaks the OpenAI format to 100+ providers.", href: "https://github.com/BerriAI/litellm" },
+      { name: "OpenRouter", kind: "service", note: "A hosted OpenAI-compatible gateway to many models.", href: "https://openrouter.ai" },
+    ],
+  },
+  "tools/llm-frameworks": {
+    lead: "Frameworks give loaders, indexes and query engines; tracing shows what they run.",
+    tools: [
+      { name: "LangChain", kind: "software", note: "Chains, retrievers and agents with many integrations.", href: "https://github.com/langchain-ai/langchain" },
+      { name: "LlamaIndex", kind: "software", note: "Document loaders, indexes and query engines for RAG.", href: "https://github.com/run-llama/llama_index" },
+      { name: "Langfuse", kind: "software", note: "Traces of every prompt a framework sends.", href: "https://github.com/langfuse/langfuse" },
+    ],
+  },
+  "tools/ollama": {
+    lead: "Local runtimes serve open models behind an HTTP API on your own machine.",
+    tools: [
+      { name: "Ollama", kind: "software", note: "Pull and run quantized open models behind a local API.", href: "https://github.com/ollama/ollama" },
+      { name: "llama.cpp", kind: "software", note: "The inference engine and GGUF format underneath many local runtimes.", href: "https://github.com/ggml-org/llama.cpp" },
+      { name: "LM Studio", kind: "software", note: "A desktop app for running local models with an OpenAI-compatible server.", href: "https://lmstudio.ai" },
+      { name: "vLLM", kind: "software", note: "When one laptop isn't enough: a high-throughput server for GPUs.", href: "https://github.com/vllm-project/vllm" },
+    ],
+  },
   "dsa/hash-map": {
     lead: "Grouping by a computed key is how databases and data tools group rows, not just an interview trick.",
     tools: [

@@ -6,6 +6,10 @@ import AttentionDemo from "./ai/attention/AttentionDemo";
 import ContextWindowDemo from "./ai/context-window/ContextWindowDemo";
 import EmbeddingsDemo from "./ai/embeddings/EmbeddingsDemo";
 import EvalsDemo from "./ai/evals/EvalsDemo";
+import ModelProvidersDemo from "./tools/model-providers/ModelProvidersDemo";
+import AiSdksDemo from "./tools/ai-sdks/AiSdksDemo";
+import LlmFrameworksDemo from "./tools/llm-frameworks/LlmFrameworksDemo";
+import OllamaDemo from "./tools/ollama/OllamaDemo";
 import HybridSearchDemo from "./ai/hybrid-search/HybridSearchDemo";
 import NextTokenDemo from "./ai/next-token/NextTokenDemo";
 import AlignmentDemo from "./ai/alignment/AlignmentDemo";
@@ -683,6 +687,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/hybrid-search": <HybridSearchDemo />,
   "ai/rag": <RagDemo />,
   "ai/evals": <EvalsDemo />,
+  "tools/model-providers": <ModelProvidersDemo />,
+  "tools/ai-sdks": <AiSdksDemo />,
+  "tools/llm-frameworks": <LlmFrameworksDemo />,
+  "tools/ollama": <OllamaDemo />,
   "ai/agent-patterns": <AgentPatternsDemo />,
   "ai/message-roles": <MessageRolesDemo />,
   "ai/few-shot": <FewShotDemo />,
