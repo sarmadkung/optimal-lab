@@ -62,6 +62,10 @@ import KeysDemo from "./frontend/reconciliation/KeysDemo";
 import StaleClosureDemo from "./frontend/hooks/StaleClosureDemo";
 import MemoDemo from "./frontend/memoization/MemoDemo";
 import BranchingDemo from "./devops/branching-strategies/BranchingDemo";
+import PullRequestsDemo from "./devops/pull-requests/PullRequestsDemo";
+import RepoLayoutDemo from "./devops/monorepo-vs-polyrepo/RepoLayoutDemo";
+import PipelineTestsDemo from "./devops/pipeline-tests/PipelineTestsDemo";
+import EnvironmentsDemo from "./devops/environments/EnvironmentsDemo";
 import SemverDemo from "./devops/releases-versioning/SemverDemo";
 import AffectedDemo from "./devops/build-caching/AffectedDemo";
 import SupplyChainDemo from "./devops/supply-chain/SupplyChainDemo";
@@ -402,6 +406,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "frontend/hooks": <StaleClosureDemo />,
   "frontend/memoization": <MemoDemo />,
   "devops/branching-strategies": <BranchingDemo />,
+  "devops/pull-requests": <PullRequestsDemo />,
+  "devops/monorepo-vs-polyrepo": <RepoLayoutDemo />,
+  "devops/pipeline-tests": <PipelineTestsDemo />,
+  "devops/environments": <EnvironmentsDemo />,
   "devops/releases-versioning": <SemverDemo />,
   "devops/build-caching": <AffectedDemo />,
   "devops/supply-chain": <SupplyChainDemo />,

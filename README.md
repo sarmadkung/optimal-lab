@@ -323,6 +323,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/pod-autoscaling` | Change the app's CPU needs and step through the HPA's replica calculation, min and max | — |
 | `/tracks/devops/scheduling` | Place seven pods on three nodes by CPU requests, with a taint and a pod left pending | — |
 | `/tracks/devops/branching-strategies` | Three developers over two weeks with trunk-based, short and long-lived branches | — |
+| `/tracks/devops/pull-requests` | Eight PRs in one day under branch protection: red checks, two green PRs that break main together, an 1,800-line PR, CODEOWNERS and a merge queue | — |
+| `/tracks/devops/monorepo-vs-polyrepo` | Three services and three libraries in one repo or six: a shared-library fix, a one-app change and a breaking API rename, with affected builds, bump bots and expand-contract | — |
+| `/tracks/devops/pipeline-tests` | Place lint, unit, integration, end-to-end and load tests on push, before merge or nightly; fail fast, shards and flaky quarantine over a month of CI | — |
+| `/tracks/devops/environments` | Five incidents from environments that differ: a rebuilt image, Postgres 16 vs 14, a missing setting, a migration on 50k vs 90M rows, a shared staging queue | — |
 | `/tracks/devops/releases-versioning` | Pick what changed, get the next version, and see which dependency ranges accept it | — |
 | `/tracks/devops/build-caching` | Change one package in a monorepo and compare building everything, affected only, and with a remote cache | — |
 | `/tracks/devops/supply-chain` | Turn on lockfiles, scanning, CI builds, signing and verification and see which attacks get through | — |

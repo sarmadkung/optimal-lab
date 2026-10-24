@@ -2338,6 +2338,45 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Merge queues", kind: "software", note: "Keep main green while merging often.", href: "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue" },
     ],
   },
+  "devops/pull-requests": {
+    lead: "Branch protection decides where a problem gets caught.",
+    tools: [
+      { name: "Protected branches", kind: "platform", note: "Required checks, reviews and up-to-date rules.", href: "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches" },
+      { name: "CODEOWNERS", kind: "standard", note: "Route a path to the team that owns it.", href: "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners" },
+      { name: "GitHub merge queue", kind: "platform", note: "Tests each PR on top of the ones ahead of it.", href: "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue" },
+      { name: "GitLab merge trains", kind: "platform", note: "The same idea in GitLab.", href: "https://docs.gitlab.com/ci/pipelines/merge_trains/" },
+      { name: "Gerrit", kind: "software", note: "Review per commit, with required votes.", href: "https://www.gerritcodereview.com/" },
+    ],
+  },
+  "devops/monorepo-vs-polyrepo": {
+    lead: "Build tools that know the graph, and bots that keep versions moving.",
+    tools: [
+      { name: "Nx", kind: "software", note: "Affected builds and caching for monorepos.", href: "https://github.com/nrwl/nx" },
+      { name: "Turborepo", kind: "software", note: "Task graph and remote cache.", href: "https://github.com/vercel/turborepo" },
+      { name: "Bazel", kind: "software", note: "Hermetic builds at very large scale.", href: "https://github.com/bazelbuild/bazel" },
+      { name: "Renovate", kind: "software", note: "Opens dependency bump PRs automatically.", href: "https://github.com/renovatebot/renovate" },
+      { name: "Dependabot", kind: "platform", note: "GitHub's built-in bump PRs.", href: "https://docs.github.com/en/code-security/dependabot" },
+    ],
+  },
+  "devops/pipeline-tests": {
+    lead: "Fast tests on every push, real dependencies in containers, slow tests on a schedule.",
+    tools: [
+      { name: "Testcontainers", kind: "software", note: "Real databases and queues in tests.", href: "https://testcontainers.com/" },
+      { name: "Playwright", kind: "software", note: "End-to-end browser tests with sharding.", href: "https://github.com/microsoft/playwright" },
+      { name: "Grafana k6", kind: "software", note: "Scripted load tests.", href: "https://github.com/grafana/k6" },
+      { name: "GitHub Actions", kind: "platform", note: "Triggers on push, pull request and schedule.", href: "https://github.com/features/actions" },
+    ],
+  },
+  "devops/environments": {
+    lead: "Same build, same infrastructure code, checked config, realistic data.",
+    tools: [
+      { name: "Terraform", kind: "software", note: "One module for every environment.", href: "https://github.com/hashicorp/terraform" },
+      { name: "OpenTofu", kind: "software", note: "Open-source Terraform fork.", href: "https://github.com/opentofu/opentofu" },
+      { name: "OCI image digests", kind: "standard", note: "Deploy the exact image you tested.", href: "https://github.com/opencontainers/image-spec" },
+      { name: "Neon branching", kind: "service", note: "A database copy per preview environment.", href: "https://neon.com/docs/introduction/branching" },
+      { name: "Vercel preview deployments", kind: "platform", note: "A URL per pull request.", href: "https://vercel.com/docs/deployments/environments" },
+    ],
+  },
   "devops/releases-versioning": {
     lead: "Package managers rely on semantic versions.",
     tools: [
