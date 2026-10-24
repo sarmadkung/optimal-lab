@@ -66,6 +66,11 @@ import SemverDemo from "./devops/releases-versioning/SemverDemo";
 import AffectedDemo from "./devops/build-caching/AffectedDemo";
 import SupplyChainDemo from "./devops/supply-chain/SupplyChainDemo";
 import ZonesDemo from "./devops/regions-zones/ZonesDemo";
+import CloudModelsDemo from "./devops/cloud-models/CloudModelsDemo";
+import ComputeOptionsDemo from "./devops/compute-options/ComputeOptionsDemo";
+import CloudStorageDemo from "./devops/cloud-storage/CloudStorageDemo";
+import ManagedDbDemo from "./devops/managed-databases/ManagedDbDemo";
+import CloudIamDemo from "./devops/cloud-iam/CloudIamDemo";
 import ServerlessDemo from "./devops/serverless/ServerlessDemo";
 import CloudCostsDemo from "./devops/cloud-costs/CloudCostsDemo";
 import StructuredLogsDemo from "./devops/structured-logging/StructuredLogsDemo";
@@ -406,6 +411,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/build-caching": <AffectedDemo />,
   "devops/supply-chain": <SupplyChainDemo />,
   "devops/regions-zones": <ZonesDemo />,
+  "devops/cloud-models": <CloudModelsDemo />,
+  "devops/compute-options": <ComputeOptionsDemo />,
+  "devops/cloud-storage": <CloudStorageDemo />,
+  "devops/managed-databases": <ManagedDbDemo />,
+  "devops/cloud-iam": <CloudIamDemo />,
   "devops/serverless": <ServerlessDemo />,
   "devops/cloud-costs": <CloudCostsDemo />,
   "devops/structured-logging": <StructuredLogsDemo />,

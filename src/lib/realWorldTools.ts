@@ -2370,6 +2370,54 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Azure availability zones", kind: "service", note: "Zone-redundant services.", href: "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview" },
     ],
   },
+  "devops/cloud-models": {
+    lead: "Every provider publishes where its job ends and yours begins.",
+    tools: [
+      { name: "AWS shared responsibility model", kind: "standard", note: "Security of the cloud vs in the cloud.", href: "https://aws.amazon.com/compliance/shared-responsibility-model/" },
+      { name: "Azure shared responsibility", kind: "standard", note: "Responsibility by IaaS, PaaS and SaaS.", href: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" },
+      { name: "Google Cloud shared fate", kind: "standard", note: "Google's version of the split.", href: "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate" },
+      { name: "NIST SP 800-145", kind: "standard", note: "The definitions of IaaS, PaaS and SaaS.", href: "https://csrc.nist.gov/pubs/sp/800/145/final" },
+    ],
+  },
+  "devops/compute-options": {
+    lead: "Match the shape of the work to the way you pay for it.",
+    tools: [
+      { name: "Amazon EC2", kind: "service", note: "Virtual machines by the hour.", href: "https://aws.amazon.com/ec2/" },
+      { name: "AWS Fargate", kind: "service", note: "Containers without managing servers.", href: "https://aws.amazon.com/fargate/" },
+      { name: "Cloud Run", kind: "service", note: "Containers that scale with requests, and jobs.", href: "https://cloud.google.com/run" },
+      { name: "AWS Lambda", kind: "service", note: "Functions billed per request and duration.", href: "https://aws.amazon.com/lambda/" },
+      { name: "Knative", kind: "software", note: "Scale-to-zero containers on Kubernetes.", href: "https://github.com/knative/serving" },
+    ],
+  },
+  "devops/cloud-storage": {
+    lead: "A disk, a shared folder or objects over HTTP.",
+    tools: [
+      { name: "Amazon EBS", kind: "service", note: "Block volumes for one instance.", href: "https://aws.amazon.com/ebs/" },
+      { name: "Amazon EFS", kind: "service", note: "Managed NFS many servers mount.", href: "https://aws.amazon.com/efs/" },
+      { name: "Amazon S3", kind: "service", note: "Object storage with lifecycle tiers.", href: "https://aws.amazon.com/s3/" },
+      { name: "MinIO", kind: "software", note: "S3-compatible object storage you run.", href: "https://github.com/minio/minio" },
+      { name: "Ceph", kind: "software", note: "Block, file and object from one cluster.", href: "https://github.com/ceph/ceph" },
+    ],
+  },
+  "devops/managed-databases": {
+    lead: "Pay someone to run backups and failover, and know what you give up.",
+    tools: [
+      { name: "Amazon RDS", kind: "service", note: "Multi-AZ, point-in-time restore, replicas.", href: "https://aws.amazon.com/rds/" },
+      { name: "Cloud SQL", kind: "service", note: "Google's managed Postgres and MySQL.", href: "https://cloud.google.com/sql" },
+      { name: "Patroni", kind: "software", note: "Postgres failover when you run it yourself.", href: "https://github.com/patroni/patroni" },
+      { name: "pgBackRest", kind: "software", note: "Backups and WAL archiving for self-run Postgres.", href: "https://github.com/pgbackrest/pgbackrest" },
+    ],
+  },
+  "devops/cloud-iam": {
+    lead: "Short-lived credentials, least privilege, and guardrails above it all.",
+    tools: [
+      { name: "IAM policy evaluation logic", kind: "standard", note: "Explicit deny, allow, implicit deny.", href: "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" },
+      { name: "Service control policies", kind: "service", note: "Organization-wide deny rules.", href: "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html" },
+      { name: "GitHub Actions OIDC", kind: "platform", note: "Cloud credentials for CI without stored keys.", href: "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect" },
+      { name: "IAM Access Analyzer", kind: "service", note: "Finds unused and overly broad permissions.", href: "https://aws.amazon.com/iam/access-analyzer/" },
+      { name: "Google Cloud IAM", kind: "service", note: "Roles and conditions on Google Cloud.", href: "https://cloud.google.com/iam" },
+    ],
+  },
   "devops/serverless": {
     lead: "Serverless platforms bill per request and compute time.",
     tools: [

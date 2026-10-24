@@ -327,6 +327,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/build-caching` | Change one package in a monorepo and compare building everything, affected only, and with a remote cache | — |
 | `/tracks/devops/supply-chain` | Turn on lockfiles, scanning, CI builds, signing and verification and see which attacks get through | — |
 | `/tracks/devops/regions-zones` | Deploy in one zone, three zones or two regions, then fail a server, a zone and a region | — |
+| `/tracks/devops/cloud-models` | Who runs each layer under your own servers, IaaS, PaaS, functions and SaaS, and who acts when a disk fails, a CVE lands, traffic triples, data is deleted or a contractor leaves | — |
+| `/tracks/devops/compute-options` | A steady API, bursty webhooks and a 3-hour nightly job on VMs, containers or functions: monthly cost, ops hours, cold starts and the 15-minute limit | — |
+| `/tracks/devops/cloud-storage` | Place a database, a shared upload folder, 2 TB of photos, 10 TB of training data and a year of backups on block, file or object storage, with an archive tier | — |
+| `/tracks/devops/managed-databases` | Postgres on your own VM or managed, against a dead host, a dropped table, a security release, reporting load and an unsupported extension | — |
+| `/tracks/devops/cloud-iam` | Eight requests through an IAM evaluator: role policies, OIDC for CI instead of stored keys, an MFA condition and organization SCPs, explicit deny first | — |
 | `/tracks/devops/serverless` | Compare function and container costs as traffic grows, and cold starts by traffic shape | — |
 | `/tracks/devops/cloud-costs` | Apply six common savings to a monthly cloud bill and see which lines shrink | — |
 | `/tracks/devops/structured-logging` | Find a user's errors with grep on free-text logs, then with a query on structured JSON | — |
