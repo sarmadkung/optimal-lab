@@ -148,6 +148,11 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/terraform-plan-apply` | Make a change, from adding a bucket to console drift, and read the create, update, replace or destroy plan | — |
 | `/tracks/devops/slos-error-budgets` | The same incidents against 99%, 99.9% and 99.99% targets: how much budget is left | — |
 | `/tracks/ai/react-loop` | Step through thought, action and observation with search, weather and calculator tools | — |
+| `/tracks/tools/tracing-tools` | 50,000 support requests a day into a tracing tool: proxy, SDK or OpenTelemetry, step spans, tags, PII redaction and tail sampling, against five questions you'll be asked next month | — |
+| `/tracks/tools/eval-tools` | Six test cases against the live prompt, a new prompt and a cheaper model: code assertions, a judge run once or three times, regressions vs false alarms, and a merge gate | — |
+| `/tracks/tools/guardrail-tools` | Six messages through input and output guards and a PII filter: Luhn-checked card masking, checking whole answers vs sentences vs afterwards, time to first word, and failing open or closed | — |
+| `/tracks/tools/prompt-management` | A support prompt in code or a registry through one month: a quick edit, a bad edit and rollback, a registry outage, a renamed variable, and which version wrote a reply | — |
+| `/tracks/tools/ai-in-ci` | An AI review bot and an eval suite on 120 PRs a month: path filters that miss a model swap, judge repeats and caching, and keeping the API key away from fork PRs | — |
 | `/tracks/ai/what-is-a-model` | A line, a curve or a lookup table for delivery times: set the parameters, fit them, predict an unseen order | — |
 | `/tracks/ai/learning-types` | A perceptron, k-means and Q-learning side by side on labels, no labels, and rewards | — |
 | `/tracks/ai/fine-tuning` | Goal, examples and epochs: task score, forgetting and overfitting, against a prompt and RAG | — |

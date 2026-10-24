@@ -818,6 +818,49 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Claude Agent SDK", kind: "software", note: "Anthropic's agent loop with tools.", href: "https://docs.claude.com/en/api/agent-sdk/overview" },
     ],
   },
+  "tools/tracing-tools": {
+    lead: "LLM tracing tools record prompts, tokens, cost and steps; OpenTelemetry makes the data portable.",
+    tools: [
+      { name: "Langfuse", kind: "software", note: "Open-source tracing, prompt management and evals.", href: "https://github.com/langfuse/langfuse" },
+      { name: "LangSmith", kind: "service", note: "Tracing and evaluation from the LangChain team.", href: "https://www.langchain.com/langsmith" },
+      { name: "Helicone", kind: "software", note: "A proxy that logs every model call with cost.", href: "https://github.com/Helicone/helicone" },
+      { name: "OpenTelemetry GenAI conventions", kind: "standard", note: "Standard span names and attributes for model calls.", href: "https://opentelemetry.io/docs/specs/semconv/gen-ai/" },
+    ],
+  },
+  "tools/eval-tools": {
+    lead: "Eval tools run a test set against each variant and show what changed.",
+    tools: [
+      { name: "promptfoo", kind: "software", note: "Test cases with assertions and model-graded rubrics, run from the command line or CI.", href: "https://github.com/promptfoo/promptfoo" },
+      { name: "Braintrust", kind: "service", note: "Datasets, scorers and experiment comparisons.", href: "https://www.braintrust.dev" },
+      { name: "Langfuse", kind: "software", note: "Datasets and evaluations next to production traces.", href: "https://github.com/langfuse/langfuse" },
+    ],
+  },
+  "tools/guardrail-tools": {
+    lead: "Guardrail libraries check inputs and outputs; where they run decides latency and coverage.",
+    tools: [
+      { name: "Guardrails AI", kind: "software", note: "Validators on model outputs, with re-asking on failure.", href: "https://github.com/guardrails-ai/guardrails" },
+      { name: "NeMo Guardrails", kind: "software", note: "Programmable input, output and dialog rails.", href: "https://github.com/NVIDIA/NeMo-Guardrails" },
+      { name: "Llama Guard (Purple Llama)", kind: "software", note: "An open classifier for unsafe prompts and responses.", href: "https://github.com/meta-llama/PurpleLlama" },
+      { name: "Presidio", kind: "software", note: "PII detection and anonymisation for text.", href: "https://github.com/microsoft/presidio" },
+    ],
+  },
+  "tools/prompt-management": {
+    lead: "Prompt registries version prompts outside the code; labels, caching and checks keep that safe.",
+    tools: [
+      { name: "Langfuse prompt management", kind: "software", note: "Versioned prompts with labels, fetched and cached by the SDK.", href: "https://langfuse.com/docs/prompt-management/overview" },
+      { name: "PromptLayer", kind: "service", note: "A prompt registry with versions and release labels.", href: "https://promptlayer.com" },
+      { name: "OpenTelemetry GenAI conventions", kind: "standard", note: "Record which prompt version produced each response.", href: "https://opentelemetry.io/docs/specs/semconv/gen-ai/" },
+    ],
+  },
+  "tools/ai-in-ci": {
+    lead: "CI runs AI review and evals like any other check; secrets need the same care as always.",
+    tools: [
+      { name: "GitHub Actions workflow syntax", kind: "platform", note: "paths filters, pull_request vs pull_request_target, secrets.", href: "https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions" },
+      { name: "GitHub Security Lab: pwn requests", kind: "standard", note: "Why pull_request_target with untrusted code leaks secrets.", href: "https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/" },
+      { name: "promptfoo", kind: "software", note: "Eval suites that run in CI and fail on regressions.", href: "https://github.com/promptfoo/promptfoo" },
+      { name: "CodeRabbit", kind: "service", note: "AI review comments on every pull request.", href: "https://www.coderabbit.ai" },
+    ],
+  },
   "ai/what-is-a-model": {
     lead: "Every library fits parameters to data; the shapes range from a line to a transformer.",
     tools: [

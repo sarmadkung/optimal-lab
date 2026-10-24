@@ -235,6 +235,11 @@ import GitObjectsDemo from "./devops/git-internals/GitObjectsDemo";
 import TerraformDemo from "./devops/terraform-plan-apply/TerraformDemo";
 import SloDemo from "./devops/slos-error-budgets/SloDemo";
 import ReactLoopDemo from "./ai/react-loop/ReactLoopDemo";
+import TracingToolsDemo from "./tools/tracing-tools/TracingToolsDemo";
+import EvalToolsDemo from "./tools/eval-tools/EvalToolsDemo";
+import GuardrailToolsDemo from "./tools/guardrail-tools/GuardrailToolsDemo";
+import PromptManagementDemo from "./tools/prompt-management/PromptManagementDemo";
+import AiInCiDemo from "./tools/ai-in-ci/AiInCiDemo";
 import WhatIsAModelDemo from "./ai/what-is-a-model/WhatIsAModelDemo";
 import LearningTypesDemo from "./ai/learning-types/LearningTypesDemo";
 import FineTuningDemo from "./ai/fine-tuning/FineTuningDemo";
@@ -575,6 +580,11 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/terraform-plan-apply": <TerraformDemo />,
   "devops/slos-error-budgets": <SloDemo />,
   "ai/react-loop": <ReactLoopDemo />,
+  "tools/tracing-tools": <TracingToolsDemo />,
+  "tools/eval-tools": <EvalToolsDemo />,
+  "tools/guardrail-tools": <GuardrailToolsDemo />,
+  "tools/prompt-management": <PromptManagementDemo />,
+  "tools/ai-in-ci": <AiInCiDemo />,
   "ai/what-is-a-model": <WhatIsAModelDemo />,
   "ai/learning-types": <LearningTypesDemo />,
   "ai/fine-tuning": <FineTuningDemo />,

@@ -1505,10 +1505,14 @@ export const TRACKS: Track[] = [
       { id: "search-engines", title: "Search engines", blurb: "Elasticsearch and OpenSearch for keyword and hybrid search.", status: "soon", section: "data-tools" },
       { id: "document-parsers", title: "Document parsers", blurb: "Getting clean text and tables out of PDFs and slides.", status: "soon", section: "data-tools" },
       // LLMOps tools
-      { id: "tracing-tools", title: "Tracing tools", blurb: "Langfuse, LangSmith and similar: see every call and its cost.", status: "soon", section: "llmops" },
-      { id: "eval-tools", title: "Eval tools", blurb: "promptfoo, Braintrust and friends: run test sets on every change.", status: "soon", section: "llmops" },
-      { id: "guardrail-tools", title: "Guardrail tools", blurb: "Libraries that check inputs and outputs against rules.", status: "soon", section: "llmops" },
-      { id: "prompt-management", title: "Prompt management", blurb: "Store, version and roll out prompts outside your code.", status: "soon", section: "llmops" },
+      { id: "tracing-tools", title: "Tracing tools", blurb: "Langfuse, LangSmith and similar: see every call and its cost.", status: "live", section: "llmops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "eval-tools", title: "Eval tools", blurb: "promptfoo, Braintrust and friends: run test sets on every change.", status: "live", section: "llmops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "guardrail-tools", title: "Guardrail tools", blurb: "Libraries that check inputs and outputs against rules.", status: "live", section: "llmops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "prompt-management", title: "Prompt management", blurb: "Store, version and roll out prompts outside your code.", status: "live", section: "llmops",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // CI tools
       {
         id: "github-actions",
@@ -1518,7 +1522,8 @@ export const TRACKS: Track[] = [
         section: "ci-tools",
         shape: { kind: "system", steps: 5, flow: "pipeline" },
       },
-      { id: "ai-in-ci", title: "AI checks in CI", blurb: "Run AI review and eval suites on every pull request.", status: "soon", section: "ci-tools" },
+      { id: "ai-in-ci", title: "AI checks in CI", blurb: "Run AI review and eval suites on every pull request.", status: "live", section: "ci-tools",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
     ],
     roadmap: ["Coding agents", "MCP and protocols", "Workflow builders", "Model APIs and data tools", "LLMOps"],
     projects: ["Connect one MCP tool", "An n8n flow with a branch", "A GitHub Action that runs tests"],
