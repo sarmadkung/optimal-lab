@@ -169,6 +169,9 @@ import FeatureCostDemo from "./ai-native/feature-cost/FeatureCostDemo";
 import AbTestDemo from "./ai-native/ab-testing-ai/AbTestDemo";
 import LatencyUxDemo from "./ai-native/latency-ux/LatencyUxDemo";
 import ClassifyRouteDemo from "./ai-automation/classify-route/ClassifyRouteDemo";
+import LlmStepDemo from "./ai-automation/llm-step/LlmStepDemo";
+import ExtractFillDemo from "./ai-automation/extract-and-fill/ExtractFillDemo";
+import DraftReviewDemo from "./ai-automation/draft-then-review/DraftReviewDemo";
 import McpServerDemo from "./tools/build-mcp-server/McpServerDemo";
 import MemoryHierarchyDemo from "./operating-systems/memory-hierarchy/MemoryHierarchyDemo";
 import CacheLocalityDemo from "./operating-systems/cache-locality/CacheLocalityDemo";
@@ -509,6 +512,9 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai-native/ab-testing-ai": <AbTestDemo />,
   "ai-native/latency-ux": <LatencyUxDemo />,
   "ai-automation/classify-route": <ClassifyRouteDemo />,
+  "ai-automation/llm-step": <LlmStepDemo />,
+  "ai-automation/extract-and-fill": <ExtractFillDemo />,
+  "ai-automation/draft-then-review": <DraftReviewDemo />,
   "tools/build-mcp-server": <McpServerDemo />,
   "operating-systems/memory-hierarchy": <MemoryHierarchyDemo />,
   "operating-systems/cache-locality": <CacheLocalityDemo />,

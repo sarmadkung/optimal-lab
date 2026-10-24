@@ -1573,6 +1573,32 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Structured outputs", kind: "standard", note: "Constrain model output to a schema.", href: "https://docs.claude.com/en/docs/build-with-claude/structured-outputs" },
     ],
   },
+  "ai-automation/llm-step": {
+    lead: "Treat a model's answer like any untrusted input: parse it, validate it against a schema, and decide what a failure does.",
+    tools: [
+      { name: "JSON Schema", kind: "standard", note: "Describe the fields, types and allowed values the next step needs.", href: "https://json-schema.org" },
+      { name: "Structured outputs", kind: "service", note: "Constrain the model's answer to a schema, removing most parse errors.", href: "https://docs.claude.com/en/docs/build-with-claude/structured-outputs" },
+      { name: "n8n Structured Output Parser", kind: "software", note: "Parse and check an LLM node's output inside a workflow.", href: "https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.outputparserstructured/" },
+    ],
+  },
+  "ai-automation/extract-and-fill": {
+    lead: "Writing extracted fields into a system of record is mostly about formats, matching and merge rules.",
+    tools: [
+      { name: "Unicode CLDR", kind: "standard", note: "Number and date formats for every locale, behind most parsing libraries.", href: "https://cldr.unicode.org" },
+      { name: "libphonenumber", kind: "software", note: "Parse, format and validate phone numbers from any country.", href: "https://github.com/google/libphonenumber" },
+      { name: "HubSpot CRM", kind: "service", note: "Contacts deduplicated by email, with property history per field.", href: "https://www.hubspot.com/products/crm" },
+      { name: "Salesforce", kind: "service", note: "Upsert records on an external id instead of creating duplicates.", href: "https://www.salesforce.com/crm/" },
+    ],
+  },
+  "ai-automation/draft-then-review": {
+    lead: "Support platforms draft with AI and route to people; checks and approval steps decide what goes out.",
+    tools: [
+      { name: "Zendesk AI", kind: "service", note: "Drafted replies for agents to review, edit and send.", href: "https://www.zendesk.com/service/ai/" },
+      { name: "Intercom Fin", kind: "service", note: "An AI agent that answers or hands off to a person.", href: "https://fin.ai" },
+      { name: "Slack interactivity", kind: "platform", note: "Approve or edit a draft from a message with buttons.", href: "https://docs.slack.dev/interactivity" },
+      { name: "promptfoo", kind: "software", note: "Assertions on model output, the same checks run before sending.", href: "https://github.com/promptfoo/promptfoo" },
+    ],
+  },
   "tools/build-mcp-server": {
     lead: "Official SDKs make writing MCP servers quick.",
     tools: [

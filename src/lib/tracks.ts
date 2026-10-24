@@ -1400,11 +1400,14 @@ export const TRACKS: Track[] = [
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
       { id: "idempotent-steps", title: "Idempotent steps", blurb: "Run a step twice without sending two emails.", status: "soon", section: "workflow-basics" },
       // AI steps in workflows
-      { id: "llm-step", title: "Adding an LLM step", blurb: "Prompt, parse and validate inside a workflow.", status: "soon", section: "ai-steps" },
+      { id: "llm-step", title: "Adding an LLM step", blurb: "Prompt, parse and validate inside a workflow.", status: "live", section: "ai-steps",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       { id: "classify-route", title: "Classify and route", blurb: "Let a model decide which branch an item takes.", status: "live", section: "ai-steps",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
-      { id: "extract-and-fill", title: "Extract and fill", blurb: "Pull fields from text and write them into a system of record.", status: "soon", section: "ai-steps" },
-      { id: "draft-then-review", title: "Draft, then review", blurb: "The model writes, a person or a check approves.", status: "soon", section: "ai-steps" },
+      { id: "extract-and-fill", title: "Extract and fill", blurb: "Pull fields from text and write them into a system of record.", status: "live", section: "ai-steps",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "draft-then-review", title: "Draft, then review", blurb: "The model writes, a person or a check approves.", status: "live", section: "ai-steps",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       { id: "confidence-fallbacks", title: "Confidence thresholds and fallbacks", blurb: "Act alone when sure, ask for help when not.", status: "live", section: "ai-steps",
         shape: { kind: "simulation", steps: 4, flow: "state" } },
       // People in the loop

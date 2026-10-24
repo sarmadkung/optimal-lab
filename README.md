@@ -237,6 +237,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai-native/ab-testing-ai` | Two prompts with a small real difference: watch the confidence interval shrink as users grow | — |
 | `/tracks/ai-native/latency-ux` | The same 6-second agent task shown as a spinner, progress steps, streaming and optimistic UI | — |
 | `/tracks/ai-automation/classify-route` | Route support emails with free-text labels vs a fixed enum and see which ones fall through | — |
+| `/tracks/ai-automation/llm-step` | Ten support emails through an LLM step that files helpdesk tickets: fences, prose, “high” for a number, a cut-off answer, a made-up order id; parse, validate, retry once, then a person | — |
+| `/tracks/ai-automation/extract-and-fill` | Six sales emails into a CRM with existing contacts: grounding quotes, parsing dates and amounts by locale in code, matching records, and merging without overwriting people's edits | — |
+| `/tracks/ai-automation/draft-then-review` | Twelve drafted support replies: code checks, which drafts a person reads, the ticket beside the draft; mistakes sent against reviewer hours a day | — |
 | `/tracks/tools/build-mcp-server` | Three versions of an order-lookup tool and how a model uses each: names, schemas and lean results | — |
 | `/tracks/devops/files-permissions` | Flip rwx bits for owner, group and others and see the octal mode and who can read, edit or run the file | — |
 | `/tracks/devops/services-ingress` | Route requests through Ingress rules to Services and pods, then break a selector and a pod's readiness | — |
