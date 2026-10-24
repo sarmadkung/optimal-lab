@@ -1501,9 +1501,12 @@ export const TRACKS: Track[] = [
       { id: "model-routers", title: "Model routers", blurb: "OpenRouter-style services: one key, many models, automatic fallback.", status: "live", section: "model-apis",
         shape: { kind: "comparison", steps: 4, flow: "pipeline" } },
       // Data and retrieval tools
-      { id: "vector-db-tools", title: "Vector databases", blurb: "pgvector, Pinecone, Qdrant and Weaviate compared.", status: "soon", section: "data-tools" },
-      { id: "search-engines", title: "Search engines", blurb: "Elasticsearch and OpenSearch for keyword and hybrid search.", status: "soon", section: "data-tools" },
-      { id: "document-parsers", title: "Document parsers", blurb: "Getting clean text and tables out of PDFs and slides.", status: "soon", section: "data-tools" },
+      { id: "vector-db-tools", title: "Vector databases", blurb: "pgvector, Pinecone, Qdrant and Weaviate compared.", status: "live", section: "data-tools",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "search-engines", title: "Search engines", blurb: "Elasticsearch and OpenSearch for keyword and hybrid search.", status: "live", section: "data-tools",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
+      { id: "document-parsers", title: "Document parsers", blurb: "Getting clean text and tables out of PDFs and slides.", status: "live", section: "data-tools",
+        shape: { kind: "system", steps: 5, flow: "pipeline", richSteps: true } },
       // LLMOps tools
       { id: "tracing-tools", title: "Tracing tools", blurb: "Langfuse, LangSmith and similar: see every call and its cost.", status: "soon", section: "llmops" },
       { id: "eval-tools", title: "Eval tools", blurb: "promptfoo, Braintrust and friends: run test sets on every change.", status: "soon", section: "llmops" },

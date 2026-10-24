@@ -41,6 +41,9 @@ import ChainOfThoughtDemo from "./ai/chain-of-thought/ChainOfThoughtDemo";
 import PromptPatternsDemo from "./ai/prompt-patterns/PromptPatternsDemo";
 import GraphRagDemo from "./ai/graph-rag/GraphRagDemo";
 import ChunkingDemo from "./ai/chunking/ChunkingDemo";
+import VectorDbsDemo from "./tools/vector-db-tools/VectorDbsDemo";
+import SearchEnginesDemo from "./tools/search-engines/SearchEnginesDemo";
+import DocumentParsersDemo from "./tools/document-parsers/DocumentParsersDemo";
 import FetchWaterfallDemo from "./frontend/data-fetching/FetchWaterfallDemo";
 import OptimisticDemo from "./frontend/optimistic-updates/OptimisticDemo";
 import RenderingModesDemo from "./frontend/csr-ssr-ssg/RenderingModesDemo";
@@ -381,6 +384,9 @@ const SESSIONS: Record<string, ReactNode> = {
   "ai/image-generation": <ImageGenerationDemo />,
   "ai/speech": <SpeechDemo />,
   "ai/chunking": <ChunkingDemo />,
+  "tools/vector-db-tools": <VectorDbsDemo />,
+  "tools/search-engines": <SearchEnginesDemo />,
+  "tools/document-parsers": <DocumentParsersDemo />,
   "frontend/data-fetching": <FetchWaterfallDemo />,
   "frontend/optimistic-updates": <OptimisticDemo />,
   "frontend/csr-ssr-ssg": <RenderingModesDemo />,

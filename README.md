@@ -102,6 +102,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/ai/image-generation` | Diffusion on a 16 × 16 picture: noise removed step by step, with steps and guidance to change | — |
 | `/tracks/ai/speech` | A voice agent in quiet and noisy rooms: word error rate and reply time stage by stage | — |
 | `/tracks/ai/chunking` | Fixed size, overlap or by heading on one help page: which questions get their whole answer, and what it costs | — |
+| `/tracks/tools/vector-db-tools` | pgvector, Pinecone, Qdrant and Weaviate for one workload: index memory from vectors, dimensions and quantization, and a filtered search at 1% selectivity with post-filtering, iterative scans or in-graph filters | — |
+| `/tracks/tools/search-engines` | 2 million products in Elasticsearch or OpenSearch: an exact SKU search through text and keyword mappings, shard size, replicas, the refresh interval, and reindexing behind an alias | — |
+| `/tracks/tools/document-parsers` | A two-column page, an invoice table, a report with running headers and a chart, parsed by plain extraction, a layout-aware parser and a vision model: reading order, tables, boilerplate, cost | — |
 | `/tracks/ai/llm-as-judge` | Eight answer pairs graded by a judge with position and length bias; swap orders and a rubric remove confident wrong picks | — |
 | `/tracks/ai/query-rewriting` | Search with the question as typed, rewritten, or as a HyDE fake answer, and see where the right page lands | — |
 | `/tracks/ai/lora` | Freeze W, train thin B and A: an 8×8 picture of B·A and trainable parameters by rank for a 7B model | — |

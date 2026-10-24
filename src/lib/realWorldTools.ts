@@ -378,6 +378,32 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "Chonkie", kind: "software", note: "A small chunking library with token, sentence and semantic chunkers.", href: "https://github.com/chonkie-inc/chonkie" },
     ],
   },
+  "tools/vector-db-tools": {
+    lead: "Vector search lives in your database, a managed service, or a dedicated engine.",
+    tools: [
+      { name: "pgvector", kind: "software", note: "Vector similarity search inside Postgres, with HNSW and iterative scans.", href: "https://github.com/pgvector/pgvector" },
+      { name: "Pinecone", kind: "service", note: "A managed vector database with namespaces and metadata filters.", href: "https://www.pinecone.io" },
+      { name: "Qdrant", kind: "software", note: "A vector database with payload filtering and quantization.", href: "https://github.com/qdrant/qdrant" },
+      { name: "Weaviate", kind: "software", note: "A vector database with built-in hybrid BM25 search.", href: "https://github.com/weaviate/weaviate" },
+    ],
+  },
+  "tools/search-engines": {
+    lead: "Elasticsearch and OpenSearch share the inverted index, mappings, shards and aliases.",
+    tools: [
+      { name: "Elasticsearch", kind: "software", note: "Full-text and hybrid search with mappings, shards and aliases.", href: "https://github.com/elastic/elasticsearch" },
+      { name: "OpenSearch", kind: "software", note: "The open-source fork with the same core model.", href: "https://github.com/opensearch-project/OpenSearch" },
+      { name: "Elasticsearch mapping docs", kind: "software", note: "text vs keyword, multi-fields and dynamic mapping.", href: "https://www.elastic.co/docs/manage-data/data-store/mapping" },
+    ],
+  },
+  "tools/document-parsers": {
+    lead: "Parsers range from plain text extraction to layout models; vision models handle what has no text.",
+    tools: [
+      { name: "Docling", kind: "software", note: "Layout-aware PDF and Office parsing with tables and reading order.", href: "https://github.com/docling-project/docling" },
+      { name: "Unstructured", kind: "software", note: "Partition documents into titles, text, tables and more.", href: "https://github.com/Unstructured-IO/unstructured" },
+      { name: "Apache Tika", kind: "software", note: "Text and metadata from over a thousand file types.", href: "https://github.com/apache/tika" },
+      { name: "Poppler", kind: "software", note: "pdftotext and friends: fast plain extraction.", href: "https://poppler.freedesktop.org" },
+    ],
+  },
   "ai/llm-as-judge": {
     lead: "Eval tools ship LLM judges; the bias fixes (swap order, rubrics, human spot checks) are up to you.",
     tools: [
