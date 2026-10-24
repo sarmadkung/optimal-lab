@@ -76,6 +76,10 @@ import LoadAverageDemo from "./devops/system-resources/LoadAverageDemo";
 import DnsRecordsDemo from "./devops/dns-records/DnsRecordsDemo";
 import ReverseProxyDemo from "./devops/reverse-proxy-config/ReverseProxyDemo";
 import VpcDemo from "./devops/vpc/VpcDemo";
+import TfModulesDemo from "./devops/terraform-modules/TfModulesDemo";
+import AnsibleDemo from "./devops/config-management/AnsibleDemo";
+import ImmutableInfraDemo from "./devops/immutable-infrastructure/ImmutableInfraDemo";
+import PolicyAsCodeDemo from "./devops/policy-as-code/PolicyAsCodeDemo";
 import LayerCacheDemo from "./devops/dockerfiles/LayerCacheDemo";
 import ContainerNetDemo from "./devops/container-networking/ContainerNetDemo";
 import VolumesDemo from "./devops/volumes/VolumesDemo";
@@ -416,6 +420,10 @@ const SESSIONS: Record<string, ReactNode> = {
   "devops/dns-records": <DnsRecordsDemo />,
   "devops/reverse-proxy-config": <ReverseProxyDemo />,
   "devops/vpc": <VpcDemo />,
+  "devops/terraform-modules": <TfModulesDemo />,
+  "devops/config-management": <AnsibleDemo />,
+  "devops/immutable-infrastructure": <ImmutableInfraDemo />,
+  "devops/policy-as-code": <PolicyAsCodeDemo />,
   "devops/dockerfiles": <LayerCacheDemo />,
   "devops/container-networking": <ContainerNetDemo />,
   "devops/volumes": <VolumesDemo />,

@@ -2290,6 +2290,45 @@ export const REAL_WORLD_TOOLS: Record<string, RealWorldEntry> = {
       { name: "VPC flow logs", kind: "service", note: "See accepted and rejected traffic.", href: "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html" },
     ],
   },
+  "devops/terraform-modules": {
+    lead: "Write infrastructure once, version it, refactor it safely.",
+    tools: [
+      { name: "Terraform modules", kind: "standard", note: "Inputs, outputs and versioned sources.", href: "https://developer.hashicorp.com/terraform/language/modules" },
+      { name: "moved blocks", kind: "standard", note: "Rename resources without destroying them.", href: "https://developer.hashicorp.com/terraform/language/modules/develop/refactoring" },
+      { name: "Terraform Registry", kind: "service", note: "Published, versioned modules.", href: "https://registry.terraform.io/" },
+      { name: "OpenTofu", kind: "software", note: "Open-source fork with the same module system.", href: "https://github.com/opentofu/opentofu" },
+      { name: "Terragrunt", kind: "software", note: "Calls the same modules per environment.", href: "https://github.com/gruntwork-io/terragrunt" },
+    ],
+  },
+  "devops/config-management": {
+    lead: "Declare the state, run it often, change nothing twice.",
+    tools: [
+      { name: "Ansible", kind: "software", note: "Agentless configuration over SSH.", href: "https://github.com/ansible/ansible" },
+      { name: "ansible-lint", kind: "software", note: "Flags shell tasks that should be modules.", href: "https://github.com/ansible/ansible-lint" },
+      { name: "Puppet", kind: "software", note: "Agent-based configuration management.", href: "https://github.com/puppetlabs/puppet" },
+      { name: "Chef", kind: "software", note: "Configuration as Ruby code.", href: "https://github.com/chef/chef" },
+      { name: "Salt", kind: "software", note: "Event-driven configuration at scale.", href: "https://github.com/saltstack/salt" },
+    ],
+  },
+  "devops/immutable-infrastructure": {
+    lead: "Build images, replace servers, keep state elsewhere.",
+    tools: [
+      { name: "Packer", kind: "software", note: "Build machine images from code.", href: "https://github.com/hashicorp/packer" },
+      { name: "EC2 Image Builder", kind: "service", note: "Build, test and distribute images.", href: "https://aws.amazon.com/image-builder/" },
+      { name: "Instance refresh", kind: "service", note: "Replace an Auto Scaling group gradually.", href: "https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html" },
+      { name: "Bottlerocket", kind: "software", note: "A minimal OS updated by image, not package.", href: "https://github.com/bottlerocket-os/bottlerocket" },
+    ],
+  },
+  "devops/policy-as-code": {
+    lead: "Rules that run on every plan and in the account itself.",
+    tools: [
+      { name: "Open Policy Agent", kind: "software", note: "Rego rules over any JSON.", href: "https://github.com/open-policy-agent/opa" },
+      { name: "Conftest", kind: "software", note: "Run OPA rules on plans and manifests in CI.", href: "https://github.com/open-policy-agent/conftest" },
+      { name: "Checkov", kind: "software", note: "Hundreds of ready-made IaC checks.", href: "https://github.com/bridgecrewio/checkov" },
+      { name: "Kyverno", kind: "software", note: "Policies as Kubernetes admission control.", href: "https://github.com/kyverno/kyverno" },
+      { name: "AWS Config", kind: "service", note: "Rules and remediation inside the account.", href: "https://aws.amazon.com/config/" },
+    ],
+  },
   "devops/dockerfiles": {
     lead: "Build caching is the biggest lever on Docker build time.",
     tools: [

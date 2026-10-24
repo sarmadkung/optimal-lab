@@ -317,6 +317,10 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 | `/tracks/devops/dns-records` | Look up A, CNAME, MX and TXT records in a zone and follow CNAME chains | — |
 | `/tracks/devops/reverse-proxy-config` | Route five requests through nginx location blocks to an upstream pool, WebSockets and static files | — |
 | `/tracks/devops/vpc` | Trace five flows through public and private subnets, gateways and security groups | — |
+| `/tracks/devops/terraform-modules` | A database for three environments, copied or as a module: one fix everywhere, input validation, pinned versions and a v2 rename that plans a destroy unless a moved block maps it | — |
+| `/tracks/devops/config-management` | An Ansible playbook on 12 servers, run three times: shell appends vs idempotent modules, handlers, check mode, serial batches and a hand edit put back | — |
+| `/tracks/devops/immutable-infrastructure` | Eight servers over six months, patched in place or replaced from images: missed patch runs, a hand fix, a bad patch, local data and rebuilding a dead server | — |
+| `/tracks/devops/policy-as-code` | Seven changes against rules over the plan: a public bucket, world-open ssh, an unencrypted database, a missing tag, a real exception and a console click | — |
 | `/tracks/devops/dockerfiles` | Change code or dependencies and see which layers rebuild with two Dockerfile orderings | — |
 | `/tracks/devops/container-networking` | Try five connections between the host and containers: published ports, names and the localhost trap | — |
 | `/tracks/devops/volumes` | Insert rows, restart, remove and recreate a database container with three kinds of storage | — |
