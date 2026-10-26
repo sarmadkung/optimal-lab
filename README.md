@@ -616,6 +616,9 @@ are written by hand, with no AI; keep that pledge when bringing problems into Pr
 
 Every session in `tracks.ts` gets a page. Sessions marked `soon` show a "coming soon" page: title and one-line blurb only, no visual.
 
+The 13 tracks hold 571 topics, 552 of them live. Only Security and cryptography still has
+topics marked `soon` (19 of its 40).
+
 **System Design is grouped into sections.** A long track can list `sections` in `tracks.ts`
 (id, title, blurb, and `related` live sessions from other tracks), and each session names its
 `section`. The track page then shows the sessions under numbered section headings with jump
@@ -746,7 +749,7 @@ Public totals appear in the site footer when any count is &gt; 0. APIs: `src/app
 | `src/sessions/<track>/<session>/*Demo.tsx` | The interactive component for one session (`"use client"`) |
 | `src/sessions/registry.tsx` | Maps `<track>/<session>` to its demo component |
 | `src/lib/` | Pure logic behind each visual (sampling math, algorithm traces). No React, so it is easy to check |
-| `src/lib/tracks.ts` | The learning tracks (DSA, Node.js, System Design, DevOps, AI, AI Native, AI Automation, Tools): sessions, planned roadmap stages and track-scoped project teasers |
+| `src/lib/tracks.ts` | The 13 learning tracks (DSA, Node.js, System Design, DevOps, Frontend, Databases, Networking, Operating Systems, Security, AI, AI Native, AI Automation, Tools): sessions, planned roadmap stages and track-scoped project teasers |
 | `src/lib/projects.ts` | Project catalog by pillar (AI engineering, backend, frontend) with categories and planned builds — rendered on Home → Projects |
 | `src/components/ProjectCatalog.tsx` | Home Projects tab: filters + project idea cards (`src/app/api/projects/` for counts) |
 | `supabase/migrations/` | SQL for optional project start counters |
